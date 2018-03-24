@@ -1,0 +1,5 @@
+package com.bridgeit.designPattern.FacadeDesignPattern;
+
+public class SortingManager {
+
+}

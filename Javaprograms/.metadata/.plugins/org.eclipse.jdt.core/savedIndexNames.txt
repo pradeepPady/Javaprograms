@@ -1,0 +1,5 @@
+INDEX VERSION 1.130+/home/bridgeit/myPrograms/Javaprograms/.metadata/.plugins/org.eclipse.jdt.core
+132786940.index
+1175494123.index
+1277084528.index
+3737537181.index

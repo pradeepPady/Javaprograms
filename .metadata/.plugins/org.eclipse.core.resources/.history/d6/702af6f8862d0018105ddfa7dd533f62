@@ -1,0 +1,95 @@
+package com.bridgelab.ooprograms;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class DocterAppointmentModel
+{
+	String appointmentFile="/home/bridgeit/Json/appointment.json";
+	JSONObject jsObject=new JSONObject();
+	JSONArray jsonArray=new JSONArray();
+	private Integer doctorId;
+	private Date appointmentDate;
+	public DocterAppointmentModel(Integer doctorId,Date appointmentDate, HashMap<DocterAppointmentModel, Integer> appoientment) throws IOException, ParseException
+	{
+		this.doctorId=doctorId;
+		this.appointmentDate=appointmentDate;
+		FileReader fileReader=new FileReader(appointmentFile);
+		BufferedReader bufferedReader=new BufferedReader(fileReader);
+		if(bufferedReader.readLine()==null)
+		{
+			addingObject(doctorId,appointmentDate,jsonArray);
+		}
+		else
+		{
+			JSONArray jsonArray=getCurrentObject();
+			addingObject(doctorId,appointmentDate,jsonArray);
+		}
+	}
+	private JSONArray getCurrentObject() throws FileNotFoundException, IOException, ParseException {
+		JSONParser jsonParser=new JSONParser();
+		JSONObject jsobject=(JSONObject) jsonParser.parse(new FileReader(appointmentFile));
+		
+		return null;
+	}
+	private void addingObject(Integer doctorId2, Date appointmentDate2, JSONArray jsonArray2) {
+		JSONObject jsonObject1=new JSONObject();
+		jsonObject1.put("DoctorId",doctorId2);
+		jsonObject1.put("AppointmentDate", appointmentDate2);
+		jsonArray2.add(jsonObject1);
+		jsObject.put("Appoiontment", jsonArray2);
+		
+	}
+
+	public Integer getDoctorId()
+	{
+		return doctorId;
+	}
+	public Date getAppointmentDate()
+	{
+		return appointmentDate;
+	}
+	public void setDoctorId(Integer doctorId)
+	{
+		this.doctorId=doctorId;
+	}
+	public void setAppointmentDate(Date appointmentDate)
+	{
+		this.appointmentDate=appointmentDate;
+	}
+	public int hashCode()
+	{
+		return this.doctorId.hashCode()+this.appointmentDate.hashCode();
+	}
+	@Override
+	public boolean equals(Object object)
+	{
+		if (object == null)
+			return false;
+		if (object == this)
+			return true;
+		if (!(object instanceof DocterAppointmentModel))
+			return false;
+		DocterAppointmentModel doctorAppoientment = (DocterAppointmentModel)object;
+		if((this.doctorId==doctorAppoientment.doctorId) && (this.appointmentDate.equals(doctorAppoientment.appointmentDate)))
+			return true;
+		else
+			return false;
+	}
+	@Override
+
+	public String toString()
+	{
+		return " "+doctorId+" "+appointmentDate;
+	}
+}
+

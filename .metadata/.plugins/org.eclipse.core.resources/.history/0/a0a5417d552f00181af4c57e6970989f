@@ -1,0 +1,7 @@
+package com.bridgeit.functional_programs;
+
+import com.bridgeit.utility.Utility;
+
+public interface Algorithm {
+Utility utility=new Utility();
+}

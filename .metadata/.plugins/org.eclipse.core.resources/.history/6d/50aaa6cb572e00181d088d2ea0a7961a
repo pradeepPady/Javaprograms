@@ -1,0 +1,195 @@
+package com.bridgeit.datastructure;
+
+import java.util.ArrayDeque;
+import java.util.Arrays;
+
+public class UserDefinedLinkedList<T>
+{
+	Node<T> frist=null;
+	public  Node<T> list()
+	{
+		Node<T> n=new Node<T>();
+		return n;
+	}
+
+
+	public void add(T i)
+	{
+		Node<T> n=list();
+		n.data=i;
+		n.next=null;
+		if(frist==null)
+		{
+		frist=n;
+		}
+		else
+		{
+			n.next=frist;
+			frist=n;
+		}
+		System.out.println("Check6");
+	}
+
+	public boolean remove(T item)
+	{
+
+		Node<T> temp=frist;
+		if(frist==null)
+		{
+			System.out.println("no elements to remove");
+			return false;
+		}
+		else if(frist.data.equals(item)&&frist.next==null) {
+			frist=null;
+		}
+		else if(frist.next.data.equals(item)) {
+			frist.next=frist.next.next;
+		}else {
+
+			while(temp.next!=null) {
+				if(temp.next.data.equals(item))
+				{
+					temp.next=temp.next.next;
+					return true;
+				}
+				else
+					temp=temp.next;
+			}
+
+		}
+		return false;
+	
+		
+	}
+
+	public boolean search(T item)
+	{
+		Node<T> temp=frist;
+		while(temp!=null)
+		{
+			if(temp.data.equals(item))
+			{
+				return true;
+			}
+			temp=temp.next;
+		}
+		return false;
+
+	}
+	public boolean isEmpty()
+	{
+		if(frist==null)
+			return true;
+		else
+			return false;
+	}
+
+
+	public int size()
+	{
+		Node<T> temp=frist;
+		int count=0;
+		while(temp!=null)
+		{
+			count++;
+			temp=temp.next;
+		}
+		return count;
+
+	}
+
+
+
+	public int pop()
+	{
+		if(frist!=null)
+		{
+			Node<T> temp=frist;
+			frist=frist.next;
+			return (int)temp.data;
+		}
+		return 0;
+	}
+	public void disply()
+	{
+		int size=size();
+		Node<T> temp=frist;
+		for(int i=0;i<size;i++)
+		{
+			System.out.print(temp.data+" ");
+			temp=temp.next;
+		}
+	}
+
+
+	public Integer[] getElem() {
+
+		int size=size();
+		Integer arr[] = new Integer[size+1];
+		Node<T> temp=frist;
+
+		for(int i=0;i<size;i++)
+		{
+			arr[i]=(int) temp.data;
+			temp=temp.next;
+		}
+		return arr;
+	}
+	public String toString()
+	{
+		String array[]=new String[size()];
+		int i=0;
+		Node<T>temp=frist;
+		while(temp!=null)
+		{
+			array[i]=(String) temp.data;
+			i++;
+			temp=temp.next;
+		}
+		StringBuilder builder = new StringBuilder();
+		for(String s : array) {
+		    builder.append(s+" ");
+		}
+		String string = builder.toString();
+		System.out.println("Check7");
+		return string;
+
+	}
+
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void addToQueue(@SuppressWarnings("rawtypes") ArrayDeque queue) {
+		Node temp=frist;
+		if(frist!=null)
+		{
+			while(temp!=null)
+			{
+				if(temp.data.equals(""))
+				{
+					queue.add("");
+				}
+				else
+				{
+					queue.add(temp.data);
+				}
+				temp=temp.next;
+			}
+		}
+
+
+	}
+
+
+
+
+
+
+}
+
+
+class Node<T>
+{
+	T data;
+	//@SuppressWarnings("rawtypes")
+	Node<T> next; 
+}

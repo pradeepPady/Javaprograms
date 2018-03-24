@@ -1,0 +1,34 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.utility.Utility;
+
+public class AdressBook {
+public static void main(String[] args) throws IOException, ParseException {
+	Utility utility=new Utility();
+	System.out.println("\t\t 1:Add New person to Book");
+	System.out.println("\t\t 2:Edit person ");
+	System.out.println("\t\t 2:Delete person ");
+	System.out.println("\t\t 2:Sort person ");
+	System.out.println("\t\t 2:Disply the Adress book");
+	System.out.println("\t\tEnter your choice ");
+	int choice =utility.IntegerInput();
+	switch(choice)
+	{
+	case 1:utility.addPerson();
+	break;
+	case 2:utility.editPerson();
+	break;
+	case 3:utility.deletePerson();
+	break;
+	case 4:utility.sortPerson();
+	break;
+	case 5:utility.sortUser();
+	break;
+	}
+	
+}
+}

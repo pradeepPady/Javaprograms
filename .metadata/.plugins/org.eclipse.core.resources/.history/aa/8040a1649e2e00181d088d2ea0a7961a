@@ -1,0 +1,90 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.utility.Utility;
+
+public class AddressBook3 {
+    public static void main(String[] args) throws IOException, ParseException
+    {
+    	
+            Utility utility=new Utility();
+            Entrys entrys =new Entrys();
+            while(true)
+            {
+            System.out.println("\t\t\tSelect an option!\n");
+            System.out.println("\t\t\t1. Add an entry");
+            System.out.println("\t\t\t2. Remove an entry");
+            System.out.println("\t\t\t3. Edit an entry");
+            System.out.println("\t\t\t4. Sort all entries in this book");
+            System.out.println("\t\t\t5. Select another book");
+            System.out.println("\t\t\t6. Move entry across books");
+            System.out.println("\t\t\t7. Exit the menu");
+            System.out.print("\t\t\t> ");
+            int selection = utility.IntegerInput();
+            String first, last, address, Zip;
+            switch(selection){
+            case 1: 
+                System.out.print("First name? ");
+                first = utility.StringInput();
+                System.out.print("Last name? ");
+                last = utility.StringInput();
+                System.out.print("Address? ");
+                address = utility.StringInput();
+                System.out.print("Zip? ");
+                Zip = utility.StringInput();
+                entrys.addingToJsonFile(first,last,address,Zip);
+                break;
+            /*case 2: 
+                System.out.print("Remove which entry? ");
+                int entry = s.nextInt();
+                book[selectedBook].remove(entry);
+                break;
+            case 3:
+                System.out.print("Edit which entry?");
+                int whichEntry = s.nextInt();
+                System.out.print("First name? ");
+                first = s.next();
+                System.out.print("Last name? ");
+                last = s.next();
+                System.out.print("Address? ");
+                address = s.nextLine();
+                System.out.print("Email? ");
+                Zip = s.next();
+                book[selectedBook].edit(first, last, address, Zip, whichEntry);
+                break;
+            case 4: 
+                System.out.println("Sort alphabetically by which field?");
+                System.out.println("1. Sort by first name");
+                System.out.println("2. Sort by last name");
+                System.out.println("3. Sort by address");
+                System.out.println("4. Sort by email");
+                book[selectedBook].sort(s.nextInt());
+                break;
+            case 5: 
+                System.out.print("Select which book?");
+                selectedBook = s.nextInt();
+                break;
+            case 6:
+                System.out.print("Move which entry? ");
+                int entryNo = s.nextInt();
+                Book.Entry entryToMove = book[selectedBook].contents[entryNo];
+                book[selectedBook].remove(entryNo);
+                System.out.print("To which book? ");
+                int whichBook = s.nextInt();
+                book[whichBook].addFromCopy(entryToMove);
+                break;
+            case 7:System.exit(0);
+                
+            default:
+                System.out.print("Please choose a valid menu number");
+
+*/
+            }
+
+        }
+    }
+}

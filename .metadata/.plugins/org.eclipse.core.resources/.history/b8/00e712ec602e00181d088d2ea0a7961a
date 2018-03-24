@@ -1,0 +1,208 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.datastructure.UserDefinedLinkedList;
+import com.bridgeit.utility.Utility;
+
+public class Transaction {
+	private  String userName;
+	private  int numberOfShares;
+	private  int ammount;
+	String userFile="/home/bridgeit/Json/userAccount.json";
+	String companyFile="/home/bridgeit/Json/companyShares.json";
+	JSONArray jsonArray=new JSONArray();
+	JSONObject jsonObject=new JSONObject();
+    JSONArray jsonArray1=new JSONArray();
+	JSONObject jsonObject1=new JSONObject();
+	Utility utility=new Utility();
+	@SuppressWarnings("rawtypes")
+	UserDefinedLinkedList userDefinedLinkedList1=new UserDefinedLinkedList();
+	@SuppressWarnings("rawtypes")
+	UserDefinedLinkedList userDefinedLinkedList2=new UserDefinedLinkedList();
+	@SuppressWarnings("rawtypes")
+	UserDefinedLinkedList userDefinedLinkedList3=new UserDefinedLinkedList();
+	public Transaction(String userName2, int numberOfShares2, int ammount2) throws IOException, ParseException 
+	{
+		this.userName=userName2;
+		this.numberOfShares=numberOfShares2;
+		this.ammount=ammount2;
+		FileReader fileReader=new FileReader(userFile);
+		BufferedReader br=new BufferedReader(fileReader);
+		if(br.readLine()==null)
+		{
+			AddingTOObject(jsonArray,userName,numberOfShares,ammount);
+
+		}
+		else
+		{
+			jsonArray=getCurrentObject();
+			AddingTOObject(jsonArray,userName,numberOfShares,ammount);
+
+		}
+		WritingIntoFile(jsonObject);
+		
+	}
+	public Transaction() {
+	}
+	private void WritingIntoFile(JSONObject jsonObject2) throws IOException {
+		FileWriter fileWriter=new FileWriter(userFile);
+		BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+		bufferedWriter.write(jsonObject2.toJSONString());
+		bufferedWriter.flush();
+		bufferedWriter.close();
+		
+	}
+	private JSONArray getCurrentObject() throws FileNotFoundException, IOException, ParseException {
+		JSONParser jsonParser=new JSONParser();
+		Object object=jsonParser.parse(new FileReader(userFile));
+		JSONObject jsonObject=(JSONObject)object;
+	    JSONArray jsonArray=(JSONArray)jsonObject.get("Users");
+		
+		return jsonArray;
+	}
+	@SuppressWarnings("unchecked")
+	private void AddingTOObject(JSONArray jsonArray, String userName2, int numberOfShares2, int ammount2) {
+	      JSONObject jsonObject1=new JSONObject();
+	      jsonObject1.put("UserName", userName2);
+	      jsonObject1.put("NumberOfShares", numberOfShares2);
+	      jsonObject1.put("ammount", ammount2);
+	      jsonArray.add(jsonObject1);
+	      jsonObject.put("Users", jsonArray);
+		
+	}
+public  void buying(String companyName, String symbol, int ammount1) throws FileNotFoundException, IOException, ParseException {
+	String ammount=Integer.toString(ammount1);
+	    JSONArray jsonArray=stockFileReading();
+	    System.out.println("1");
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
+			 System.out.println("2");
+			        if(jsonObject2.get("CompanyName").toString().equals(companyName))
+					{
+			        	 System.out.println("3");
+
+				      if(jsonObject2.get("stock_Symbol").toString().equals(symbol))
+				      {
+				    	  System.out.println("5");
+				    	  if(jsonObject2.get("amount").toString().equals(ammount))
+				    	  {
+				 			 System.out.println("6");
+				 			JSONParser jsonParser1=new JSONParser();
+							Object object=jsonParser1.parse(new FileReader(userFile));
+							JSONObject jsonObject=(JSONObject)object;
+				    			JSONArray jsonArray1=(JSONArray)jsonObject.get("Users");
+				    			System.out.println();
+					 			 System.out.println("7");
+				    			System.out.println("\t\t\tEnter your Name ");
+				    			String username=utility.StringInput();
+				    			 System.out.println(jsonArray1);
+				    			for(int j=0;j<jsonArray1.size();j++)
+				    			{
+				    	             
+				    	 			System.out.println("9");
+				    				JSONObject jsonObject3=(JSONObject)jsonArray.get(i);
+				    				       if((jsonObject3.get("UserName").toString().equals(username)))
+				    						{
+				    				    	  String numberOfSharesUserEntered=(jsonObject3.get("NumberOfShares").toString());
+				    				    	  String count=jsonObject2.get("Count").toString();
+				    					        if((numberOfSharesUserEntered.compareTo(count))<0)
+				    					        {
+				    					        	System.out.println("Enter the amount");
+				    								int UserEnteredAmmount = utility.IntegerInput();
+
+						    					         int userBalence=(int) jsonObject3.get("ammount");
+						    					         int priceOfShare =(int)jsonObject2.get("amount");
+						    					         int numberOfSharesOfUser =(int)jsonObject3.get("NumberOfShares");
+						    					         int numberOfSharesOfCompany =(int)jsonObject2.get("Count");
+						    					         int numofshare = UserEnteredAmmount / priceOfShare;
+						 								 int UserNewbalence = userBalence - UserEnteredAmmount;
+						 								 int newnumberOfSharesOfUser = numberOfSharesOfUser + numofshare;
+														 int NumberOfSharesStock = numberOfSharesOfCompany - numofshare;
+														 jsonObject3.remove("ammount");
+														 jsonObject3.remove("NumberOfShares");
+														 jsonObject2.remove("Count");
+														 jsonObject2.put("Count", NumberOfSharesStock);
+														 jsonObject3.put("ammount", UserNewbalence);
+														 jsonObject3.put("NumberOfShares", newnumberOfSharesOfUser);
+														 System.out.println("Transaction sucsessfull.....");
+				    					        }
+				    						}
+				    			}
+				    			
+
+				    	  }
+				      }
+					}
+		}
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getNumberOfShares() {
+		return numberOfShares;
+	}
+	public void setNumberOfShares(int numberOfShares) {
+		this.numberOfShares = numberOfShares;
+	}
+	public int getAmmount() {
+		return ammount;
+	}
+	public void setAmmount(int ammount) {
+		this.ammount = ammount;
+	}
+	@Override
+	public String toString()
+	{
+		return userName+" "+numberOfShares+" "+ammount+"\n";
+	}
+	public void addingCompanyShares() throws FileNotFoundException, IOException, ParseException  {
+		JSONArray jsonArray=stockFileReading();
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
+			userDefinedLinkedList1.add(jsonObject2.get("CompanyName"));
+			userDefinedLinkedList2.add(jsonObject2.get("stock_Symbol"));
+			userDefinedLinkedList3.add(jsonObject2.get("amount").toString());
+			
+		}
+	}
+	public JSONArray stockFileReading() throws FileNotFoundException, IOException, ParseException {
+		 
+			JSONParser jsonParser=new JSONParser();
+			Object object=jsonParser.parse(new FileReader(companyFile));
+			JSONObject jsonObject=(JSONObject)object;
+			JSONArray jsonArray=(JSONArray)jsonObject.get("Stocks");
+			return jsonArray;
+}
+	public void disply() throws FileNotFoundException, IOException, ParseException {
+	
+		JSONArray jsonArray=stockFileReading();
+		System.out.println("\t\t\t=======Company Lists======\n");
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
+			System.out.println("\t\t\t=======Company "+(i+1)+"========\n");
+		System.out.println("\t\t\tCompanyName    :"+jsonObject2.get("CompanyName")+"\n");
+		System.out.println("\t\t\tstock_Symbo    :"+jsonObject2.get("stock_Symbol")+"\n");
+		System.out.println("\t\t\tShare ammount  :"+jsonObject2.get("amount").toString()+"\n");
+			
+		}
+		System.out.println("\t\t\tEnter your choice\n");
+		
+	}
+}

@@ -1,0 +1,13 @@
+package com.bridgeit.designPattern.FacadeDesignPattern;
+
+public class SortinApp 
+{
+public static void main(String[] args)
+{
+       SortingManager  sortingManager=new  SortingManager();
+	   sortingManager.insertionSortForIntegerFromSortinManager();
+	   sortingManager.insertionSortStringFromSortinManager();
+	   sortingManager.bubbleSortForIntegerFromSortinManager();
+	   sortingManager.bubbleSortForStringFromSortinManager();
+}
+}

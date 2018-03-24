@@ -1,0 +1,114 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.utility.Utility;
+
+public class AddressBook3 {
+    public static void main(String[] args) throws IOException, ParseException
+    {
+    	
+            Utility utility=new Utility();
+            Entrys entrys =new Entrys();
+            while(true)
+            {
+            System.out.println("\t\t\tSelect an option!\n");
+            System.out.println("\t\t\t1. Add an entry\n");
+            System.out.println("\t\t\t2. Remove an entry\n");
+            System.out.println("\t\t\t3. Edit an entry\n");
+            System.out.println("\t\t\t4. Sort all entries in this book\n");
+            System.out.println("\t\t\t5. Select another book\n");
+            System.out.println("\t\t\t6. Move entry across books\n");
+            System.out.println("\t\t\t7. Exit the menu\n");
+            System.out.print("\t\t\t> \n");
+            int selection = utility.IntegerInput();
+            String first, last, address, Zip;
+            switch(selection){
+            case 1: 
+	                System.out.print("\t\t\tFirst name?  \n");
+	                first = utility.StringInput();
+	                System.out.print("\t\t\t\tLast name? \n");
+	                last = utility.StringInput();
+	                System.out.print("\t\t\tAddress?     \n");
+	                address = utility.StringInput();
+	                System.out.print("\t\t\tZip?         \n");
+	                Zip = utility.StringInput();
+	                entrys.addingToJsonFile(first,last,address,Zip);
+                break;
+            case 2: System.out.println("\n\t\t\tEnter the First Name and last name to Remove from entry\n");
+                    entrys.removeAnEntry(utility.StringInput(),utility.StringInput());
+                break;
+            case 3:
+                System.out.print("Edit which entry?");
+                System.out.print("\t\t\tFirst name? \n");
+                
+                System.out.print("\t\t\tLast name? \n");
+               
+                System.out.print("\t\t\tAddress?   \n");
+                
+                System.out.print("\t\t\tZip-code?  \n");
+                int whichEntry = utility.IntegerInput();
+               switch (whichEntry) {
+			 case 1:String first1=utility.StringInput() ;
+			     entrys.editEntry1(first1);
+				break;
+				
+             case 2:String last1=utility.StringInput() ;
+             entrys.editEntry2(last1);
+				break;
+				
+             case 3:String address1=utility.StringInput() ;
+             entrys.editEntry3(address1);
+	          break;
+	          
+             case 4:String zip=utility.StringInput() ;
+             entrys.editEntry4(zip);
+             break;
+             
+			default:
+				break;
+			}
+               
+                
+              /*  
+                Zip = s.next();
+                
+                last = s.next();
+                address = s.nextLine();
+                book[selectedBook].edit(first, last, address, Zip, whichEntry);
+                break;*/
+           /* case 4: 
+                System.out.println("Sort alphabetically by which field?");
+                System.out.println("1. Sort by first name");
+                System.out.println("2. Sort by last name");
+                System.out.println("3. Sort by address");
+                System.out.println("4. Sort by email");
+                book[selectedBook].sort(s.nextInt());
+                break;
+            case 5: 
+                System.out.print("Select which book?");
+                selectedBook = s.nextInt();
+                break;
+            case 6:
+                System.out.print("Move which entry? ");
+                int entryNo = s.nextInt();
+                Book.Entry entryToMove = book[selectedBook].contents[entryNo];
+                book[selectedBook].remove(entryNo);
+                System.out.print("To which book? ");
+                int whichBook = s.nextInt();
+                book[whichBook].addFromCopy(entryToMove);
+                break;
+            case 7:System.exit(0);
+                
+            default:
+                System.out.print("Please choose a valid menu number");
+
+*/
+            }
+
+        }
+    }
+}

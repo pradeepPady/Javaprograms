@@ -1,0 +1,5 @@
+package com.bridgeit.designPattern.SingletonPattern;
+
+public class BillPughSingleton {
+
+}

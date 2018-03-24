@@ -1,0 +1,25 @@
+package com.bridgeit.designPattern.ProxyDesignPattern;
+
+import java.util.HashMap;
+
+public class InternetProxy implements Internet
+{
+	 private static HashMap<String,String> restrictedSites;
+	 Internet internet=new RealInternet();
+	static 
+	{
+		restrictedSites.put( "www.metrimony.com","restricted");
+		restrictedSites.put( "testme.com","restricted");
+		restrictedSites.put("www.badSites.com","restricted");
+		restrictedSites.put( "www.facebook.com","allowed");
+	}
+	public void connectTo(String host) throws Exception {
+        
+        if(!restrictedSites.containsKey(host.toLowerCase())){
+            internet.connectTo(host);
+        }
+        throw new Exception("Company restricted this site view");
+ 
+    }
+
+}

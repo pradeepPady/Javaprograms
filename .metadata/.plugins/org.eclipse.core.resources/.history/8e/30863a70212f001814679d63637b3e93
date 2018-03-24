@@ -1,0 +1,213 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.utility.Utility;
+
+public class Entrys 
+{
+	Utility utility=new Utility();
+	String file="/home/bridgeit/Json/BookEntry.json";
+	JSONObject jsonObject=new JSONObject();
+	JSONArray jsonArray=new JSONArray();
+	public void addingToJsonFile(String first, String last, String address, String zip) throws IOException, ParseException
+	{
+		FileReader fileReader=new FileReader(file);
+		BufferedReader bufferedReader=new BufferedReader(fileReader);
+		if(bufferedReader.readLine()==null)
+		{
+			addingToObject(jsonArray,first,last,address,zip);
+		}
+		else
+		{
+			JSONArray jsonArray=getCurrentObject();
+			addingToObject(jsonArray,first,last,address,zip);
+		}
+		writingIntoFile(jsonObject);
+		
+	}
+	private void writingIntoFile(JSONObject jsonObject) throws IOException {
+		FileWriter fileWriter=new FileWriter(file);
+		BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+		bufferedWriter.write(jsonObject.toJSONString());
+		bufferedWriter.flush();
+		bufferedWriter.close();
+		
+	}
+	private JSONArray getCurrentObject() throws FileNotFoundException, IOException, ParseException
+	{
+		 JSONArray jsonArray=jsonPraser();
+		
+		return jsonArray;
+	}
+	private JSONArray jsonPraser() throws FileNotFoundException, IOException, ParseException 
+	{
+		JSONParser jsonParser=new JSONParser();
+		Object obj=jsonParser.parse(new FileReader(file));
+		JSONObject jsonObject=(JSONObject)obj;
+		JSONArray jsonArray=(JSONArray) jsonObject.get("Book");
+		
+		return jsonArray;
+	}
+	private void addingToObject(JSONArray jsonArray2, String first, String last, String address, String zip)
+	{
+		JSONObject jsonObject1=new JSONObject();
+		jsonObject1.put("FirstNmae", first);
+		jsonObject1.put("LastName", last);
+		jsonObject1.put("Adress", address);
+		jsonObject1.put("Zip-Code", zip);
+		jsonArray.add(jsonObject1);
+		jsonObject.put("Book", jsonArray);
+	}
+	public void removeAnEntry(String stringInput, String string) throws FileNotFoundException, IOException, ParseException
+	{
+		JSONArray jsonArray=jsonPraser();
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject1=(JSONObject)jsonArray.get(i);
+			if(jsonObject1.get("FirstNmae").equals(stringInput)&&(jsonObject1.get("LastName").equals(string)))
+			{
+				jsonArray.remove(jsonObject1);
+				break;
+			}
+		}
+		jsonObject.put("Book", jsonArray);
+		writingIntoFile(jsonObject);
+	}
+	@SuppressWarnings("unchecked")
+	public void editEntry1(String first1) throws FileNotFoundException, IOException, ParseException {
+		JSONArray jsonArray=jsonPraser();
+		boolean flag=true;
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject1=(JSONObject)jsonArray.get(i);
+			if(jsonObject1.get("FirstNmae").equals(first1))
+			{
+				System.out.println("\t\t\tEnter the new name to update\n");
+				String name=utility.StringInput();
+				jsonObject1.put("FirstNmae", name);
+				System.out.println("updated sucsessfully....");
+				flag=false;
+				break;
+			}
+		}
+		if(flag)
+			System.out.println("\t\t\tEnterd name not found in the list");
+		jsonObject.put("Book", jsonArray);
+		writingIntoFile(jsonObject);
+	}
+	public void editEntry2(String last1) throws FileNotFoundException, IOException, ParseException {
+		
+		JSONArray jsonArray=jsonPraser();
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject1=(JSONObject)jsonArray.get(i);
+			if(jsonObject1.get("LastName").equals(last1))
+			{
+				System.out.println("\t\t\tEnter the new last name to update\n");
+				String name=utility.StringInput();
+				jsonObject1.put("LastName", name);
+				System.out.println("updated sucsessfully....");
+				break;
+			}
+		}
+		jsonObject.put("Book", jsonArray);
+		writingIntoFile(jsonObject);
+	}
+	public void editEntry3(String address1) throws FileNotFoundException, IOException, ParseException {
+		
+
+		JSONArray jsonArray=jsonPraser();
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject1=(JSONObject)jsonArray.get(i);
+			if(jsonObject1.get("Adress").equals(address1))
+			{
+				System.out.println("\t\t\tEnter the new address to update\n");
+				String name=utility.StringInput();
+				jsonObject1.put("Adress", name);
+				System.out.println("updated sucsessfully....");
+				break;
+			}
+		}
+		jsonObject.put("Book", jsonArray);
+		writingIntoFile(jsonObject);
+	}
+	public void editEntry4(String zip) throws IOException, ParseException {
+
+		JSONArray jsonArray=jsonPraser();
+		for(int i=0;i<jsonArray.size();i++)
+		{
+			JSONObject jsonObject1=(JSONObject)jsonArray.get(i);
+			if(jsonObject1.get("Zip-Code").equals(zip))
+			{
+				System.out.println("\t\t\tEnter the new Zip-code to update\n");
+				String name=utility.StringInput();
+				jsonObject1.put("Zip-Code", zip);
+				System.out.println("updated sucsessfully....");
+				break;
+			}
+		}
+		jsonObject.put("Book", jsonArray);
+		writingIntoFile(jsonObject);
+	}
+	public void sorting(int whichEntry1) throws FileNotFoundException, IOException, ParseException
+	{
+		switch (whichEntry1) 
+		{
+		case 1:JSONArray jsonArray=jsonPraser();
+		System.out.println("check1");
+			    sortByname(jsonArray);
+			    System.out.println("ckeck2");
+			    System.out.println("\t\t\tSorted by name Sucsessfully...");
+			
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	private void sortByname(JSONArray jsonArray) throws IOException 
+	{
+		System.out.println("check3");
+		  	
+					for (int i = 0; i < jsonArray.size(); i++)
+					{
+						for (int j = 0; j < jsonArray.size() - i - 1; j++)
+						{
+							JSONObject jsonObject1=(JSONObject)jsonArray.get(j);
+							JSONObject jsonObject2=(JSONObject)jsonArray.get(j+1);
+							if (((((String)jsonObject1.get("FirstNmae")).compareTo((String)jsonObject2.get("FirstNmae")))) > 0) 
+							{
+								System.out.println("check4");
+								JSONObject temp = jsonObject2;
+								jsonObject2 = jsonObject1;
+								jsonObject1 = temp;
+								jsonArray.add(jsonObject1);
+								jsonArray.add(jsonObject2);
+							}
+						}
+					}
+					jsonObject.put("Book", jsonArray);
+					System.out.println("check5");
+					writingIntoFile(jsonObject);
+				
+			
+		
+		
+	}
+	
+	
+
+}

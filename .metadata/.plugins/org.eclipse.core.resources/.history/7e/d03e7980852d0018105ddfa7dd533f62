@@ -1,0 +1,73 @@
+package com.bridgelab.ooprograms;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Date;
+import java.util.HashMap;
+
+import org.json.simple.JSONArray;
+
+public class DocterAppointmentModel
+{
+	String appointmentFile="/home/bridgeit/Json/appointment.json";
+	private Integer doctorId;
+	private Date appointmentDate;
+	public DocterAppointmentModel(Integer doctorId,Date appointmentDate, HashMap<DocterAppointmentModel, Integer> appoientment)
+	{
+		this.doctorId=doctorId;
+		this.appointmentDate=appointmentDate;
+		FileReader fileReader=new FileReader(appointmentFile);
+		BufferedReader bufferedReader=new BufferedReader(fileReader);
+		if(bufferedReader.readLine()==null)
+		{
+			addingObject(appoientment,jsonArray);
+		}
+		else
+		{
+			JSONArray jsonArray=getCurrentObject();
+			addingObject(appoientment,jsonArray);
+		}
+	}
+	public Integer getDoctorId()
+	{
+		return doctorId;
+	}
+	public Date getAppointmentDate()
+	{
+		return appointmentDate;
+	}
+	public void setDoctorId(Integer doctorId)
+	{
+		this.doctorId=doctorId;
+	}
+	public void setAppointmentDate(Date appointmentDate)
+	{
+		this.appointmentDate=appointmentDate;
+	}
+	public int hashCode()
+	{
+		return this.doctorId.hashCode()+this.appointmentDate.hashCode();
+	}
+	@Override
+	public boolean equals(Object object)
+	{
+		if (object == null)
+			return false;
+		if (object == this)
+			return true;
+		if (!(object instanceof DocterAppointmentModel))
+			return false;
+		DocterAppointmentModel doctorAppoientment = (DocterAppointmentModel)object;
+		if((this.doctorId==doctorAppoientment.doctorId) && (this.appointmentDate.equals(doctorAppoientment.appointmentDate)))
+			return true;
+		else
+			return false;
+	}
+	@Override
+
+	public String toString()
+	{
+		return " "+doctorId+" "+appointmentDate;
+	}
+}
+
