@@ -1,0 +1,20 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import com.bridgeit.utility.Utility;
+
+public class DeckOfCardsUsingQueue {
+
+		public static void main(String[] args) {
+			int noOfPlayers = 4;
+			int noOfCards = 9;
+			String[] deckOfCards = Utility.assignDeckOfCards();
+			String[] deckOfShuffleCards = Utility.shuffle(deckOfCards);
+			String[][] playerCards = Utility.distribute(deckOfShuffleCards, noOfPlayers, noOfCards);
+			System.out.println("Cards before sorting...");
+			System.out.println();
+			Utility.printDistibutedCards(playerCards, noOfPlayers, noOfCards);
+			System.out.println("Cards after sorting...");
+			Utility.printSortedCards(playerCards,noOfPlayers,noOfCards);
+		}
+
+	}

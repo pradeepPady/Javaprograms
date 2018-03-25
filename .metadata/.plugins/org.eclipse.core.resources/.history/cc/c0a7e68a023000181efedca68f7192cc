@@ -1,0 +1,131 @@
+package com.bridgeit.datastructure;
+
+class Node1<T> {
+
+	private Node1<T> link;
+	private T data;
+
+	public Node1(T mData, Node1<T> node) {
+		data = mData;
+		link = node;
+	}
+
+	/*
+	 * This method is used to set the data in a particular node
+	 *
+	 * @param data is the value to be stored
+	 * 
+	 */
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	/*
+	 * This method is used to set the link in a particular node
+	 *
+	 * @param link is the address of next node to be stored
+	 * 
+	 */
+	public void setLink(Node1<T> rear) {
+		this.link = rear;
+	}
+
+	/*
+	 * This method is used to get the link of a particular node
+	 *
+	 * @return the link of a node
+	 * 
+	 */
+	public Node1<T> getLink() {
+		return link;
+	}
+
+	/*
+	 * This method is used to get the data of a particular node
+	 *
+	 * @return the data of a particular node
+	 * 
+	 */
+	public T getData() {
+		return data;
+	}
+}
+
+public class QueueLinked<T> {
+
+	private Node1<T> front;
+	private Node1<T> rear;
+	private int size;
+
+	public QueueLinked() {
+		size = 0;
+		rear = null;
+		front = null;
+	}
+
+	/*
+	 * This method is to create a node and add the element in that node
+	 * 
+	 * @param element is the value to be stored in a particular node
+	 */
+	public  void enQueue(T element) {
+		Node1<T> nd = new Node1<T>(element, null);
+		if (rear == null) {
+			rear = nd;
+			front = nd;
+		} else {
+			rear.setLink(nd);
+			rear = rear.getLink();
+		}
+		size++;
+	}
+
+	/*
+	 * This method is used to retrieve and remove the data from queue
+	 * 
+	 * @returns the value in a particular node
+	 */
+	public T deQueue() {
+		Node1<T> nd = null;
+		T element = null;
+		if (isEmpty()) {
+			size = 0;
+			System.out.println("Queue is empty");
+		}
+		if (front == null)
+			rear = null;
+		nd = front;
+		front = nd.getLink();
+		element = nd.getData();
+		return element;
+	}
+
+	/*
+	 * This method helps to retrieve the data from queue
+	 * 
+	 * @returns the value in a particular node
+	 */
+	public T peek() {
+		if (isEmpty())
+			System.out.println("Queue is empty..!!");
+		return front.getData();
+	}
+
+	/*
+	 * This method helps to check whether the queue is empty or not
+	 * 
+	 * @returns true if empty
+	 */
+	public boolean isEmpty() {
+		return (front == null);
+	}
+
+	/*
+	 * This method is used to find the size of the queue
+	 * 
+	 * @returns the size of the queue
+	 */
+	public int size() {
+		return size;
+	}
+}

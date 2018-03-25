@@ -1,0 +1,50 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+public class CompanyShares {
+
+	private String stockName;
+	private String stockSymbol;
+	private int noOfShares;
+	private String dateTime;
+	private long price;
+
+	public CompanyShares(String stockName, String stockSymbol, int noOfSellingShares, long price2) {
+		this.stockName = stockName;
+		this.stockSymbol = stockSymbol;
+		this.noOfShares = noOfSellingShares;
+		this.price = price2;
+	}
+
+	public String getStockName() {
+		return stockName;
+	}
+
+	public String getSymbol() {
+		return stockSymbol;
+	}
+
+	public int getNumberOfShares() {
+		return noOfShares;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public String getDateTime() {
+		return dateTime;
+	}
+
+	public long getValue() {
+		return noOfShares * price;
+	}
+
+	public void setNumberOfShares(int numberOfShares) {
+		this.noOfShares = numberOfShares;
+	}
+
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
+}
+

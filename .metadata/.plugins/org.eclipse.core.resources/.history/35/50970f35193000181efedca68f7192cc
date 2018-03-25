@@ -1,0 +1,46 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.json.simple.parser.ParseException;
+
+import com.bridgeit.utility.Utility;
+
+public class StockAccount {
+     
+		public static void main(String[] args)
+		{
+			Scanner scanner=new Scanner(System.in);
+			boolean check=true;
+			String filePath="/home/bridgeit/Json/companyShares.json";
+
+			do{
+
+				System.out.println("\t\t\tPlease enter the Number  \n\t\t\t1 to display all companies shares\\t\t\tn2 to remove shares\n\t\t\t3 "
+						+ "to add the shares\n4 to exit.");
+
+				int choise=scanner.nextInt();
+				CompanyManagement company=new CompanyManagement();
+				switch (choise) {
+
+				case 1:
+					company.displayShares(filePath);
+					break;
+				case 2:
+					company.removeShare(filePath);
+					break;
+				case 3:
+					company.addShares(filePath);
+					break;
+				case 4:
+					check=false;
+					break;
+				default:
+					System.out.println("You have entered wrong choise, please enter correct choise.");
+					break;
+				}
+			}while(check);
+
+		}
+	}

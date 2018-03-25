@@ -28,7 +28,7 @@ public class StopWatch {
 			choice=utility.IntegerInput();
 		}while(choice==1);
 		long endTime=System.currentTimeMillis();
-		float elapsedTime=(endTime-startTime)%100;
+		float elapsedTime=(endTime-startTime)/1000;
 		System.out.println("Elased Time :"+" "+elapsedTime+"seconds");
 
 	}

@@ -1,0 +1,16 @@
+/**************************************************************************************************************************
+ * Purpose:Baking implimentations
+ * 
+ * @author bridgeit
+ * 
+ * Date: 22/02/18
+ **************************************************************************************************************************/
+package com.bridgeit.datastructure;
+import com.bridgeit.utility.Utility;
+public class CallenderUsingQueue {
+    public static void main(String[] args) {
+        System.out.println();
+        System.out.print("Enter the Month and Year in form [jan 2018] : ");
+      
+}
+}

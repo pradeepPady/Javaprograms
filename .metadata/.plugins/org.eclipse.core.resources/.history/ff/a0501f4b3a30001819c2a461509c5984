@@ -1,0 +1,21 @@
+package com.bridgeit.functional_programs;
+
+import com.bridgeit.utility.Utility;
+
+public class Gambler {
+
+	private static int wins = 0;
+
+	public static void main(String[] args) {
+		Utility utility=new Utility();
+		int stake = Integer.parseInt(args[0]);
+		int goal = Integer.parseInt(args[1]);
+		int times = Integer.parseInt(args[2]);
+		for (int i = 0; i < times; i++) {
+			wins = utility.play(stake, goal,wins);
+		}
+		System.out.println("Won " + wins + " times ");
+		System.out.println("Win percentage = " + 100 * wins / (float) times);
+		System.out.println("Loss percentage = " + (100 - (100 * wins / (float) times)));
+	}
+}

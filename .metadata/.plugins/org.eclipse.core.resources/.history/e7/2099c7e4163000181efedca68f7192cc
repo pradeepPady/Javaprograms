@@ -1,0 +1,42 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+public class Stock {
+
+	private String stockName;
+	private long noOfShares;
+	long priceOfShares;
+	private String fileDirectory = "/home/bridgeit/Desktop/";
+	private String filePath;
+
+	public void setFilePath(String name) {
+		this.filePath = fileDirectory + name + ".json";
+	}
+
+	public String getFileName() {
+		return this.filePath;
+	}
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	public void setNoOfShares(long noOfShares) {
+		this.noOfShares = noOfShares;
+	}
+
+	public void setPriceOfShares(long priceOfShares) {
+		this.priceOfShares = priceOfShares;
+	}
+
+	public String getStockName() {
+		return this.stockName;
+	}
+
+	public long getNoOfShares() {
+		return this.noOfShares;
+	}
+
+	public long getPriceOfShares() {
+		return priceOfShares;
+	}
+}

@@ -22,7 +22,7 @@ public class TempratureConvertion {
 					int input=scanner.nextInt();
 					@SuppressWarnings("static-access")
 					int result=utility.temperaturConversion(input,choice);
-					System.out.println("\ttemperature in Fahrenheit"+result);
+					System.out.println("\ttemperature in Fahrenheit "+result);
 			}
 			else if(choice.equals("FTC"))
 			{

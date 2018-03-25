@@ -54,17 +54,17 @@ public class InventeryManagement {
 		       String symbol=utility.StringInput();
 		       System.out.println("\t\t\tEnter the number of shares you want to buy ");
 		       int number=utility.IntegerInput();
-			transaction.buy(companyName,symbol,number);
+			  transaction.buy(companyName,symbol,number);
 			break;
 
 		case 3:
-			utility.selling();
+			//utility.selling();
 			break;
 
 		case 4:
-			utility.display();
+			//utility.display();
 			break;
-		case 5:transaction.addingCompanyShares();
+		case 5://transaction.addingCompanyShares();
 			
 			break;
 		case 6:System.exit(0);

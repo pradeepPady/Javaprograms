@@ -18,13 +18,18 @@ public class OrderedLinkedList {
 		Utility utility=new Utility();
 		UserDefinedLinkedList<String> ll=new UserDefinedLinkedList<String>();
 		stringArray=utility.fileReading();
-		System.out.println("After sorting--");
+		
 		Arrays.sort(stringArray);
+		for(String a:stringArray)
+		{
+			System.out.println(a);
+		}
 		ll.disply();
 		for(int i=0;i<stringArray.length;i++)
 		{
 			ll.add(((stringArray[i])));
 		}
+		System.out.println("After sorting--");
 		ll.disply();
 		System.out.println();
 		System.out.println();
@@ -43,7 +48,6 @@ public class OrderedLinkedList {
 				ll.add(key);
 				System.out.println("Key"+" "+key+" "+"Not found");
 			}
-			ll.disply();
 			utility.filewriting(ll);
 		}
 	}

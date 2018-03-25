@@ -1,0 +1,33 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import com.bridgeit.utility.Utility;
+
+public class StockAccount {
+      
+	public static Stock stock = new Stock();
+
+	public static void main(String[] args) {
+		Utility utility=new Utility();
+		char reply = 'y';
+		do {
+			System.out.println("Enter your operatons \n1.Create Account file \n2.Buy \n3.Sell");
+			int choice = utility.IntegerInput();
+			switch (choice) {
+			case 1:
+				Transactions.createAccount();
+				break;
+			case 2:
+				Transactions.buyStocks();
+				break;
+			case 3:
+				Transactions.sell();
+				break;
+			default:
+				System.out.println("Invalid choice!!!");
+				break;
+			}
+			System.out.println("Do you want to continue y/n");
+			reply = scanner.next().charAt(0);
+		} while (reply == 'y' || reply == 'Y');
+	}
+}

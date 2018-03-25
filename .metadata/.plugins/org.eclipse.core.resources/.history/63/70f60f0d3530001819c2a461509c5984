@@ -1,0 +1,6 @@
+package com.bridgeit.designPattern.VisiterDesignPattern;
+
+public class Fruit implements 
+{
+
+}

@@ -1,0 +1,31 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+public class StockAccount {
+
+	private static Scanner scanner = new Scanner(System.in);
+	public static Stock stock = new Stock();
+
+	public static void main(String[] args) throws IOException, ParseException {
+		char reply = 'y';
+		do {
+			System.out.println("Enter your operatons \n1.Create Account file \n2.Buy \n3.Sell");
+			int choice = scanner.nextInt();
+			switch (choice) {
+			case 1:
+				StockPortFolio.createAccount();
+				break;
+			case 2:
+				StockPortFolio.buyStocks();
+				break;
+			case 3:
+				StockPortFolio.sell();
+				break;
+			default:
+				System.out.println("Invalid choice!!!");
+				break;
+			}
+			System.out.println("Do you want to continue y/n");
+			reply = scanner.next().charAt(0);
+		} while (reply == 'y' || reply == 'Y');
+	}
+}

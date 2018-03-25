@@ -365,18 +365,16 @@ public class Utility1 {
 	}
 	public static int temperaturConversion(int input,String choice)
 	{
-		if(choice=="CTF")
+		if(choice.equals("CTF"))
 		{
-			int CTF=input*(9/5)+32;
-			return CTF;
+			int farenheat=(input*9/5)+32;
+			return farenheat;
 		}
-		else if(choice=="FTC")
+		else 
 		{
-			int FTC=(input-32)*9/5;
-			return FTC;
+			int celcius=(input-32)*(9/5);
+			return celcius;
 		}
-		else
-			return 0;
 		
 		
 	}

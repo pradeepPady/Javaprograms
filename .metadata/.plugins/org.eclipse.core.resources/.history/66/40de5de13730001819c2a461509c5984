@@ -1,0 +1,24 @@
+
+/***********************************************************************************
+ * Purpose:finding the distinct coupon numbers
+ * 
+ * @author bridgeit
+ * 
+ * Date: 22/02/18
+ ***********************************************************************************/
+package com.bridgeit.functional_programs;
+import com.bridgeit.utility.Utility;
+public class CouponNumber {
+	
+	public static void main(String args[])
+	{
+		Utility utility=new Utility();
+		System.out.println("Enter how many random numbers do you need to generate distinct coupon number");
+		int coupen_number;
+		coupen_number=utility.IntegerInput();
+		
+		utility.coupan(coupen_number);
+
+	}
+
+}

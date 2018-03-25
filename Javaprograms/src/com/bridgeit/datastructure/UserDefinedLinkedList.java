@@ -2,6 +2,7 @@ package com.bridgeit.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class UserDefinedLinkedList<T>
 {
@@ -134,24 +135,15 @@ public class UserDefinedLinkedList<T>
 		}
 		return arr;
 	}
-	public String toString()
-	{
-		String array[]=new String[size()];
-		int i=0;
-		Node<T>temp=frist;
-		while(temp!=null)
-		{
-			array[i]=(String) temp.data;
-			i++;
-			temp=temp.next;
+	public String toString() {
+		String string = "";
+		Node forword = frist;
+		while (forword != null) {
+			string = string + forword.data + " "; // Important(will call toString of Node class)
+			forword = forword.next;
 		}
-		StringBuilder builder = new StringBuilder();
-		for(String s : array) {
-		    builder.append(s+" ");
-		}
-		String string = builder.toString();
-		return string;
 
+		return string;
 	}
 
 

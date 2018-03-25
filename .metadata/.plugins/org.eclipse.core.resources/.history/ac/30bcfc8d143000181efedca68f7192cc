@@ -1,0 +1,260 @@
+package com.bridgeit.ObjectOrientedPrograms;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.Scanner;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class Transactions {
+
+	public static Scanner scanner = new Scanner(System.in);
+	public static String companySharesFilePath = "/home/bridgeit/Desktop/StockReport.json";
+	private static LinkedList<CompanyShares> companylist = new LinkedList<>();
+	private static StackLinkedList<String> stackOfTransactions = new StackLinkedList<>();
+	private static Queue<String> queueOfDateTime = new QueueLinkedList<>();
+	private static int index = 0;
+	public static Stock stock = new Stock();
+
+	public static void enterDetailsOfStock(String sourceAddress) throws IOException, ParseException {
+		File file = new File(sourceAddress);
+		System.out.print("Enter the stock Name:");
+		stock.setStockName(scanner.next());
+		System.out.print("Enter the Number of Shares:");
+		stock.setNoOfShares(scanner.nextInt());
+		System.out.print("Enter the Price Of Each Share: ");
+		stock.setPriceOfShares(scanner.nextInt());
+		if (file.length() == 0) {
+			createJsonObjectStock(stock, sourceAddress);
+		} else {
+			addToJsonObjectStock(stock, sourceAddress);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void addToJsonObjectStock(Stock stock, String sourceAddress) throws IOException, ParseException {
+		JSONObject object = new JSONObject();
+		JSONObject stockObject = new JSONObject();
+		JSONArray stockDetails = Utility.getArray(sourceAddress, "Stock");
+		object.put("StockName", stock.getStockName());
+		object.put("NoOfShares", stock.getNoOfShares());
+		object.put("PriceOfEachShare", stock.getPriceOfShares());
+		stockDetails.add(object);
+		stockObject.put("Stock", stockDetails);
+		Utility.writeToFile(stockObject, sourceAddress);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void createJsonObjectStock(Stock stock, String sourceAddress) throws IOException {
+		JSONObject object = new JSONObject();
+		JSONObject stockObject = new JSONObject();
+		JSONArray stockDetails = new JSONArray();
+		object.put("StockName", stock.getStockName());
+		object.put("NoOfShares", stock.getNoOfShares());
+		object.put("PriceOfEachShares", stock.getPriceOfShares());
+		stockDetails.add(object);
+		stockObject.put("Stock", stockDetails);
+		Utility.writeToFile(stockObject, sourceAddress);
+	}
+
+	public static void calculateValueOfStock(String filePath)throws FileNotFoundException, IOException, ParseException {
+		long totalValue = 0;
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(filePath));
+		JSONArray array = (JSONArray) jsonObject.get("Stock");
+		System.out.println("The JSON String is as follows..");
+		for (int i = 0; i < array.size(); i++) {
+			System.out.println(array.get(i));
+		}
+		System.out.println();
+		System.out.println("The price of your Stock is as follows...");
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject stock = (JSONObject) array.get(i);
+			long value = (long) stock.get("NoOfShares") * (long) (stock.get("Price"));
+			System.out.println("The total amount of stock " + (i + 1) + " is " + value);
+			totalValue += value;
+		}
+		System.out.println();
+		System.out.println("Total value of stock is " + totalValue);
+	}
+
+	/*public static void printReport() {
+		for (int i = companylist.size() - 1; i >= 0; i--) {
+			System.out.println();
+			System.out.println("-------------Details of Stocks Account---------------");
+			System.out.println("Name: " + companylist.get(i).getStockName());
+			System.out.println("Number of shares: " + companylist.get(i).getNumberOfShares());
+			System.out.println("Share price: " + companylist.get(i).getPrice());
+			System.out.println("Last Transaction done was " + (stackOfTransactions).pop());
+			System.out.println("Last transaction date and time: " + companylist.get(i).getDateTime());
+		}
+	}*/
+
+	public static void createAccount() throws IOException {
+		System.out.println("Enter the name of the file by which you would like to create a file");
+		stock.setFilePath(scanner.next());
+		File file = new File(stock.getFileName());
+		if (file.exists()) {
+			System.out.println("Sorry..!! File already exists by this name..Try some another name");
+			createAccount();
+		} else {
+			if (file.createNewFile())
+				System.out.println("File created..!!");
+		}
+	}
+
+	public static void buyStocks() throws FileNotFoundException, IOException, ParseException {
+		JSONObject stockInformation = null;
+		printStocks();
+		System.out.println("Enter name of the stock you would like to buy:");
+		String stockName = scanner.next();
+		stockInformation = searchForStock(stockName,companySharesFilePath);
+		if (stockInformation != null) {
+			buy(stockInformation, stockName);
+		} else {
+			System.out.println("Sorry..!!we dont have stock of this company with us..!!");
+			System.out.println("Would you like to buy stock of some other company (Type Y/N)");
+			char reply = scanner.next().charAt(0);
+			if (reply == 'Y' || reply == 'y') {
+				buyStocks();
+			} else {
+				System.out.println("Thank You for visiting us..!!");
+			}
+		}
+	}
+
+	private static void buy(JSONObject stockInformation, String stockName)throws FileNotFoundException, IOException, ParseException {
+		System.out.println("Enter stock symbol you would like to give:");
+		String stockSymbol = scanner.next();
+		System.out.println("Enter no of stocks you would like to buy:");
+		int noOfStock = scanner.nextInt();
+		long price = (long) stockInformation.get("Price");
+		if ((long) stockInformation.get("NoOfShares") == 0) {
+			System.out.println("Sorry..!!All the stocks of " + stockInformation.get("StockName") + " has been buyed");
+		} else if ((long) stockInformation.get("NoOfShares") >= noOfStock) {
+			long remainingShares = (long) stockInformation.get("NoOfShares") - noOfStock;
+			updateCompanyShares(remainingShares, stockInformation);
+			Date date = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - hh:mm");
+			String dateTime = format.format(date);
+			CompanyShares share = new CompanyShares(stockName, stockSymbol, noOfStock,price);
+			companylist.add(share);
+			stackOfTransactions.push("purchased");
+			queueOfDateTime.enQueue(dateTime);
+			System.out.println(noOfStock + " Shares has been purchased..!!");
+			save();
+		} else {
+			System.out.println("Sorry..!! only " + (long) stockInformation.get("NoOfShares") + "stocks of "
+					+ stockInformation.get("StockName") + " are remaining..!!");
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void updateCompanyShares(long remainingShares, JSONObject stockInformation)throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObjectStock = (JSONObject) parser.parse(new FileReader(companySharesFilePath));
+		JSONArray array = (JSONArray) jsonObjectStock.get("Stock");
+		stockInformation.replace("NoOfShares", remainingShares);
+		stockInformation.put("NoOfShares", remainingShares);
+		jsonObjectStock.put("Stock", array);
+		Utility.writeToFile(jsonObjectStock, companySharesFilePath);
+	}
+	
+	public static void save() throws IOException, ParseException {
+		System.out.println("Enter the user fileName");
+		stock.setFilePath(scanner.next());
+		String filePath = stock.getFileName();
+		File file = new File(filePath);
+		JSONArray arrayOfStocks = new JSONArray();
+	    if(file.length()==0){
+	    	saveDetails(arrayOfStocks,filePath);
+	    }else{
+	    	arrayOfStocks = Utility.getArray(filePath, "Stocks");
+	    	saveDetails(arrayOfStocks,filePath);
+	    }
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void saveDetails(JSONArray arrayOfStocks, String filePath) throws IOException{
+		JSONObject object = new JSONObject();
+		JSONObject stockDetails = new JSONObject();
+		stockDetails.put("Stock Name", companylist.get(index).getStockName());
+		stockDetails.put("Stock Symbol", companylist.get(index).getSymbol());
+		stockDetails.put("Number Of Shares", companylist.get(index).getNumberOfShares());
+		stockDetails.put("Price", companylist.get(index).getValue());
+		stockDetails.put("Transaction Status", stackOfTransactions.pop());
+		stockDetails.put("Transaction Date And Time", queueOfDateTime.deQueue());
+		arrayOfStocks.add(stockDetails);
+		object.put("Stocks", arrayOfStocks);
+		companylist.clear();
+		Utility.writeToFile(object, filePath);
+	}
+	
+	private static void printStocks() throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject stockObject = null;
+		JSONObject jsonObjectStock = (JSONObject) parser.parse(new FileReader(companySharesFilePath));
+		JSONArray stock = (JSONArray) jsonObjectStock.get("Stock");
+		System.out.println();
+		for (int i = 0; i < stock.size(); i++) {
+			stockObject = (JSONObject) stock.get(i);
+			System.out.println(stockObject.toJSONString());
+		}
+	}
+
+	private static JSONObject searchForStock(String stockName,String filePath)throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject stockObject = null;
+		JSONObject jsonObjectStock = (JSONObject) parser.parse(new FileReader(filePath));
+		JSONArray stock = (JSONArray) jsonObjectStock.get("Stocks");
+		for (int i = 0; i < stock.size(); i++) {
+			stockObject = (JSONObject) stock.get(i);
+			if (stockObject.get("Stock Name").equals(stockName))
+				return stockObject;
+		}
+		return null;
+	}
+
+	public static void sell() throws FileNotFoundException, IOException, ParseException {
+		System.out.println("Enter the user fileName");
+		stock.setFilePath(scanner.next());
+		String filePath = stock.getFileName();
+		System.out.println("Enter stock name to sell stock: ");
+		String stockName = scanner.next();
+		System.out.println("Enter the stock Sysmbol");
+		String stockSymbol = scanner.next();
+		System.out.println("Enter number of shares to sell:");
+	    int noOfSellingShares = scanner.nextInt();
+		JSONObject stockInformation = searchForStock(stockName, filePath);
+		if(stockInformation == null){
+			System.out.println("Sorry...!!But your account does not contain any shares ");
+			System.out.println("Would you like to buy some shares..?? (Type Y/N) ");
+			char answer = scanner.next().charAt(0);
+			if(answer == 'y'||answer == 'Y')
+				buyStocks();
+		} else {
+			long remainingShare = (long)stockInformation.get("Number Of Shares") - noOfSellingShares;
+			if (remainingShare >= 0) {
+				System.out.println("At what price would you u like to sell " + noOfSellingShares + " shares");
+				long price = scanner.nextLong();
+			    CompanyShares shares = new CompanyShares(stockName, stockSymbol, noOfSellingShares, price);
+			    companylist.add(shares);
+				Date date = new Date();
+				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy-hh:mm");
+				String dateTime = format.format(date);
+				queueOfDateTime.enQueue(dateTime);
+				stackOfTransactions.push("Sold");
+				System.out.println("Share has been sold..!!");
+				save();
+			} else {
+				System.out.println("Sorry...!! your account contains only " + stockInformation.get("Number Of Shares") + " shares.");
+			}
+		}
+	}
+}

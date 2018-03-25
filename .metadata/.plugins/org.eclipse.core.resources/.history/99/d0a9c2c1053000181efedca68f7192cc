@@ -1,0 +1,59 @@
+package com.bridgeit.datastructure;
+
+import java.util.Stack;
+
+import com.bridgeit.utility.Utility;
+
+		
+	public class TwoStack {
+		static String month[]= {" ","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		 static int day[]= {0,31,28,31,30,31,30,31,31,30,31,30,31};
+		 static int months;
+		 static int year;
+	    public static void main(String[] args) {
+			Stack<Integer> usin=new Stack<Integer>();
+			Stack<String> usin1=new Stack<String>();
+			Utility utility=new Utility();
+			System.out.println("Please Enter the months");
+			try {
+				
+				 months=utility.IntegerInput();
+			} catch (Exception e) 
+			{
+				System.out.println("Please Enter the number");
+			}
+			System.out.println("Please Enter the year");
+			try 
+			{
+				 year=utility.IntegerInput();
+			} catch (Exception e)
+			{
+				System.out.println("Please Enter the Intger Formate");
+			}
+	 		String  array[]= {"s","m","t","w","t","f","s"};
+	 		System.out.println("  "+month[months]+" "+year);
+		    for(int k=0;k<array.length;k++)
+			usin1.push(array[k]);
+			int value=utility.day(year, 1,months);
+			System.out.println();
+			for(int i=1;i<=day[months];i++)  
+				usin.push(i);
+	
+			System.out.println();
+			System.out.println("Program Ended");
+			for (int i = 0; i < usin.pop(); i++)
+				System.out.print("     ");
+			for (int i = 1; i <=usin.size(); i++) {
+				System.out.printf("%4d ", i);
+				if (((i + value) % 7 == 0) || (i == day[months])) System.out.println();
+				
+
+			}
+
+		}
+		}
+	   
+	}
+		
+	
+}

@@ -1,0 +1,5 @@
+package com.bridgeit.designPattern.VisiterDesignPattern;
+
+public class ShoppingCartClient {
+
+}

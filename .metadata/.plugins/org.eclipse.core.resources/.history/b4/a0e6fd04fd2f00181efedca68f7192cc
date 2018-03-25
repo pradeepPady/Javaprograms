@@ -1,0 +1,16 @@
+package com.bridgeit.datastructure;
+
+import com.bridgeit.datastructure.Queue.Node1;
+
+public class QueueLinked<T> {
+
+	private Node1<T> front;
+	private Node1<T> rear;
+	private int size;
+
+	public QueueLinked() {
+		size = 0;
+		rear = null;
+		front = null;
+	}
+}

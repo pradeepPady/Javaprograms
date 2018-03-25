@@ -213,8 +213,8 @@ public class Transaction {
 		  for(int i=0;i<jsonArray.size();i++)
 		  {
 			  JSONObject jsonObject=(JSONObject) jsonArray.get(i);
-			  String companyName1=jsonObject.get("CompanyName").toString();
-			  String symbol1=jsonObject.get("stock_Symbol").toString();
+			  String companyName1=jsonObject.get("Company_Name").toString();
+			  String symbol1=jsonObject.get("Company_Share").toString();
 			  if(companyName1.equals(companyName)&&symbol1.equals(symbol))
 			  {
 				  return true;
@@ -259,9 +259,9 @@ public class Transaction {
 		for(int i=0;i<jsonArray.size();i++)
 		{
 			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
-			userDefinedLinkedList1.add(jsonObject2.get("CompanyName"));
-			userDefinedLinkedList2.add(jsonObject2.get("stock_Symbol"));
-			userDefinedLinkedList3.add(jsonObject2.get("amount").toString());
+			userDefinedLinkedList1.add(jsonObject2.get("Company_Name"));
+			userDefinedLinkedList2.add(jsonObject2.get("Company_Share"));
+			userDefinedLinkedList3.add(jsonObject2.get("Share_Ammount").toString());
 			
 		}
 	}
@@ -289,8 +289,8 @@ public class Transaction {
 		{
 			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
 			System.out.println("\t\t\t=======Company "+(i+1)+"========\n");
-		System.out.println("\t\t\tCompanyName     :"+jsonObject2.get("CompanyName")+"\n");
-		System.out.println("\t\t\tstock_Symbo     :"+jsonObject2.get("stock_Symbol")+"\n");
+		System.out.println("\t\t\tCompanyName     :"+jsonObject2.get("Company_Name")+"\n");
+		System.out.println("\t\t\tstock_Symbo     :"+jsonObject2.get("Share_Ammoun")+"\n");
 		System.out.println("\t\t\tShare ammount   :"+jsonObject2.get("amount").toString()+"\n");
 		System.out.println("\t\t\tNumber of Shares:"+jsonObject2.get("amount").toString()+"\n");
 			

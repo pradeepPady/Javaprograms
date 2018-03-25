@@ -1,0 +1,15 @@
+package com.bridgeit.ObjectOrientedPrograms;
+
+import com.bridgeit.utility.Utility;
+
+public class DeckOfCardsUsingQueue {
+		
+		public static void main(String[] args) {
+			
+			Utility utility = new Utility();
+			String SUITS[] = {"Clubs", "Diamonds", "Hearts", "Spades"};
+			String RANKS[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King", "Ace"};
+			utility.deckOfCardsInQueue(SUITS,RANKS);
+		}
+
+	}

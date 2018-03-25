@@ -15,7 +15,7 @@ public class HasingFun {
 	{
 		
 		Utility utility=new Utility();
-		String arrray[]=utility.fileReading();
+		String arrray[]=utility.hashinFileReading();
 		utility.hasingImplimentation(arrray);
 	}
 }

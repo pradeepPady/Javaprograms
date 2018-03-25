@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import com.bridgeit.datastructure.UserDefinedDeQueue;
 import com.bridgeit.datastructure.UserDefinedLinkedList;
 import com.bridgeit.datastructure.UserDefinedStack;
@@ -51,10 +53,10 @@ public class Utility {
 	 */
 	public  void powerOf2Print(int Number)
 	{
-		for(int i=1;i<=Number;i++)
+		for(int i=0;i<Number;i++)
 		{
-			if(((i)&(i-1))==0)
-				System.out.println(i);
+			double pow=Math.pow(2, i);
+				System.out.println((int)pow);
 		}
 	}
 
@@ -828,11 +830,69 @@ public class Utility {
 			}
 			return false;
 		}
+public void cashCounter(int cash1, int people1) {
+		int customerNo = 0;
+		int cash = cash1;
+		int people = people1;
+		Queue<Integer> queue = new LinkedList<Integer>();
+		for (int i = 0; i < people; i++) {
+			queue.add(i);
+		}
+		for (int i = 0; i < people; i++) {
+			System.out.println();
+			customerNo++;
+			System.out.print("Person no. " + customerNo + " :\n");
+			queue.remove();
+			System.out.print("\t\t\t===>1.CashWithdrawal===>\n\t\t\t===>2.Deposit===>\n");
+			int choice = scanner.nextInt();
+			cash = transaction(choice, cash);
+			System.out.println();
+			System.out.print("\t\t\tTotal cash balance  is : " + cash+"\n");
+		}
+		if (customerNo == people)
+			System.out.println();
+		System.out.println("End of queue..\n");
+	}
+			
+		private int transaction(int choice1, int cash1)
+		{
+			int choice = choice1;
+			int cash = cash1;
+			switch (choice) {
+			case 1:
+				if (cash <40) {
+					System.out.println("\t\t\tEnter the cash Minimum of 50");
+					break;
+				}
+				System.out.println("\t\t\tEnter the ammount  to withdraw..??");
+				int withdrawalAmount = scanner.nextInt();
+				if (cash >= withdrawalAmount) {
+					cash =cash- withdrawalAmount;
+					System.out.println("\t\t\tTransaction of amount " + withdrawalAmount + " was Successful");
+					return cash;
+				} else {
+					System.out.println("\t\t\tSorry...!!Insufficient balence.!!");
+					break;
+				}
+			case 2:
+				System.out.println("\t\t\tEnter the Deposite ammount");
+				int depositAmount = scanner.nextInt();
+				cash =cash+ depositAmount;
+				System.out.println("Deposited " + depositAmount + " Successfully");
+				return cash;
+
+			default:
+				System.out.println("Invalid choice");
+				break;
+			}
+			return cash;
+}
+		String hasingFile1="/home/bridgeit/file/orderedList.txt";
 		@SuppressWarnings("resource")
 		public String[] fileReading() throws IOException {
-			String file="/home/bridgeit/file/wordList.txt";
+			
 			BufferedReader bufferedReader = null;
-			bufferedReader = new BufferedReader(new FileReader(file));
+			bufferedReader = new BufferedReader(new FileReader(hasingFile1));
 
 			String lines = null;
 			lines = bufferedReader.readLine();
@@ -842,18 +902,30 @@ public class Utility {
 			String[] stringArray = lines.split(" ");
 			return stringArray;
 		}
-		@SuppressWarnings("rawtypes")
+		String hasingFile="/home/bridgeit/file/HashingFun.txt";
+        public String[] hashinFileReading() throws IOException {
+			
+			BufferedReader bufferedReader = null;
+			bufferedReader = new BufferedReader(new FileReader(hasingFile));
+
+			String lines = null;
+			lines = bufferedReader.readLine();
+
+			System.out.println("------>" + lines);
+
+			String[] stringArray = lines.split(" ");
+			return stringArray;
+		}
+	
 		public void filewriting(UserDefinedLinkedList ll) throws IOException {
-			new File("/home/bridgeit/file/wordList.txt");
-			ll.toString();
-			/*BufferedWriter BufferedWriter = new BufferedWriter(new FileWriter(files));
-			BufferedWriter.write(string);
-			BufferedWriter.flush();*/
-			FileWriter fileWriter = new FileWriter("/home/bridgeit/file/wordList.txt");
-			  PrintWriter printWriter = new PrintWriter(fileWriter);
-			  printWriter.flush();
-			  fileWriter.close();
-			 
+			System.out.println();
+			String file="/home/bridgeit/file/orderedList.txt";
+			FileWriter fileWriter = new FileWriter(file);
+			  BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+			  System.out.println("Updated data: "+ll.toString());
+			  bufferedWriter.write(ll.toString());
+			  bufferedWriter.flush();
+			  bufferedWriter.close();
 		}
 
 		public String isBalenced(String expstion )
@@ -918,85 +990,72 @@ public class Utility {
 			}
 		}
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		public void hasingImplimentation(String[] arrray) throws FileNotFoundException
-		{
-			@SuppressWarnings("rawtypes")
-			HashMap<Integer, UserDefinedLinkedList>hm=new HashMap<Integer, UserDefinedLinkedList>();
-			int hash=-1;
-			int newArray[]=new int[arrray.length];
-			for(int i=0;i<arrray.length;i++)
-			{
-				newArray[i]=Integer.parseInt(arrray[i]);
-			}
-			for(int i=0;i<newArray.length;i++)
-			{
-				hash=newArray[i]%11;
-				if(hm.containsKey(hash))
-				{
-					UserDefinedLinkedList ll=hm.get(hash);
-					ll.add(newArray[i]);
-				}
-				else
-				{
-					hm.put(hash, new UserDefinedLinkedList());
-					UserDefinedLinkedList ll=hm.get(hash);
-					ll.add(newArray[i]);
+		public static void hasingImplimentation(String[] string) {
+			Utility utility = new Utility();
+			HashMap<Integer, OrderList> map = new HashMap<Integer, OrderList>();
+			int rem = -1;
+			for (int i = 0; i < string.length; i++) {
+				rem = Integer.parseInt(string[i]) % 11;
+				if (map.containsKey(rem)) {
+					OrderList list = map.get(rem);
+					list.insert(Integer.parseInt(string[i]));
+				} else {
+					map.put(rem, new OrderList());
+					OrderList list = map.get(rem);
+					list.insert(Integer.parseInt(string[i]));
 				}
 			}
-			System.out.println("enter the key");
-			int key=scan.nextInt();
-			hash=key%11;
-			if(hm.containsKey(hash))
-			{
-				UserDefinedLinkedList ll=hm.get(hash);
-				if(ll.search(key))
-				{
-					ll.remove(key);
-					System.out.println(key+" found and removed from the list");
-					writeUsingFileWriter(ll.toString());
-				}
-				else
-				{
-					ll.add(key);
-					System.out.println(key+" Not found and added to the list");
-					writeUsingFileWriter(ll.toString());
 
+			System.out.println(map);
+			System.out.print("Elements persent in the File  : ");
+			for (String str : string) {
+				System.out.print(str + " ");
+			}
+			System.out.println();
+
+			System.out.print("Enter the Key Which you want  : ");
+			int key = utility.IntegerInput();
+			// int index = 0;
+			rem = key % 11;
+
+			if (map.containsKey(rem)) {
+				OrderList list = map.get(rem);
+
+				if (list.search(key)) {
+					list.remove(key);
+					System.out.println(key + " Found and removed from the list...!");
+					fileUpdate(map);
+					System.out.println("File is Update...!");
+				} else {
+					list.add(key);
+					System.out.println(key + " Not Found and added from the list...!");
+					fileUpdate(map);
+					System.out.println("File is Update...!");
 				}
-			}
-			else
-			{
-				hm.put(hash, new UserDefinedLinkedList());
-				hm.get(hash);
-
-
-			}
-			Set<Integer> keys = hm.keySet(); 
-			for(Integer key1: keys)
-			{ 
-				UserDefinedLinkedList value = hm.get(key1);
-				System.out.print(key1+"-");
-				value.disply();
-				System.out.println();
+			} else {
+				map.put(rem, new OrderList());
+				OrderList list = map.get(rem);
+				if (!list.search(key)) {
+					list.add(key);
+					System.out.println(key + " Not Found and added from the list...!");
+					fileUpdate(map);
+					System.out.println("File is Update...!");
+				}
 			}
 		}
-		public void writeUsingFileWriter(String data) {
-			File file = new File("/home/bridgeit/file/wordList.txt");
-			FileWriter fr = null;
+		public static void fileUpdate(HashMap<Integer, OrderList> map) {
 			try {
-				fr = new FileWriter(file);
-				fr.write(data);
-			} catch (IOException e) {
+				String string = map.toString();
+				System.out.println(string);
+				FileWriter fw = new FileWriter("/home/bridgeit/file/HasingStore.txt");
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(string);
+				bw.close();
+			} catch (Exception e) {
 				e.printStackTrace();
-			}finally{
-
-				try {
-					fr.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
-
+		
 		public int primeCount() {
 			System.out.println("enter the frist");
 			int first=IntegerInput();
@@ -1407,7 +1466,7 @@ public class Utility {
 
 		}
 		@SuppressWarnings({ "unchecked", "unused", "null" })
-		public void createUser(String file) throws IOException, ParseException
+		/*public void createUser(String file) throws IOException, ParseException
 		{
 			if((file.exists() && file.length()> 0))
 			{
@@ -1422,12 +1481,12 @@ public class Utility {
 				}
 
 			}
-			/*FileWriter fileWriter = new FileWriter("/home/bridgeit/Json/userDetailes.json");
+			FileWriter fileWriter = new FileWriter("/home/bridgeit/Json/userDetailes.json");
 
 				fileWriter.write(((JSONObject) jsonObject).toJSONString());
 				System.out.println(jsonObject.toJSONString());
 				fileWriter.flush();
-				fileWriter.close();*/
+				fileWriter.close();
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(jsonObject.toJSONString());
@@ -1616,7 +1675,7 @@ public class Utility {
 				}
 			}
 
-		}
+		}*/
 		public void adduser()
 		{
 
@@ -1700,7 +1759,806 @@ public class Utility {
 			bufferedWriter.flush();
 			bufferedWriter.close();
 		}
-		
+		public  void storeCalenderInQueue(int month, int year) throws InterruptedException{
+			Queue q = new LinkedList();
+			LinkedList<String> week;
+			LinkedList<LinkedList>weekQueue=new LinkedList<LinkedList>(); 
+			String[] dayOfWeek = { "S", "M", "T","W", "Th", "F", "S" };
+			int[] noOfDays = { 0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+			int date = 1;
+			if (month == 2 || cheakLeapYear(year))
+				noOfDays[2] = 29;
+			int day = day(month,1, year);
+			week = new LinkedList<String>();
+			for (int i = 0; i < dayOfWeek.length; i++) {
+				  week.add((dayOfWeek[i]));
+			}
+			weekQueue.add(week);
+			for (int i = 1; i <7; i++) {
+				week = new LinkedList();
+				if (i == 1) {
+					for (int k = 0; k < 7; k++) {
+						if (k < day) {
+							week.add(" ");
+						} else {
+							week.add(String.valueOf(date));
+							date++;
+						}
+					}
+				} else {
+					for (int k = 0; k < 7; k++) {
+						if(date<=noOfDays[month])
+						week.add(String.valueOf(date));
+						date++;
+					}
+				}
+			weekQueue.add(week);
+			}
+			displayCalender(weekQueue,month,year);
+		}
+		public  void displayCalender(LinkedList<LinkedList> weekQueue,int month,int year) throws InterruptedException {
+			try
+			{
+			Object date = " ";
+			String[] monthName = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+					"October", "November", "December" };
+			System.out.println("              Calender of " + monthName[month] + "  " + year);
+			System.out.println();
+			for (int i = 0; i < 6; i++) {
+				LinkedList week = weekQueue.remove();
+				for (int j = 0; j < 7; j++) {
+				    date =  week.remove();
+				    if(date==null)
+				    	break;
+				    System.out.print(date+"\t");
+				}
+				System.out.println();
+			}
+		}catch(Exception e)
+		{}
 
+		}
+		public void storeCalenderInStack(int month, int year) {
+			Stack stack=new Stack();
+			Stack<String> week;
+			Stack<Stack>weekQueue=new Stack<Stack>(); 
+			String[] dayOfWeek = { "S", "M", "T","W", "Th", "F", "S" };
+			int[] noOfDays = { 0,31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+			int date = 1;
+			if (month == 2 || cheakLeapYear(year))
+				noOfDays[2] = 29;
+			int day = day(month,1, year);
+			week = new Stack<String>();
+			for (int i = 0; i < dayOfWeek.length; i++) {
+				  week.add((dayOfWeek[i]));
+			}
+			weekQueue.push(week);
+			for (int i = 1; i <7; i++) {
+				week = new Stack();
+				if (i == 1) {
+					for (int k = 0; k < 7; k++) {
+						if (k < day) {
+							week.add(" ");
+						} else {
+							week.add(String.valueOf(date));
+							date++;
+						}
+					}
+				} else {
+					for (int k = 0; k < 7; k++) {
+						if(date<=noOfDays[month])
+						week.add(String.valueOf(date));
+						date++;
+					}
+				}
+			weekQueue.add(week);
+			}
+			displayCalender1(weekQueue,month,year);
+			
+		}
+		private void displayCalender1(Stack<Stack> weekQueue, int month, int year) {
+			
+			try
+			{
+			Object date = " ";
+			String[] monthName = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+					"October", "November", "December" };
+			System.out.println("              Calender of " + monthName[month] + "  " + year);
+			System.out.println();
+			for (int i = 0; i < 6; i++) {
+				Stack week = weekQueue.lastElement();
+				for (int j = 0; j < 7; j++) {
+				    date =  week.lastElement();
+				    if(date==null)
+				    	break;
+				    System.out.print(date+"\t");
+				}
+				System.out.println();
+			}
+		}catch(Exception e)
+		{}
+		}
+		
+		/*public void deckOfCardsInQueue(String[] SUITS, String[] RANKS) {
+
+			
+			int lengthOfCards = SUITS.length * RANKS.length;
+			String[] deck = new String[lengthOfCards];
+			for (int i = 0; i < RANKS.length; i++) {
+				for (int j = 0; j < SUITS.length; j++) {
+					deck[SUITS.length*i + j] = RANKS[i] + " of " + SUITS[j];
+				}
+			}
+			for (int i = 0; i < lengthOfCards; i++) {
+				int r = i + (int) (Math.random() * (lengthOfCards-i));
+				String temp = deck[r];
+				deck[r] = deck[i];
+				deck[i] = temp;
+			}
+			String arr[][]=new String[SUITS.length][9];
+			for(int i=0; i<SUITS.length; i++)
+			{
+				 System.out.println("\t\t\t======Player "+(i+1)+"======\n");
+				for(int j=0; j<9; j++)
+				{
+					arr[i][j]=deck[i+j];
+					cardQueue.add(arr[i][j]);
+					//System.out.println(arr[i][j]+"\n");
+					System.out.println("\t\t\t"+cardQueue.remove()+"\n");
+				}
+				System.out.println();
+			}	
+		}*/
+		Queue cardQueue = new LinkedList();
+		public String[] assignDeckOfCards() 
+		{
+			String[] suit = { "Club", "Diamond", "Heart", "Spade" };
+				String[] rank = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+				String[] deckOfCards = new String[52];
+				int index = 0;
+				for (int i = 0; i < suit.length; i++) {
+					for (int j = 0; j < rank.length; j++) {
+						deckOfCards[index++] = suit[i] + " " + rank[j];
+					}
+				}
+				return deckOfCards;
+		
+		}
+		public  String[] shuffle(String[] deckCards) {
+			for (int i = 0; i < deckCards.length; i++) {
+				int random = (int) (Math.random() * (52));
+				String temp = deckCards[i];
+				deckCards[i] = deckCards[random];
+				deckCards[random] = temp;
+			}
+			return deckCards;
+		}
+		public  String[][] distribute(String[] deckOfShuffleCards, int noOfPlayers, int noOfCards) {
+			int index = 0;
+			String[][] distributedCards = new String[noOfPlayers][noOfCards];
+			for (int i = 0; i < noOfPlayers; i++) {
+				for (int j = 0; j < noOfCards; j++) {
+					distributedCards[i][j] = deckOfShuffleCards[index++];
+				}
+			}
+			return distributedCards;
+		}
+		public  void printDistibutedCards(String[][] cardsOfPlayers, int noOfPlayers, int noOfCards) {
+			for (int i = 0; i < noOfPlayers; i++) {
+				System.out.println("Cards of player " + (i + 1) + " are as follows :");
+				for (int j = 0; j < noOfCards; j++) {
+					System.out.println(cardsOfPlayers[i][j]);
+				}
+				System.out.println();
+			}
+		}
+		public  void printSortedCards(String[][] playerCards, int noOfPlayers, int noOfCards) {
+			String[] cards = new String[noOfCards];
+			for (int i = 0; i < noOfPlayers; i++) {
+				for (int j = 0; j < noOfCards; j++) {
+					cards[j] = playerCards[i][j];
+				}
+				cardQueue.add("Cards Of Player " + (i + 1) + " are as follows..");
+				sort(cards);
+			}
+			printSortedCardQueue();
+		}
+		private  void printSortedCardQueue() {
+			for (int i = 0; i < 40; i++) {
+				if (i % 10 == 0)
+					System.out.println();
+				System.out.println(cardQueue.remove());
+
+			}
+		}
+		private  void sort(String[] cards) {
+			char[] rank = { 'A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K' };
+			for (int i = 0; i < rank.length; i++) {
+				for (int j = 0; j < cards.length; j++) {
+					String card = cards[j];
+					char cardRank = card.charAt(card.length() - 1);
+					if (cardRank == rank[i])
+						cardQueue.add(card);
+				}
+			}
+		}
+		public JSONArray jsonFileReader(String filePath) {
+			
+			File file=new File(filePath);
+			JSONArray jSonArray=null;
+			try {
+				FileReader fileReader=new FileReader(file);
+				JSONParser jSonParser=new JSONParser();
+				jSonArray=new JSONArray();
+				jSonArray=(JSONArray) jSonParser.parse(fileReader);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return jSonArray;
+		}
+		public void jsonFileWriter1(String filePath, JSONArray jsonArray) 
+		{
+		
+			
+		}
+		public void createUser() throws IOException, ParseException {
+				JSONObject stockUser = new JSONObject();
+				JSONArray jsonArray = new JSONArray();
+				FileReader reader = new FileReader("/home/bridgeit/Json/userAccount.json");
+				BufferedReader bw=new BufferedReader(reader);
+				String name;
+				int numberOfShare, amount;
+
+				System.out.println("Enter First Name");
+				name =StringInput();
+
+				stockUser.put("user_Name", name);
+
+				System.out.println("Enter Number of Shares");
+				numberOfShare = scanner.nextInt();
+				stockUser.put("number_Share", numberOfShare);
+
+				System.out.println("Enter your balance");
+				amount = scanner.nextInt();
+				stockUser.put("amount", amount);
+				jsonArray.add(stockUser);
+				JSONArray object1=null;
+				 boolean found = true;
+				if(bw.readLine()!=null)
+				{
+				 JSONParser jsonParser = new JSONParser();
+				  object1 = (JSONArray) jsonParser.parse(reader);
+
+				
+				 Iterator<?> itr1 = (object1).iterator();
+				 while(itr1.hasNext()) 
+				{
+					JSONObject jsonDeatils = (JSONObject) itr1.next();
+					String userName = (String) jsonDeatils.get("user_Name");
+					if (userName.equalsIgnoreCase(name))
+					{
+						System.out.println("This "+name+" user is already created");
+						found = false;
+					}
+				}
+				}
+				if (found)
+				{
+					//object1.add(stockUser);
+					//((JSONArray) jsonArray).add(stockUser);
+					FileWriter fileWriter = new FileWriter("/home/bridgeit/Json/userAccount.json");
+					fileWriter.write(jsonArray.toJSONString());
+					fileWriter.flush();
+					fileWriter.close();
+
+				}
+			
+			}
+		public void Buy() throws IOException, ParseException 
+		{
+			
+			File file = new File("/home/bridgeit/Json/userAccount.json");
+
+			File file1 = new File(	"/home/bridgeit/Json/companyShares.json");
+
+			if (file.exists() && file1.exists())
+			{
+				// reading stock file
+
+				FileReader fileReader = new FileReader(file);
+				JSONParser parser = new JSONParser();
+				JSONArray stock = (JSONArray) parser.parse(fileReader);
+
+				// reading share file
+
+				FileReader fileReader2 = new FileReader(file1);
+				JSONParser parser1 = new JSONParser();
+				JSONArray share = (JSONArray) parser1.parse(fileReader2);
+
+				System.out.println("********** @ Buy Shares @ *********");
+				System.out.println();
+
+				System.out.println("Enter user name");
+				String name = StringInput();
+				Iterator<?> itr = ((List<Integer>) stock).iterator();
+				Iterator<?> itr1 = ((List<Integer>) share).iterator();
+				boolean flag = false;
+
+				while (itr.hasNext())
+				{
+					JSONObject jsonObject = (JSONObject) itr.next();
+					if (jsonObject.get("user_Name").equals(name))
+					{
+						System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
+						String symbol = StringInput();
+
+						while (itr1.hasNext())
+						{
+							JSONObject jsonObject2 = (JSONObject) itr1.next();
+							if (jsonObject2.get("stock_Symbol").equals(symbol))
+							{
+								System.out.println("Enter the amount to buy the shares");
+								int ammount = IntegerInput();
+
+								int balalnce = Integer.parseInt(jsonObject.get("amount").toString());
+								int price = Integer.parseInt(jsonObject2.get("amount").toString());
+								int numberShare = Integer.parseInt(jsonObject.get("number_Share").toString());
+								int stockShare = Integer.parseInt(jsonObject2.get("Count").toString());
+
+								int numofshare = ammount / price;
+								int newbalalnce = balalnce - ammount;
+								int sharecountcus = numberShare + numofshare;
+								int sharecountstock = stockShare - numofshare;
+
+								jsonObject.remove("amount");
+								jsonObject.remove("number_Share");
+								jsonObject.remove("Count");
+
+								jsonObject.put("amount", newbalalnce);
+								jsonObject.put("number_Share", sharecountcus);
+								jsonObject2.put("Count", sharecountstock);
+
+								flag = true;
+								break;
+							}
+						}
+						System.out.println();
+						System.out.println("You buy shares successfully on... ");
+						//	System.out.println();
+					}
+					FileWriter fileWriter = new FileWriter(file);
+					fileWriter.write(JSONValue.toJSONString(stock));
+					fileWriter.flush();
+					fileWriter.close();
+				}
+
+				Queue queue = new LinkedList();
+				Stack stack1 = new Stack();
+				long time = System.currentTimeMillis();
+				java.util.Date date = new java.util.Date(time);
+				queue.add(date);
+				System.out.println();
+
+				System.out.println("----------------------------------");
+				if (flag == false)
+				{
+					System.out.println("User name is not exits");
+				}
+				FileWriter fw = new FileWriter(file1);
+				fw.write(JSONValue.toJSONString(share));
+				fw.flush();
+				fw.close();
+			} else {
+				System.out.println("File does not exits");
+			}
+		}
+		public void sell() throws IOException, ParseException 
+		{
+
+				File file = new File("/home/bridgeit/Json/userAccount.json");
+
+				File file1 = new File(	"/home/bridgeit/Json/companyShares.json");
+				if (file.exists() && file1.exists()) {
+
+
+
+					FileReader fr = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray stock = (JSONArray) parser.parse(fr);
+
+					FileReader sf = new FileReader(file1);
+					JSONParser parser1 = new JSONParser();
+					JSONArray share = (JSONArray) parser1.parse(sf);
+
+					System.out.println();
+					System.out.println("**** @ Sell Shares @ ****");
+					System.out.println();
+					System.out.println("Enter the user name");
+					String name = StringInput();
+					Iterator<?> itr = ((List<Integer>) stock).iterator();
+					Iterator<?> itr1 = ((List<Integer>) share).iterator();
+					boolean flag = false;
+					while (itr.hasNext())
+					{
+						JSONObject obj = (JSONObject) itr.next();
+						if (obj.get("user_Name").equals(name)) 
+						{
+							System.out.println("Enter the share symbol to sell share:[@,#,!]");
+							String symbol = StringInput();
+
+							while (itr1.hasNext())
+							{
+								JSONObject obj1 = (JSONObject) itr1.next();
+								if (obj1.get("stock_Symbol").equals(symbol))
+								{
+									System.out.println("Enter the amount");
+									int ammount = IntegerInput();
+
+									int bal = Integer.parseInt(obj.get("amount").toString());
+									int price = Integer.parseInt(obj1.get("amount").toString());
+									int noShare = Integer.parseInt(obj.get("number_Share").toString());
+									int stockShare = Integer.parseInt(obj1.get("Count").toString());
+
+									int numofshare = ammount / price;
+									int newbal = bal + ammount;
+									int sharecountcus = noShare - numofshare;
+									int sharecountstock = stockShare + numofshare;
+
+									obj.remove("amount");
+									obj.remove("number_Share");
+									obj1.remove("Count");
+									obj.put("amount", newbal);
+									obj.put("number_Share", sharecountcus);
+									obj1.put("Count", sharecountstock);
+
+									flag = true;
+									break;
+								}
+							}
+
+							System.out.println();
+							System.out.println("Your shares sell successfully on...");
+
+							Queue queue = new LinkedList();
+							Stack stack1 = new Stack();
+							long time = System.currentTimeMillis();
+							java.util.Date date = new java.util.Date(time);
+							queue.add(date);
+							stack1.push(symbol);
+							System.out.println();
+							System.out.println("Date: "+queue.remove());
+							System.out.println("Shares symbol is: "+stack1.pop());
+							System.out.println();
+							System.out.println("---------------------------------------");
+							System.out.println();
+						}
+						FileWriter fileWriter = new FileWriter(file);
+						fileWriter.write(JSONValue.toJSONString(stock));
+						fileWriter.flush();
+						fileWriter.close();
+					}
+					if (flag == false) {
+						System.out.println("User name not fond");
+					}
+					FileWriter fw = new FileWriter(file1);
+					fw.write(JSONValue.toJSONString(share));
+					fw.flush();
+					fw.close();		
+				} else
+				{
+					System.out.println("File does not exits");
+				}
+			}
+		public static void display() throws IOException, ParseException
+		{
+
+			File file = new File("/home/bridgeit/Json/userAccount.json");
+
+				FileReader reader1 = new FileReader("/home/bridgeit/Json/userAccount.json");
+
+				JSONParser jsonParser1 = new JSONParser();
+				JSONArray jsonArrays_StackDtails = (JSONArray) jsonParser1.parse(reader1);
+
+				System.out.println("**** @ User Details @ ****");
+				for (Object o1 : jsonArrays_StackDtails) 
+				{
+					JSONObject jsonDetails2 = (JSONObject) o1;
+					String name = (String) jsonDetails2.get("user_Name");
+					System.out.println("User Name: " + name);
+
+					Object share = jsonDetails2.get("number_Share");
+					System.out.println("Number of share: " + share);
+
+					Object amount = jsonDetails2.get("amount");
+					System.out.println("Amount: " + amount);
+
+					System.out.println("-----------------------------------------");
+				}
+			}
+		public void calenderStack(int month, int year) {
+
+			Stack monthstack = new Stack();
+			Stack day = new Stack();
+			Utility utility = new Utility();
+
+			String[] months = { "", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+					"October", "November", "December" };
+			for (int i = 0; i < months.length; i++) {
+				monthstack.push(months[i]);
+			}
+			int[] days = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+			if (month == 2 && cheakLeapYear(year)) {
+				days[month] = 29;
+			}
+			for (int i = 0; i < days.length; i++) {
+				day.push(days[i]);
+			}
+			System.out.println("   " + months[month] + " " + year);
+			System.out.println(" S  M Tu  W Th  F  S");
+			int d = day(month, 1, year);
+			for (int i = 0; i < d; i++) {
+				System.out.print("   ");
+			}
+			for (int i = 1; i <= days[month]; i++) {
+				System.out.printf("%2d ", i);
+				if (((i + d) % 7 == 0) || (i == days[month]))
+					System.out.println();
+			}
+
+		}
+		/*public void createAcc() throws IOException, ParseException, Exception {
+			String file="/home/bridgeit/Json/UserDetailes.json";
+
+			JSONArray array = new JSONArray();
+             JSONObject json1=new JSONObject();
+			boolean check = true;
+			while (check == true)
+				{JSONObject json=null;
+				System.out.println("Want to add user: y or n");
+				char character = scanner.next().charAt(0);
+				if (character == 'y') {
+
+					FileReader filereader = new FileReader(file);
+					BufferedReader bufferedReader=new BufferedReader(filereader);
+					if(bufferedReader.readLine()!=null)
+					{
+					JSONParser parser = new JSONParser();
+					JSONArray array1 = (JSONArray) parser.parse(filereader);
+			        json = new JSONObject();
+					}
+					System.out.println("Enter name");
+					String name = StringInput();
+					System.out.println("Enter balance");
+					int bal = IntegerInput();
+					json.put("Name", name);
+					json.put("Balance", bal);
+					json.put("ShareCount", 100);
+
+					array1.add(json);
+					FileWriter filewriter = new FileWriter(file);
+					filewriter.write(JSONArray.toJSONString(array1));
+					filewriter.flush();
+					filewriter.close();
+
+				} else {
+					check = false;
+				}
+			}
+
+		}*/
+
+		public void saleShare() throws IOException, ParseException, Exception {
+			File file = new File("UserDetailes.json");
+			File file1 = new File("Stock.json");
+
+			// reading demo file
+			FileReader filereader = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONArray stock = (JSONArray) parser.parse(filereader);
+			// reading demo1 file
+
+			FileReader filereader1 = new FileReader(file1);
+			JSONParser parser1 = new JSONParser();
+			JSONArray share = (JSONArray) parser1.parse(filereader1);
+
+			System.out.println("Enter the user");
+			String name = StringInput();
+			Iterator itr = stock.iterator();
+			Iterator itr1 = share.iterator();
+			boolean flag = false;
+			while (itr.hasNext()) {
+				JSONObject jsonobject = (JSONObject) itr.next();
+				if (jsonobject.get("Name").equals(name)) {
+					System.out.println("Enter the share sysmbol to sale share:[@,!,#]");
+					String symbol = StringInput();
+					System.out.println("Enter the number of share to sale");
+					int count =IntegerInput();
+					while (itr1.hasNext()) {
+						JSONObject jsonobject1 = (JSONObject) itr1.next();
+						if (jsonobject1.get("Symbol").equals(symbol)) {
+							int balance = Integer.parseInt(jsonobject.get("Balance").toString());
+							int price = Integer.parseInt(jsonobject1.get("Price").toString());
+							int noShare = Integer.parseInt(jsonobject.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(jsonobject1.get("Count").toString());
+							int saleprize = count * price;
+							int newbal = balance + saleprize;
+							int sharecountcus = noShare - count;
+							int sharecountstock = stockShare + count;
+							jsonobject.remove("Balance");
+							jsonobject.remove("ShareCount");
+							jsonobject1.remove("Count");
+
+							jsonobject.put("Balance", newbal);
+							jsonobject.put("ShareCount", sharecountcus);
+							jsonobject1.put("Count", sharecountstock);
+							Date d = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							System.out.println("Date " + date);
+							flag = true;
+							break;
+						}
+
+					}
+				}
+
+				FileWriter fs = new FileWriter(file);
+				fs.write(JSONValue.toJSONString(stock));
+				fs.flush();
+				fs.close();
+			}
+			if (flag == false) {
+				System.out.println("User name not exits");
+			}
+			FileWriter fw = new FileWriter(file1);
+			fw.write(JSONValue.toJSONString(share));
+			fw.flush();
+			fw.close();
+
+		}
+		public void buyShare() throws IOException, ParseException, Exception {
+			File file = new File("UserDetailes.json");
+			File file1 = new File("Stock.json");
+
+			FileReader filereader = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONArray stock = (JSONArray) parser.parse(filereader);
+			// reading file
+
+			FileReader filereader1 = new FileReader(file1);
+			JSONParser parser1 = new JSONParser();
+			JSONArray share = (JSONArray) parser1.parse(filereader1);
+
+			System.out.println("Enter the user");
+			String name = StringInput();
+			Iterator itr = stock.iterator();
+			Iterator itr1 = share.iterator();
+			boolean flag = false;
+			while (itr.hasNext()) {
+				JSONObject jsonobject = (JSONObject) itr.next();
+				if (jsonobject.get("Name").equals(name)) {
+					System.out.println("Enter the share sysmbol to buy share:[@,!,#]");
+					String symbol = StringInput();
+
+					while (itr1.hasNext()) {
+						JSONObject jsonobject1 = (JSONObject) itr1.next();
+						if (jsonobject1.get("Symbol").equals(symbol)) {
+							System.out.println("Enter the amount");
+							int amount = IntegerInput();
+							int balance = Integer.parseInt(jsonobject.get("Balance").toString());
+							int price = Integer.parseInt(jsonobject1.get("Price").toString());
+							int noShare = Integer.parseInt(jsonobject.get("ShareCount").toString());
+							int stockShare = Integer.parseInt(jsonobject1.get("Count").toString());
+							int numofshare = amount / price;
+							int newbal = balance - amount;
+							int sharecountcus = noShare + numofshare;
+							int sharecountstock = stockShare - numofshare;
+							jsonobject.remove("Balance");
+							jsonobject.remove("ShareCount");
+							jsonobject1.remove("Count");
+
+							jsonobject.put("Balance", newbal);
+							jsonobject.put("ShareCount", sharecountcus);
+							jsonobject1.put("Count", sharecountstock);
+							Date d = new Date();
+							String date = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(d);
+							System.out.println("Date " + date);
+							flag = true;
+							break;
+						}
+					}
+
+				}
+				FileWriter fs = new FileWriter(file);
+				fs.write(JSONValue.toJSONString(stock));
+				fs.flush();
+				fs.close();
+			}
+			if (flag == false) {
+				System.out.println("User name not exits");
+			}
+			FileWriter fw = new FileWriter(file1);
+			fw.write(JSONValue.toJSONString(share));
+			fw.flush();
+			fw.close();
+		}
+		public <E> void display1() throws IOException, ParseException 
+		{
+			File file = new File("UserDetailes.json");
+			FileReader filereader = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONArray array1 = (JSONArray) parser.parse(filereader);
+			Iterator<E> itrator = array1.iterator();
+			while (itrator.hasNext()) {
+				JSONObject object = (JSONObject) itrator.next();
+				System.out.println(object);
+			}
+		}
+public void coupan(int coupen_number) {
+	LinkedHashSet<Integer> randomnumber = new LinkedHashSet<Integer>();
+	int count=0;
+	for (int i =0 ; i <coupen_number; i++) 
+	{
+		for(int j=0;j<=i;j++)
+		{
+		int setvalue=((getRandomNumber(1,coupen_number)));
+		count++;
+		randomnumber.add(new Integer(setvalue));
+		}
+	}
+	System.out.println(randomnumber + " ");
+	System.out.println(count);
 }
+static int getRandomNumber(int min,int max)
+{
+	
+	Random r = new Random();
+	return r.nextInt((max - min) + 1) + min;
+	
+}
+public void gambler(int stake, int goal, int time) {
+		int won = 0, loss = 0, beat = 0;
+		
+		for (int i = 0; i <time; i++) {
+			
+			if(stake > 0 && stake< goal) 
+			{
+				beat++;
+				
+				if (Math.random() < 0.5) {
+					stake++;
+					won++;
+
+				} 
+				else {
+					stake--;
+					loss++;
+				}
+			}
+		
+		}
+		System.out.println("wins" + won);
+		System.out.println("loss" + loss);
+		System.out.println("Beat" + beat);
+		int wins = (won * 100) / beat;
+		int los = (loss * 100) / beat;
+		System.out.println(wins + "% vs " + los + "%");
+		
+	}
+	public  int play(int cash, int target, int count) {
+		double random = 0.0;
+		int amount = cash;
+		while (amount > 0 && amount < target) {
+			random = Math.random();
+			if (random > 0.5)
+				amount++;
+			if (random < 0.5)
+				amount--;
+		}
+		if (amount == target)
+			count++;
+		return count;
+	}
+}
+
+
 

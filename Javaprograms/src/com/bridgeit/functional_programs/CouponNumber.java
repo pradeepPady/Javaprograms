@@ -13,10 +13,11 @@ public class CouponNumber {
 	public static void main(String args[])
 	{
 		Utility utility=new Utility();
-		System.out.println("Enter the number of coupons");
-		int number=utility.IntegerInput();
-		int ranCount=utility.generateCouponNumber(number);
-		System.out.println(ranCount);
+		System.out.println("enter the number of copan number do you want to generate");
+		int coupen_number;
+		coupen_number=utility.IntegerInput();
+		
+		utility.coupan(coupen_number);
 
 	}
 

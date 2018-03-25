@@ -1,0 +1,5 @@
+package com.bridgeit.designPattern.ObserverDesignPattern;
+
+public class MyTopic {
+
+}

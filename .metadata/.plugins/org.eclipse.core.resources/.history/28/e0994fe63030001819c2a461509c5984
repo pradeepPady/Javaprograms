@@ -1,0 +1,45 @@
+/******************************************************************************
+ *  Purpose:Commercial data processing
+
+ *  @author  Poonam
+ *  @version 1.0
+ *  @since   12-03-2018
+ *
+ ******************************************************************************/
+package com.bridgeit.ObjectOrientedPrograms;
+import com.bridgeit.utility.*;
+public class CommarcialDataProcessing {
+
+	public static void main(String[] args) throws Exception {
+		Utility utility = new Utility();
+
+		while (true) {
+			System.out.println("Enter your choice:");
+			System.out.println("1. Create user");
+			System.out.println("2. Buy Share");
+			System.out.println("3. Sale Share");
+			System.out.println("4. Display Details");
+			System.out.println("5. Exit");
+			int choice = utility.I;
+			switch (choice) {
+			case 1:
+				utility.createAcc();
+				break;
+			case 2:
+				utility.buyShare();
+				break;
+
+			case 3:
+				utility.saleShare();
+				break;
+			case 4:
+				utility.display();
+				break;
+			default:
+				return;
+			}
+		}
+
+	}
+
+}
