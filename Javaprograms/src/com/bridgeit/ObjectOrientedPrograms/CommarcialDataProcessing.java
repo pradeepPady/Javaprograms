@@ -1,12 +1,4 @@
-/******************************************************************************
- *  Purpose:Commercial data processing
 
-
- *  @author  Poonam
- *  @version 1.0
- *  @since   12-03-2018
- *
- ******************************************************************************/
 
 
 package com.bridgeit.ObjectOrientedPrograms;
