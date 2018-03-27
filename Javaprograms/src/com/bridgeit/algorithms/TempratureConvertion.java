@@ -12,30 +12,25 @@ public class TempratureConvertion {
 		while(true)
 		{
 				System.out.println("\t\t--:Temprature Convertion:--\t");
-				System.out.println("\t\t1:Celsius to Fahrenheit\t"+"Enter------ >CTF");
-				System.out.println("\t\t1:Fahrenheit to Celsius\t"+"Enter------->FTC");
-				String choice=scanner.next();
+				System.out.println("\t\t1:Celsius to Fahrenheit\t"+"Enter------ >1");
+				System.out.println("\t\t1:Fahrenheit to Celsius\t"+"Enter------->2");
+				int choice=scanner.nextInt();
 				
-			if(choice.equals("CTF"))
+			if(choice==1)
 			{
 					System.out.println("\tEnter temperature in celsius");
 					int input=scanner.nextInt();
 					@SuppressWarnings("static-access")
-					int result=utility.temperaturConversion(input,choice);
+					int result=utility.farenheattemperaturConversion(input);
 					System.out.println("\ttemperature in Fahrenheit "+result);
 			}
-			else if(choice.equals("FTC"))
+			else 
 			{
 					System.out.println("\tEnter temperature in Fahrenheit");
 					int input=scanner.nextInt();
 					@SuppressWarnings("static-access")
-					int result=utility.temperaturConversion(input,choice);
-					System.out.println("\ttemperature in Celsius"+result);
-			}
-			else
-			{
-					System.out.println("\t\t\tThank You\t\t");
-					break;
+					int result=utility.celciustemperaturConversion(input);
+					System.out.println("\ttemperature in Celsius "+result);
 			}
 		}
 	}

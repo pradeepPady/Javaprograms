@@ -363,22 +363,21 @@ public class Utility1 {
         }
         return ammountCount;
 	}
-	public static int temperaturConversion(int input,String choice)
+	public static int farenheattemperaturConversion(int input)
 	{
-		if(choice.equals("CTF"))
-		{
 			int farenheat=(input*9/5)+32;
 			return farenheat;
-		}
-		else 
-		{
-			int celcius=(input-32)*(9/5);
-			return celcius;
-		}
 		
 		
 	}
-
+	
+	public static int celciustemperaturConversion(int input)
+	{
+			int celcius=(input-32)*(9/5);
+			return celcius;
+		
+		
+	}
 	public String tobinary(int decimalInput) {
 		
 		if(decimalInput==0)

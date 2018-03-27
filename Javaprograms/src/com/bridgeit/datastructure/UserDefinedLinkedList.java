@@ -7,6 +7,7 @@ import java.util.Collections;
 public class UserDefinedLinkedList<T>
 {
 	Node<T> frist=null;
+	public Object userDefinedLinkedList1;
 	public  Node<T> list()
 	{
 		Node<T> n=new Node<T>();
@@ -139,7 +140,7 @@ public class UserDefinedLinkedList<T>
 		String string = "";
 		Node forword = frist;
 		while (forword != null) {
-			string = string + forword.data + " "; // Important(will call toString of Node class)
+			string = string + forword.data + " "; 
 			forword = forword.next;
 		}
 

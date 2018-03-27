@@ -1,11 +1,14 @@
 package com.bridgeit.ObjectOrientedPrograms;
 
+import java.util.Scanner;
+
 import com.bridgeit.utility.Utility;
 
 public class REgularExpresations {
-	private static final String message="Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx. Please,let us know in case of any clarification Thank you BridgeLabz 01/01/2016. ";
+	private static final String message="Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx. Please,let us know in case of any clarification Thank you BridgeLabz 26/03/2018. ";
 public static void main(String[] args) {
 	Utility utility=new Utility();
+	Scanner scanner=new Scanner(System.in);
 	boolean flag=true;
 	String name="";
 	String mobileNumber="";
@@ -21,7 +24,7 @@ public static void main(String[] args) {
 	}
 	utility.setName(name);
 	System.out.print("\t2:enter your FullName: \n");
-	String Fullname=utility.StringLineInput();
+	String Fullname=scanner.nextLine();
 	System.out.println();
     utility.setFullName(Fullname);
     flag=true;

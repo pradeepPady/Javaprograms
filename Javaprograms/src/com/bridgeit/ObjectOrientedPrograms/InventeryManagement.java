@@ -58,15 +58,15 @@ public class InventeryManagement {
 			break;
 
 		case 3:
-			//utility.selling();
+		//	utility.selling();
 			break;
 
 		case 4:
-			//utility.display();
+			utility.display();
 			break;
-		case 5://transaction.addingCompanyShares();
+		//case 5:transaction.addingCompanyShares();
 			
-			break;
+		//	break;
 		case 6:System.exit(0);
 		break;
 

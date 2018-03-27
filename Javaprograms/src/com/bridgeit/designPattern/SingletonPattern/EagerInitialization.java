@@ -15,7 +15,8 @@ public class EagerInitialization {
 	   
 	    private EagerInitialization(){}
 
-	    public static EagerInitialization getInstance(){
+	    public static EagerInitialization getInstance()
+	    {
 	        return instance;
 	    }
 	}

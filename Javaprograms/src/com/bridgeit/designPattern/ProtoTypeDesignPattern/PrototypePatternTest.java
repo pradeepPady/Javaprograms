@@ -2,7 +2,8 @@ package com.bridgeit.designPattern.ProtoTypeDesignPattern;
 
 import java.util.ArrayList;
 
-public class PrototypePatternTest {
+public class PrototypePatternTest
+{
 
 	public static void main(String[] args) throws CloneNotSupportedException {
 		Employees emps = new Employees();

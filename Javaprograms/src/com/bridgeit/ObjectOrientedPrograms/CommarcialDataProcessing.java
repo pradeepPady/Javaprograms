@@ -1,33 +1,37 @@
 /******************************************************************************
  *  Purpose:Commercial data processing
 
-
- *  @author  Poonam
+ *  @author  Pardeep
  *  @version 1.0
- *  @since   12-03-2018
+ *  @since   22-03-2018
  *
  ******************************************************************************/
-
-
 package com.bridgeit.ObjectOrientedPrograms;
-import com.bridgeit.utility.*;
+
+import com.bridgeit.datastructure.UserDefinedLinkedList;
 import com.bridgeit.utility.Utility;
+
 public class CommarcialDataProcessing {
 
 	public static void main(String[] args) throws Exception {
 		Utility utility = new Utility();
-
-		while (true) {
+		UserDefinedLinkedList<?> userDefinedLinkedList1=new UserDefinedLinkedList<>();
+		UserDefinedLinkedList<?> userDefinedLinkedList2=new UserDefinedLinkedList<>();
+		UserDefinedLinkedList<?> userDefinedLinkedList3=new UserDefinedLinkedList<>();
+		String companyFile="/home/bridgeit/myPrograms/Javaprograms/CompanyShares1.json";
+		while (true) 
+		{
 			System.out.println("Enter your choice:");
 			System.out.println("1. Create user");
 			System.out.println("2. Buy Share");
 			System.out.println("3. Sale Share");
 			System.out.println("4. Display Details");
-			System.out.println("5. Exit");
+			System.out.println("5. Company shares Management");
+			System.out.println("7. Exit");
 			int choice = utility.IntegerInput();
 			switch (choice) {
 			case 1:
-				utility.createAcc();
+				utility.createUserAccount();
 				break;
 			case 2:
 				utility.buyShare();
@@ -39,7 +43,14 @@ public class CommarcialDataProcessing {
 			case 4:
 				utility.display();
 				break;
-			default:
+		    case 5:utility.companyShareManageMent(userDefinedLinkedList1,userDefinedLinkedList2,userDefinedLinkedList3,companyFile);
+			          break;
+		    case 6:utility.removeDataFromLinkedList(userDefinedLinkedList1,userDefinedLinkedList2,userDefinedLinkedList3,companyFile);
+		    
+		    default:
+				
+				
+				
 				return;
 			}
 		}

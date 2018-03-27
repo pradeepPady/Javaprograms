@@ -5,7 +5,36 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2018-03-23T15:11:13Z</updated>
+  <updated>2018-03-26T10:14:00Z</updated>
+  <entry>
+    <title>Spring Security SAML DSL 1.0.5.RELEASE</title>
+    <link rel="alternate" href="https://spring.io/blog/2018/03/26/spring-security-saml-dsl-1-0-5-release" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Filip Hanik</name>
+    </author>
+    <id>tag:spring.io,2018-03-26:3217</id>
+    <updated>2018-03-26T10:14:00Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;The Spring Security team is proud to announce our latest 1.0.5.RELEASE of our SAML DSL project. This release works against Spring Security SAML 1.0.4.RELEASE.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This release adds a simple &lt;a href="https://github.com/spring-projects/spring-security-saml-dsl/blob/929b94b349e894f17a7ff89375446b48f1c7f637/samples/spring-security-saml-dsl-sample/src/main/java/com/example/SecurityConfiguration.java#L21-L41"&gt;Java configuration option&lt;/a&gt; to your existing Spring Boot applications&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This release requires an additional &lt;a href="http://repository.mulesoft.org/releases/"&gt;Maven repository&lt;/a&gt; to download the latest version of the not-yet-commons-ssl dependency.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Available on &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22spring-security-saml-dsl-core%22"&gt;Maven Central&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Feedback and contributions are always appreciated. Stay tuned.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security-saml/"&gt;Project Site&lt;/a&gt; |
+&lt;a href="https://docs.spring.io/spring-security-saml/docs/current/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-security"&gt;Help&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</content>
+  </entry>
   <entry>
     <title>Spring Cloud Finchley.M9 Has Been Released</title>
     <link rel="alternate" href="https://spring.io/blog/2018/03/23/spring-cloud-finchley-m9-has-been-released" />
@@ -1515,41 +1544,5 @@ public class SocialConfig {
   &lt;li&gt;The &lt;em&gt;Java Revisited&lt;/em&gt; blog &lt;em&gt;also&lt;/em&gt; looked &lt;a href="http://javarevisited.blogspot.sg/2018/02/what-is-securitycontext-and-SecurityContextHolder-Spring-security.html#axzz58PUD5MEC"&gt;at Spring Security&amp;rsquo;s &lt;code&gt;SecurityContext&lt;/code&gt; and &lt;code&gt;SecurityContextHolder&lt;/code&gt;.&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;This looks promising: Spring Data ninja Christoph Strobl previews &lt;a href="https://twitter.com/SpringData/status/968789942141939713"&gt;reactive &lt;code&gt;ClientSession&lt;/code&gt; support for MongoDB&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security SAML Roadmap</title>
-    <link rel="alternate" href="https://spring.io/blog/2018/03/05/spring-security-saml-roadmap" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2018-03-02:3198</id>
-    <updated>2018-03-05T13:54:00Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;The Spring Security SAML project has been an integral part of the Spring ecosystem since its inception nearly 9 years ago. This critically important project was born through the incredible effort and contributions of &lt;a href="https://github.com/vschafer"&gt;Vladimír Schäfer&lt;/a&gt;. I’d like to take the time to personally thank Vladimír and our fantastic community for their tireless work. Without all of their efforts, this project would not be what it is today.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Vladimír, our amazing community, and the Spring engineering team are planning to team up to enhance Spring Security SAML to achieve the following primary goals:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="ulist"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Ensuring all dependencies are up to date&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Ensure all Spring Security APIs do not expose any dependency APIs&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Graduate Spring Security SAML from an extension into Spring Security proper&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Starting today &lt;a href="https://github.com/fhanik"&gt;Filip Hanik&lt;/a&gt; will be working full time on Spring Security SAML to help the community push these goals forward in a timely manner. If you would like to get involved, please &lt;a href="https://github.com/spring-projects/spring-security-saml"&gt;join us&lt;/a&gt;. You may also ping me in the comments on this blog or ping us on Twitter at &lt;a href="https://twitter.com/rob_winch"&gt;@rob_winch&lt;/a&gt; and &lt;a href="https://twitter.com/fhanik"&gt;@fhanik&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security-saml/"&gt;Project Site&lt;/a&gt; |
-&lt;a href="https://docs.spring.io/spring-security-saml/docs/current/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-security"&gt;Help&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;</content>
   </entry>
 </feed>

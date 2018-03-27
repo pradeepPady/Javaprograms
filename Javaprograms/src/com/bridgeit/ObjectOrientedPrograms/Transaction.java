@@ -93,7 +93,7 @@ public class Transaction {
 	}
 	public void buy(String companyName, String symbol, int number) throws FileNotFoundException, IOException, ParseException
 	{
-		 JSONArray jsonArray=stockFileReading();
+		// JSONArray jsonArray=stockFileReading();
 		 boolean trueOrFalse=checkCompanyNameAndSymbol(companyName,symbol,jsonArray);
 		 if(trueOrFalse)
 		 {
@@ -105,7 +105,7 @@ public class Transaction {
 			 boolean trueOrFalse1=isUserNameCarect(name);
 			 if(trueOrFalse1)
 			 {
-				 JSONArray jsonArray1=stockFileReading();
+				 //JSONArray jsonArray1=stockFileReading();
 				 JSONArray jsonArray2=userFileReading();
                  for(int i=0;i<jsonArray1.size();i++)
                  {
@@ -254,25 +254,8 @@ public class Transaction {
 		return userName+" "+numberOfShares+" "+ammount+"\n";
 	}
 	@SuppressWarnings("unchecked")
-	public void addingCompanyShares() throws FileNotFoundException, IOException, ParseException  {
-		JSONArray jsonArray=stockFileReading();
-		for(int i=0;i<jsonArray.size();i++)
-		{
-			JSONObject jsonObject2=(JSONObject)jsonArray.get(i);
-			userDefinedLinkedList1.add(jsonObject2.get("Company_Name"));
-			userDefinedLinkedList2.add(jsonObject2.get("Company_Share"));
-			userDefinedLinkedList3.add(jsonObject2.get("Share_Ammount").toString());
-			
-		}
-	}
-	public JSONArray stockFileReading() throws FileNotFoundException, IOException, ParseException {
-		 
-			JSONParser jsonParser=new JSONParser();
-			Object object=jsonParser.parse(new FileReader(companyFile));
-			JSONObject jsonObject=(JSONObject)object;
-			JSONArray jsonArray=(JSONArray)jsonObject.get("Stocks");
-			return jsonArray;
-}
+	
+	
 	public JSONArray userFileReading() throws FileNotFoundException, IOException, ParseException {
 		 
 		JSONParser jsonParser=new JSONParser();
@@ -283,7 +266,7 @@ public class Transaction {
 }
 	public void disply() throws FileNotFoundException, IOException, ParseException {
 	
-		JSONArray jsonArray=stockFileReading();
+		//JSONArray jsonArray=stockFileReading();
 		System.out.println("\t\t\t=======Company Lists======\n");
 		for(int i=0;i<jsonArray.size();i++)
 		{

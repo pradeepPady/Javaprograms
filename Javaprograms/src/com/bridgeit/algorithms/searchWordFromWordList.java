@@ -28,9 +28,11 @@ public class searchWordFromWordList {
 		String key = utility.StringInput();
 		
 		boolean flag = utility.binarySearch(stringArray, 0, stringArray.length - 1, key);
-		if (flag) {
+		if (flag) 
+		{
 			System.out.println("Element found");
-		} else {
+		} else 
+		{
 			System.out.println("Element Not Found");
 		}
 		

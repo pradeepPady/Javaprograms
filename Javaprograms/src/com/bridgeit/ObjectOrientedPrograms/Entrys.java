@@ -223,6 +223,7 @@ public class Entrys
 		}
 		
 	}
+	@SuppressWarnings("unchecked")
 	private void sortByname(JSONArray jsonArray,String keyname) throws IOException {
 	    JSONArray sortedJsonArray = new JSONArray();
 

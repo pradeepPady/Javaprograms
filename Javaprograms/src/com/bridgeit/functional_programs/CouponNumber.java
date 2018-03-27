@@ -17,7 +17,7 @@ public class CouponNumber {
 		int coupen_number;
 		coupen_number=utility.IntegerInput();
 		
-		utility.coupan(coupen_number);
+		utility.coupanNumberGenaration(coupen_number);
 
 	}
 
