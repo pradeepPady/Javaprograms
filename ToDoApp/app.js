@@ -11,15 +11,15 @@ app.config(['$stateProvider', '$urlRouterProvider',
        url : '/login',
        templateUrl : 'Templates/login.html',
       controller : 'loginctrl'
-       })
-     .state('registration', {
-       url : '/registration',
-       templateUrl : 'Templates/registration.html',
-       controller : 'loginctrl'
-     })
+    })
      .state('home', {
        url : '/home',
        templateUrl : 'Templates/home.html',
+       controller:'homeCtrl'
+     })
+     .state('readjsonProduct', {
+       url : '/readjsonProduct',
+       templateUrl : 'Templates/jsonProductRead.html',
        controller:'homeCtrl'
      });
       $urlRouterProvider.otherwise('/home');

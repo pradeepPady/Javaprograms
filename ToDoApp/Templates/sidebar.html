@@ -1,27 +1,69 @@
-<div layout="column" style="height: 500px;" ng-cloak>
+<section layout="row">
+    <md-sidenav style="margin-top:4.0em;width:200px;height:790px; "  class="md-sidenav-left" md-component-id="left"  md-disable-backdrop md-whiteframe="4">
+      <md-content  flex layout-padding>
+        <div layout="row" layout-wrap>
 
-  <section layout="row" flex>
+    <div flex="100" layout-align="center" layout="column">
+      <div>
+        <fieldset class="standard">
+          <legend><strong>Manufacturer <strong></legend>
+            <div ng-repeat="data in jsonProductData">
+            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="x">
+              {{data.specs.manufacturer}}
+            </md-checkbox>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+   <div layout-padding>
+   </div>
+    <div flex="100" layout-align="center" layout="column">
+      <div>
+        <fieldset class="standard">
+          <legend><strong>Screen Size<strong></legend>
+            <div ng-repeat="data in jsonProductData">
+            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="x">
+              {{data.specs.manufacturer}}
+            </md-checkbox>
+          </div>
+            <md-checkbox md-no-ink ng-model="hasInk2" aria-label="No Ink Effects">
+              32 GB
+            </md-checkbox>
 
-    <md-sidenav class="md-sidenav-left" md-component-id="left"
-                md-disable-backdrop md-whiteframe="4">
+        </fieldset>
+      </div>
+    </div>
 
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-      </md-toolbar>
 
-      <md-content layout-margin>
-        <p>
-          This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-        </p>
-        <md-button ng-click="toggleLeft()" class="md-accent">
-          Close this Sidenav
-        </md-button>
+    <div layout-padding>
+    </div>
+     <div flex="100"  layout-align="center" layout="column">
+       <div>
+         <fieldset class="standard">
+           <legend><strong>OS<strong></legend>
+             <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects">
+               Android
+             </md-checkbox>
+
+         </fieldset>
+       </div>
+     </div>
+
+     <div layout-padding>
+     </div>
+      <div flex="100"  layout-align="center" layout="column">
+        <div>
+          <fieldset class="standard">
+            <legend>Camera </legend>
+              <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects">
+                5 Mpx
+              </md-checkbox>
+          </fieldset>
+        </div>
+      </div>
+
+  </div>
       </md-content>
+  </md-sidenav>
 
-    </md-sidenav>
-
-
-
-  </section>
-
-</div>
+</section>

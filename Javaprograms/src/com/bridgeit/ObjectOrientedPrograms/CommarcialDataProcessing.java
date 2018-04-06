@@ -1,11 +1,14 @@
-/******************************************************************************
- *  Purpose:Commercial data processing
 
+<<<<<<< HEAD
  *  @author  Pardeep
  *  @version 1.0
  *  @since   22-03-2018
  *
  ******************************************************************************/
+=======
+
+
+>>>>>>> 20706c570f531bca25d3c874919c814a39e2bdef
 package com.bridgeit.ObjectOrientedPrograms;
 
 import com.bridgeit.datastructure.UserDefinedLinkedList;
