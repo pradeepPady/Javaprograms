@@ -1,0 +1,25 @@
+<html ng-app="myApp">
+  <head>
+    <title>Form Demo</title>
+    <style>body{font-family:"Arial";background-color:#E2E2DC}</style>
+    <style>table{border: :10px solid blue}</style>
+  </head>
+  <body ng-controller="loginctrl">
+<p style="color:red">{{message}}</p>
+      <form name="myForm">
+        <table>
+          <h1 style="color:blue">Login Page</h1>
+          <input type="email" ng-model="email" name="email" placeholder="Enter your Email" required/>
+              <span style="color:red" ng-show="myForm.$dirty && myForm.email.$error.required">This is a required field</span>
+              <span style="color:red" ng-show="myForm.$dirty && myForm.email.$invalid">This field is invalid </span><br/><br/>
+              <input type="password" ng-model="password" name="password" placeholder="Enter your password" required/>
+                  <span style="color:red" ng-show="myForm.$dirty && myForm.password.$error.required">This is a required field</span>
+                  <span style="color:red" ng-show="myForm.$dirty && myForm.password.$invalid">This field is invalid </span><br/><br/>
+          <input type="submit"    value="Login" ng-click="loginCheck(email,password)" ng-disabled="myForm.$invalid">
+            </form>
+          <a ui-sref="registration" target="_self"><button type="submit">registration</button></a>
+          <table>
+
+  </script>
+  </body>
+</html>

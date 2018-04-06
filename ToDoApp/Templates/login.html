@@ -1,0 +1,43 @@
+
+
+<div layout="row">
+  <div flex="30">
+
+  </div>
+  <div flex="40" style="padding:0px;margin:120px 0 0 0;">
+  <div flex="50" style="background-color:red">
+  </div>
+  <md-card >
+          <md-toolbar md-colors="{color:'yellow-A100', 'border-color': 'primary-100'}">
+              <h2 class="md-toolbar-tools">
+              <span>Login</span>
+              </h2>
+          </md-toolbar>
+          <form name="myForm">
+                <md-content style="overflow:hidden">
+                          <md-input-container class="md-block">
+                                <md-icon ><i class="material-icons" >email</i></md-icon>
+                                <input ng-model="email" name="email" type="email" placeholder="Email (required)" required>
+                                <div ng-messages="myForm.email.$error">
+                                <div ng-message="required">Email is required.</div>
+                                <div ng-message="email">Invalid email address.</div>
+                                </div>
+                          </md-input-container>
+                          <md-input-container  class="md-block">
+                                    <md-icon><i class="material-icons">lock</i></md-icon>
+                                    <input ng-model="password" type="password" name="password" placeholder="Password" required   minlength="5" md-maxlength="15">
+                                    <div ng-messages="myForm.password.$error">
+                                            <div ng-message="required">Password is required...!</div>
+                                            <div ng-message="md-maxlength">Password is too Long...!</div>
+                                            <div ng-message="minlength">Password is too short...!</div>
+                                    </div>
+                          </md-input-container>
+                  </md-content>
+        <center><md-button ng-click="sendHome()"  class="md-primary md-raised">Login</md-button></center>
+
+          </form>
+          </md-card>
+          </div>
+          <div flex="30" >
+          </div>
+</div>

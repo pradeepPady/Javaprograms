@@ -1,0 +1,17 @@
+{
+  "name": "angularprograms",
+  "homepage": "https://github.com/Pradeepgithub1/Javaprograms",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^1.0.15"
+  }
+}

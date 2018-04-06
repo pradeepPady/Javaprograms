@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <tbody>
+        <th>Name:</th>
+        <th>Gender:</th>
+        <th>Date of Birth:</th>
+        <th>Age:</th>
+        <th>Salary:</th>
+      </tbody>
+
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="emploee in emploeesData | orderBy: '+ name' ">
+        <td>{{emploee.name}}</td>
+        <td>{{emploee.Gender}}</td>
+        <td>{{emploee.DateOfBirth | date :"dd/MM/YYYY"}}</td>
+        <td>{{emploee.age}}</td>
+        <td>{{emploee.salary}}</td>
+      </tr>
+
+    </tbody>
+  </table>
