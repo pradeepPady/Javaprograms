@@ -7,8 +7,8 @@
       <div>
         <fieldset class="standard">
           <legend><strong>Manufacturer <strong></legend>
-            <div ng-repeat="data in jsonProductData">
-            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="x">
+            <div ng-repeat="data in jsonProductData | unique: 'specs.manufacturer'">
+            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="data">
               {{data.specs.manufacturer}}
             </md-checkbox>
           </div>
@@ -21,14 +21,11 @@
       <div>
         <fieldset class="standard">
           <legend><strong>Screen Size<strong></legend>
-            <div ng-repeat="data in jsonProductData">
-            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="x">
-              {{data.specs.manufacturer}}
+            <div ng-repeat="data in jsonProductData | unique: 'specs.storage'">
+            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="data">
+              {{data.specs.storage}}
             </md-checkbox>
           </div>
-            <md-checkbox md-no-ink ng-model="hasInk2" aria-label="No Ink Effects">
-              32 GB
-            </md-checkbox>
 
         </fieldset>
       </div>
@@ -41,10 +38,11 @@
        <div>
          <fieldset class="standard">
            <legend><strong>OS<strong></legend>
-             <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects">
-               Android
+             <div ng-repeat="data in jsonProductData | unique: 'specs.os'">
+             <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="data">
+               {{data.specs.os}}
              </md-checkbox>
-
+           </div>
          </fieldset>
        </div>
      </div>
@@ -55,9 +53,11 @@
         <div>
           <fieldset class="standard">
             <legend>Camera </legend>
-              <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects">
-                5 Mpx
-              </md-checkbox>
+            <div ng-repeat="data in jsonProductData | unique: 'specs.camera'">
+            <md-checkbox md-no-ink ng-model="hasInk1" aria-label="No Ink Effects" ng-value="data">
+              {{data.specs.camera}}
+            </md-checkbox>
+          </div>
           </fieldset>
         </div>
       </div>

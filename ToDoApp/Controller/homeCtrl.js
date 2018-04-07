@@ -1,4 +1,4 @@
-  app.controller('homeCtrl', function ($scope, $timeout, $mdSidenav,$state,jsonProductReader)
+  app.controller('homeCtrl', function ($scope, $timeout, $mdSidenav,$state,jsonProductReader,$mdDialog)
   {
        $scope.toggleLeft = buildToggler('left');
        $scope.toggleRight = buildToggler('right');
@@ -16,4 +16,6 @@
       {
         $scope.jsonProductData=response;
       })
+
   });
+  

@@ -1,4 +1,4 @@
-var app=angular.module("myApp",['ui.router','ngMaterial','ngAnimate','ngAria','ngMessages']);
+var app=angular.module("myApp",['ui.router','ngMaterial','ngAnimate','ngAria','ngMessages','angular.filter']);
 app.config(['$stateProvider', '$urlRouterProvider',
  function($stateProvider, $urlRouterProvider) {
    $stateProvider
@@ -21,6 +21,11 @@ app.config(['$stateProvider', '$urlRouterProvider',
        url : '/readjsonProduct',
        templateUrl : 'Templates/jsonProductRead.html',
        controller:'homeCtrl'
+     })
+     .state('home.dashbord', {
+       url : '/dashbord',
+       templateUrl : 'Templates/dashbord.html',
+
      });
       $urlRouterProvider.otherwise('/home');
  }]);
