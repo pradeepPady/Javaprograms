@@ -1,11 +1,11 @@
 package com.bridgeit.ObjectOrientedPrograms;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import org.json.simple.parser.ParseException;
 
 import com.bridgeit.utility.Utility;
+
 
 public class AddressBook3 {
     public static void main(String[] args) throws IOException, ParseException
