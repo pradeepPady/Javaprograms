@@ -1,77 +1,110 @@
 package AddressBook;
-
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+import org.json.simple.parser.ParseException;
 public class AdressBookManager 
 {
-	static String firstName,lastName,address,state,city;
-	static int phoneNumber,zip;
-	static String filename="";
+	String firstName,lastName,address,state,city;
+	int phoneNumber,zip;
+	String filename="";
 	static File file;
-	
-	static BufferedReader bufferedReader;
-	static ArrayList<Person> arrayList;
-	static Person person;
-	static Scanner scanner=new Scanner(System.in);
-	static String path1="/home/bridgeit/AdressBookData";
-	public static void newBoook() throws IOException
+
+	BufferedReader bufferedReader;
+	Person person;
+	Scanner scanner=new Scanner(System.in);
+	String path1="/home/bridgeit/AdressBookData/";
+	ObjectMapper mapper=new ObjectMapper();
+	static ArrayList<Person>arrayList=new ArrayList<Person>();
+	public  ArrayList<Person> getList()
 	{
-		File filePath=new File("/home/bridgeit/AdressBookData");
-		 System.out.print("\t\t\tEnter file name\n");
-		 filename=scanner.next();
-		 file=new File(filePath+filename+".json");
-		 file.createNewFile();
-		 arrayList=new ArrayList<Person>();
-		 System.out.println("\t\t\tFile created in the Directry...");
+
+		return arrayList;
 	}
-	
-	public static  void addPerson()
+	public  ArrayList<Person> addPerson(ArrayList<Person> arrayList) throws IOException
 	{
+		Person person=new Person();
 		System.out.print("\t\t\tEnter First Name\n");
 		firstName=scanner.next();
+		person.setFirstName(firstName);
 		System.out.print("\t\t\tEnter Last Name\n");
 		lastName=scanner.next();
+		person.setLastName(lastName);
 		System.out.print("\t\t\tEnter Adress\n");
 		address=scanner.next();
+		person.setAddress(address);
 		System.out.print("\t\t\tEnter city\n");
 		city=scanner.next();
+		person.setCity(city);
 		System.out.print("\t\t\tEnter the state\n");
 		state=scanner.next();
+		person.setState(state);
 		System.out.print("\t\t\tEnter the Zip-code\n");
 		zip=scanner.nextInt();
+		person.setZip(zip);
 		System.out.print("\t\t\tEnter phone number\n");
 		phoneNumber=scanner.nextInt();
-		arrayList.add(new Person(firstName,lastName,address,state,city,zip,phoneNumber));
-	}
-  
-	public static  void open() throws IOException
-	{
-		File filePath=new File("/home/bridgeit/AdressBookData");
-	    File mylist[]=filePath.listFiles();
-	    System.out.println("\t\t\tExisting files in the Directry");
-	    System.out.print("\t\t\t================================\n");
-	    for(int i=0;i<mylist.length;i++)
-	    {
-	    	System.out.println("\t\t\t"+(i+1)+": "+mylist[i].getName());
-	    }
-	    System.out.print("\t\t\t================================\n");
-	    System.out.print("\t\t\tEnter the file name to open.....\n");
-	    String name=scanner.next()+".json";	    
-	    File file=new File(path1+name);
-	    bufferedReader=new BufferedReader(new FileReader(file));
-	    if(bufferedReader.readLine()!=null)
-	    {
-         	    	
-	    }
-	   
+		person.setPhoneNumber(phoneNumber);
+		arrayList.add(person);
+		return arrayList;
 	}
 
-	public static void save()
+	public  ArrayList<Person> open(ArrayList<Person> arrayList) throws IOException, ParseException
 	{
-			
+		File filePath=new File("/home/bridgeit/AdressBookData");
+		File mylist[]=filePath.listFiles();
+		System.out.println("\t\t\tExisting files in the Directry");
+		System.out.print("\t\t\t================================\n");
+		for(int i=0;i<mylist.length;i++)
+		{
+			System.out.println("\t\t\t"+(i+1)+": "+mylist[i].getName());
+		}
+		System.out.print("\t\t\t================================\n");
+		System.out.print("\t\t\tEnter the file name to open.....\n");
+		String name=scanner.next()+".json";	    
+		file=new File(path1+name);
+		bufferedReader=new BufferedReader(new FileReader(file));
+		String jsonArray;
+
+		if((jsonArray=bufferedReader.readLine())!=null)
+		{
+			System.out.println(jsonArray);
+			TypeReference<ArrayList<Person>> typeReference = new TypeReference<ArrayList<Person>>() {};
+			arrayList = mapper.readValue(jsonArray, typeReference);
+			System.out.println(arrayList);
+
+		}
+		else
+		{
+			System.out.println("\t\t\tNo data to disply...\n");
+		}
+		AdressBook adressBook=new AdressBook();
+		adressBook.adressBookOperation(arrayList,file);
+		return arrayList;
+
+	}
+
+	public  void save(ArrayList<Person> arrayList) throws JsonGenerationException, JsonMappingException, FileNotFoundException, IOException
+	{
+		System.out.println(arrayList);
+		mapper.writeValue(new FileOutputStream(file), arrayList);
+		System.out.print("Data added sucsessfully......\n");
+	}
+
+	public void newBoook() throws IOException {
+		System.out.print("\t\t\tEnter file name\n");
+		filename=scanner.next();
+		file=new File(path1+filename+".json");
+		file.createNewFile();
+		System.out.println("\t\t\tFile created in the Directry...");
 	}
 }

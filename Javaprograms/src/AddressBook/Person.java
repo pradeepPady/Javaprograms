@@ -9,19 +9,14 @@ public class Person
   String state;
   int zip;
   int phoneNumber;
-   
-public Person(String firstName, String lastName, String address, String state, String city, int zip,
-		int phoneNumber) {
-	  this.firstName=firstName;
-	  this.lastName = lastName;
-	  this.address = address;
-	  this.city = city;
-	  this.state = state;
-	  this.zip = zip;
-	  this.phoneNumber = phoneNumber;
+public Person() {
+	// TODO Auto-generated constructor stub
 }
 public String getFirstName() {
 	return firstName;
+}
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
 }
 public String getLastName() {
 	return lastName;
@@ -64,4 +59,7 @@ public String toString() {
 	return "Person [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
 			+ ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + "]";
 }
+   
+
+
 }
