@@ -2,15 +2,15 @@ package AddressBook;
 
 public class Person 
 {
-  String firstName;
-  String lastName;
-  String address;
-  String city;
-  String state;
-  int zip;
-  int phoneNumber;
+  private String firstName;
+  private String lastName;
+  private String address;
+  private String city;
+  private String state;
+  private int zip;
+  private int phoneNumber;
 public Person() {
-	// TODO Auto-generated constructor stub
+	
 }
 public String getFirstName() {
 	return firstName;

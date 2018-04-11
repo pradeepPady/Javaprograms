@@ -1,6 +1,4 @@
 package AddressBook;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,23 +8,23 @@ public class AdressBook {
 	Scanner scanner=new Scanner(System.in);
 	AdressBookManager adressBookManager=new AdressBookManager();
 	ArrayList<Person>arraylist;
-	public void adressBookOperation(ArrayList<Person> arrayList2, File file1) throws IOException {
+	public void adressBookOperation(ArrayList<Person> arrayList2) throws IOException {
 		
 		System.out.print("\t\t\t============Menu==============\n\n");
 		System.out.print("\t\t\tEdit                  Enter 1:\n");
 		System.out.print("\t\t\tAdd an entry to book  Enter 2:\n");
 		System.out.print("\t\t\tSort all entries      Enter 3:\n");
-		System.out.print("\t\t\tDisply file Data      Enter 4:\n\n");
+		System.out.print("\t\t\tDisply file Data      Enter 4:\n");
 		System.out.print("\t\t\tDelete Person         Enter 5:\n");
-		System.out.print("\t\t\t===============================\n");
+		System.out.print("\t\t\t===============================\n\n");
 		int choice=scanner.nextInt();
 		switch (choice) 
 		{
 		case 1:arraylist=editMenu(arrayList2);
 
 		break;
-		case 2:System.out.println(arrayList2);
-		arraylist=adressBookManager.addPerson(arrayList2);
+		case 2:System.out.print("Data "+arrayList2+"\n");
+		       arraylist=adressBookManager.addPerson(arrayList2);
 
 		break;
 		case 3:arraylist=sortMenu(arrayList2);
@@ -49,7 +47,7 @@ public class AdressBook {
 			if((arrayList2.get(i).getFirstName().equals(firstName))&&(arrayList2.get(i).getLastName().equals(lastName)))
 			{
 				arrayList2.remove(i);
-				System.out.println("\t\t\tData removed sucsessfully");
+				System.out.println("\t\t\tData remved sucsessfully");
 				break;
 			}
 		}
@@ -61,14 +59,14 @@ public class AdressBook {
 		System.out.println("\t\t\t*******Disply********");
 		for(int i=0;i<arrayList2.size();i++)
 		{
-			System.out.println("\t\t\t========Data "+(i+1)+"========");
+			System.out.println("\t\t\t========Data "+(i+1)+"=======");
 
-			System.out.println("\t\t\tFirst name :"+arrayList2.get(i).getFirstName());
-			System.out.println("\t\t\tLast name  :"+arrayList2.get(i).getLastName());
-			System.out.println("\t\t\tAddress    :"+arrayList2.get(i).getAddress());
-			System.out.println("\t\t\tCity       :"+arrayList2.get(i).getCity());
-			System.out.println("\t\t\tZip-Code   :"+arrayList2.get(i).getZip());
-			System.out.println("\t\t\t=======================\n\n\n");
+			System.out.print("\t\t\tFirst name :"+arrayList2.get(i).getFirstName()+"\n");
+			System.out.print("\t\t\tLast name  :"+arrayList2.get(i).getLastName()+"\n");
+			System.out.print("\t\t\tAddress    :"+arrayList2.get(i).getAddress()+"\n");
+			System.out.print("\t\t\tCity       :"+arrayList2.get(i).getCity()+"\n");
+			System.out.print("\t\t\tZip-Code   :"+arrayList2.get(i).getZip()+"\n");
+			System.out.print("\t\t\t=======================\n\n\n");
 
 
 		}
@@ -77,8 +75,8 @@ public class AdressBook {
 	}
 
 	private ArrayList<Person> sortMenu(ArrayList<Person> arrayList2) {
-		System.out.println("\t\t\tSort by name Enter 1:");
-		System.out.println("\t\t\tSort by Zip  Enter 2:");
+		System.out.print("\t\t\tSort by name Enter 1:\n");
+		System.out.print("\t\t\tSort by Zip  Enter 2:\n");
 		int choice=scanner.nextInt();
 		switch (choice) 
 		{
@@ -89,16 +87,16 @@ public class AdressBook {
 			        return one.getFirstName().compareTo(other.getFirstName());
 			     }
 		   });
-		System.out.println("\t\t\tData sorted by Name sucsessfully...");
+		System.out.print("\t\t\tData sorted by Name sucsessfully...\n");
 		return arrayList2;
 		case 2:Collections.sort(arrayList2, new Comparator<Person>() 
 	    {
 		    public int compare(Person one, Person other) 
 		    {
-		        return (String.valueOf(one.getZip()).compareTo(String.valueOf(other.getZip())));
+		        return (one.getZip())-(other.getZip());
 		     }
 	   }); 
-		System.out.println("\t\t\tData sorted by Zip-Code sucsessfully...");
+		System.out.print("\t\t\tData sorted by Zip-Code sucsessfully...\n");
 
 	return arrayList2;
 
@@ -111,12 +109,12 @@ public class AdressBook {
 
 	public ArrayList<Person> editMenu(ArrayList<Person> arrayList2) 
 	{
-		System.out.println("\t\t\tEnter the First name and Last Name Which You want to edit");
+		System.out.print("\t\t\tEnter the First name and Last Name Which You want to edit\n");
 		String firstName=scanner.next();
 		String lastName=scanner.next();
-	    System.out.println("\t\t\tEnter the mobile number");
+	    System.out.print("\t\t\tEnter the mobile number\n");
 	    int  mobilenumber=scanner.nextInt();
-		System.out.println("\n\n");
+		System.out.print("\n\n");
 		System.out.print("\t\t\t========Menu=======\n\n");
 
 
@@ -124,26 +122,26 @@ public class AdressBook {
 		System.out.print("\t\t\tState?     Enter 2:\n");
 		System.out.print("\t\t\tZip-code?  Enter 3:\n");
 		System.out.print("\t\t\tCity?      Enter 4:\n");
-		System.out.println("\t\t\tEnter your choice   ");
+		System.out.print("\t\t\tEnter your choice  \n");
 		System.out.print("\t\t\t==================\n\n");
 
 		int choice=scanner.nextInt();
 		switch (choice) 
 		{
-		case 1:System.out.println("\t\t\tEnter the new Adress ");
+		case 1:System.out.print("\t\t\tEnter the new Adress \n");
 		       String adress=scanner.next();
 		       editAddress(firstName,lastName,mobilenumber,arrayList2,adress);
 		       
 		break;
-	   case 2:System.out.println("\t\t\tEnter the new state name ");
+	   case 2:System.out.print("\t\t\tEnter the new state name \n");
               String state=scanner.next();
               editState(firstName,lastName,mobilenumber,arrayList2,state);
               break;
-	   case 3:System.out.println("\t\t\tEnter the new Zip-code ");
+	   case 3:System.out.print("\t\t\tEnter the new Zip-code \n");
               int zipCode=scanner.nextInt();
               editZip(firstName,lastName,mobilenumber,arrayList2,zipCode);
        break;
-	   case 4:System.out.println("\t\t\tEnter the new City ");
+	   case 4:System.out.print("\t\t\tEnter the new City \n");
               String city=scanner.next();
               editCity(firstName,lastName,mobilenumber,arrayList2,city);
               break;
