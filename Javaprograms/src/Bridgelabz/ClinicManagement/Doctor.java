@@ -1,10 +1,12 @@
 package Bridgelabz.ClinicManagement;
 
-public class Docter {
+public class Doctor {
 	private String name;
 	private int id;
 	private String avalability;
 	private String spcilization;
+	private int count;
+	private int numberOfPatients;
 	public String getSpcilization() {
 		return spcilization;
 	}
@@ -30,9 +32,22 @@ public class Docter {
 	public void setAvalability(String avalability) {
 		this.avalability = avalability;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getNumberOfPatients() {
+		return numberOfPatients;
+	}
+	public void setNumberOfPatients(int numberOfPatients) {
+		this.numberOfPatients = numberOfPatients;
+	}
 	@Override
 	public String toString() {
-		return "Docter [name=" + name + ", id=" + id + ", avalability=" + avalability + "]";
+		return "Doctor [name=" + name + ", id=" + id + ", avalability=" + avalability + ", spcilization=" + spcilization
+				+ ", count=" + count + ", numberOfPatients=" + numberOfPatients + "]";
 	}
 	
 }

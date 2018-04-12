@@ -17,16 +17,16 @@ public class Clinic {
 			System.out.print("\t\t\t|       3: Display detils             |\n");
 			System.out.print("\t\t\t|       4: Take Appoientment          |\n");
 			System.out.print("\t\t\t|       5: Get famous docter          |\n");
+			System.out.print("\t\t\t|       6: Exit                       |\n");
 			System.out.print("\t\t\t|          Enter Your Choice          |\n");
-			System.out.print("\t\t\t|       6: Enter E to Exit            |\n");
-			System.out.print("\t\t\t|_____________________________________\n");
+			System.out.print("\t\t\t|_____________________________________|\n");
 			System.out.print("\t\t\tEnter your choice\n");
 			int choice = scanner.nextInt();
 			
 			switch (choice) {
 			case 1:app.addDetails();
-                   app.save();
-                   app.savePatient();
+			app.saveDoctor();
+	        app.savePatient();
 				break;
 			case 2:app.searchDetails(); 
 				break;
@@ -36,14 +36,15 @@ public class Clinic {
 			case 4:app.appointment();
 
 				break;
-			case 5:app.getAppointment();
+			//case 5:app.getAppointment();
 
-				break;
+				//break;
 
 			case 6:flag=false;
 				break;
 			}
 		} 
+		
 
 	}
 }
