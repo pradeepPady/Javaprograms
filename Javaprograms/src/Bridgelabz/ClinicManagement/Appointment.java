@@ -1,19 +1,15 @@
 package Bridgelabz.ClinicManagement;
-
-import java.sql.Date;
-import java.time.LocalDate;
-
 public class Appointment {
 private String doctorName;
 private String patientName;
 private int doctorId;
 private int patientId;
-private LocalDate date;
+private String date;
 private String docterAvalability;
-public LocalDate getDate() {
+public String getDate() {
 	return date;
 }
-public void setDate(LocalDate localDate) {
+public void setDate(String localDate) {
 	this.date =  localDate;
 }
 public String getDocterAvalability() {

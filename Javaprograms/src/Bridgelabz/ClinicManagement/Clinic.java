@@ -1,10 +1,14 @@
 package Bridgelabz.ClinicManagement;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class Clinic {
-	public static void main(String[] args) throws FileNotFoundException {
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+
+public class Clinic{
+	public static void main(String[] args) throws ParseException, JsonGenerationException, JsonMappingException, IOException {
 		
 		ClinicManagementApp app = new ClinicManagementApp();
 		Scanner scanner = new Scanner(System.in);
@@ -25,8 +29,6 @@ public class Clinic {
 			
 			switch (choice) {
 			case 1:app.addDetails();
-			app.saveDoctor();
-	        app.savePatient();
 				break;
 			case 2:app.searchDetails(); 
 				break;
@@ -36,7 +38,7 @@ public class Clinic {
 			case 4:app.appointment();
 
 				break;
-			//case 5:app.getAppointment();
+			case 5:app.getFamousDocter();
 
 				//break;
 
@@ -47,4 +49,6 @@ public class Clinic {
 		
 
 	}
+
+	
 }
