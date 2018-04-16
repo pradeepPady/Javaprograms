@@ -1,0 +1,18 @@
+<md-dialog aria-label="Mobile">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{mobileData.name}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="bower_components/material-design-icons/navigation/svg/production/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <img style="margin: auto; max-width: 100%;align-self:center;" alt="Mobile Image" src="{{mobileData.image.large}}">
+        <p>{{mobileData.description}}</p>
+      </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,34 @@
+.md-sidenav-left, md-sidenav{
+  margin-top: 64px;
+  position: fixed;
+}
+@media(max-width:959px) and (orientation: portrait){
+  .md-sidenav-left, md-sidenav{
+    margin-top: 56px;
+    position: fixed;
+  }
+}
+@media(max-width:959px) and (orientation: landscape){
+  .md-sidenav-left, md-sidenav{
+    margin-top: 48px;
+    position: fixed;
+  }
+}
+/* .pageContainer{
+  height: 100vh !important;
+  max-height: 100vh !important;
+} */
+/* .card{
+  height : 400px;
+} */
+#toolbar{
+  position: fixed !important;
+}
+.dashboard{
+  padding-top: 5%;
+}
+.card > img{
+  height : 300px;
+  width : 350px;
+  align-self: center;
+}

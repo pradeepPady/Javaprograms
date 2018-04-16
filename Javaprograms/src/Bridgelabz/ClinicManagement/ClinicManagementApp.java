@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,10 +18,9 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-public class ClinicManagementApp implements ClinicApp{
-	
+public class ClinicManagementApp{
 	private ArrayList<Appointment>appointList=new ArrayList<Appointment>();
-	private ArrayList<Doctor>DoctorsList;
+	private ArrayList<Doctor>doctorsList;
 	private ArrayList<Patient>pationtList;
 	private  File DoctorFile=new File("/home/bridgeit/ClinicManagement/doctorsList.json");
 	private  File patientFile=new File("/home/bridgeit/ClinicManagement/patientList.json");
@@ -32,12 +30,13 @@ public class ClinicManagementApp implements ClinicApp{
 	private Scanner scanner=new Scanner(System.in);
 	public void addDetails() throws FileNotFoundException 
 	{
-		DoctorsList=new ArrayList<Doctor>();
+		doctorsList=new ArrayList<Doctor>();
 		boolean flag=true;
 		while(flag)
 		{
 			System.out.println("\n");
 			System.out.print("\t\t\t _____________Add-Details_____________\n");
+			System.out.print("\t\t\t|                                    |\n");
 			System.out.print("\t\t\t|       1: Add Doctor                |\n");
 			System.out.print("\t\t\t|       2: Add Patent                |\n");
 			System.out.print("\t\t\t|       3: Exit                      |\n");
@@ -84,7 +83,7 @@ public class ClinicManagementApp implements ClinicApp{
 		Doctor.setSpcilization(scanner.next());
 		System.out.print("Enter Doctor avalability\n");
 		Doctor.setAvalability(scanner.next());
-		DoctorsList.add(Doctor);
+		doctorsList.add(Doctor);
 		saveDoctor();
 
 	}
@@ -95,6 +94,7 @@ public class ClinicManagementApp implements ClinicApp{
 		while(flag)
 		{
 			System.out.print("\t\t\t _____________Search-Details_____________\n");
+			System.out.print("\t\t\t|                                       |\n");
 			System.out.print("\t\t\t|       1: Search Doctor                |\n");
 			System.out.print("\t\t\t|       2: Search Patient               |\n");
 			System.out.print("\t\t\t|       3: Exit                         |\n");
@@ -104,7 +104,7 @@ public class ClinicManagementApp implements ClinicApp{
 			int choice = scanner.nextInt();
 			switch (choice) 
 			{
-			case 1:DoctorSearchMenu();
+			case 1:doctorSearchMenu();
 			break;
 			case 2:patientSearchMenu();
 			break;
@@ -114,9 +114,9 @@ public class ClinicManagementApp implements ClinicApp{
 		}
 	}
 
-	private ArrayList<Doctor> DoctorSearchMenu() throws FileNotFoundException {
+	private ArrayList<Doctor> doctorSearchMenu() throws FileNotFoundException {
 		boolean flag=true;
-		ArrayList<Doctor>DoctorsList=readDoctorFile();
+		ArrayList<Doctor>doctorsList=readDoctorFile();
 		ArrayList<Doctor>arrayList=null;
 		while(flag)
 		{
@@ -132,13 +132,13 @@ public class ClinicManagementApp implements ClinicApp{
 			int choice = scanner.nextInt();
 			switch (choice) 
 			{
-			case 1: searchDoctorByName(DoctorsList);
+			case 1: searchDoctorByName(doctorsList);
 			break;
 
-			case 2: searchDocterById(DoctorsList);
+			case 2: searchDocterById(doctorsList);
 
 			break;
-			case 3:searchDocterBySpecilzn(DoctorsList);
+			case 3:searchDocterBySpecilzn(doctorsList);
 			break;
 			case 4:flag=false;
 			break;
@@ -155,19 +155,19 @@ public class ClinicManagementApp implements ClinicApp{
 		System.out.println("Enter the Specilization of Doctor you want to search\n");
 		String spl=scanner.next();
 		ArrayList<Doctor>arrayList=new ArrayList<Doctor>();
-		System.out.println("\t\t\t________Doctors list with Specilization-"+spl+"________");
-			for(int i=0;i<DoctorsList.size();i++)
+		System.out.println("\t\t\t|________Doctors list with Specilization-"+spl+"________|");
+		for(int i=0;i<doctorsList.size();i++)
+		{
+			if(doctorsList.get(i).getSpcilization().equals(spl))
 			{
-				if(DoctorsList.get(i).getSpcilization().equals(spl))
-				{
-					System.out.println("\t\t\tName                         :"+DoctorsList.get(i).getName());
-					System.out.println("\t\t\tId                           :"+DoctorsList.get(i).getId());
-					System.out.println("\t\t\tSpecilization                :"+DoctorsList.get(i).getSpcilization());
-					System.out.println("\t\t\tAvalibility                  :"+DoctorsList.get(i).getAvalability());
-					System.out.println("\t\t\t_________________________________________________");
-					arrayList.add(DoctorsList.get(i));
-				}
+				System.out.println("\t\t\tName                         :"+doctorsList.get(i).getName());
+				System.out.println("\t\t\tId                           :"+doctorsList.get(i).getId());
+				System.out.println("\t\t\tSpecilization                :"+doctorsList.get(i).getSpcilization());
+				System.out.println("\t\t\tAvalibility                  :"+doctorsList.get(i).getAvalability());
+				System.out.println("\t\t\t_________________________________________________");
+				arrayList.add(doctorsList.get(i));
 			}
+		}
 		System.out.println("\t\t\t_________________________________________________");
 		System.out.println("\n");
 
@@ -315,8 +315,8 @@ public class ClinicManagementApp implements ClinicApp{
 			System.out.print("\t\t\t _____________Disply-Details_____________\n");
 			System.out.print("\t\t\t|       1: Disply Doctors                |\n");
 			System.out.print("\t\t\t|       2: Disply Patients               |\n");
-			System.out.print("\t\t\t|       3: Exit                         |\n");
-			System.out.print("\t\t\t|_______________________________________|\n");
+			System.out.print("\t\t\t|       3: Exit                          |\n");
+			System.out.print("\t\t\t|________________________________________|\n");
 			System.out.print("\t\t\tEnter your choice\n");
 
 			int choice = scanner.nextInt();
@@ -333,7 +333,7 @@ public class ClinicManagementApp implements ClinicApp{
 
 	}
 	private void patientDisply() throws FileNotFoundException {
-		System.out.println("\t\t\t________________Patient-List_________________________");
+		System.out.println("\t\t\t|________________Patient-List_________________________|");
 		ArrayList<Patient>pationtList=readPationtFile();
 		System.out.println("\t\t\t   Patient Name _ Id _ Mobile Number _ Age   ");
 		for(int i=0;i<pationtList.size();i++)
@@ -347,12 +347,12 @@ public class ClinicManagementApp implements ClinicApp{
 	}
 	private void doctersDisply() throws FileNotFoundException {
 		System.out.println("\t\t\t________________Doctors-List_________________________");
-		ArrayList<Doctor>DoctorsList=readDoctorFile();
+		ArrayList<Doctor>doctorsList=readDoctorFile();
 		System.out.println("\t\t\t   Doctor Name _ Id _ Specilization _ Avalibility   ");
-		for(int i=0;i<DoctorsList.size();i++)
+		for(int i=0;i<doctorsList.size();i++)
 		{
 
-			System.out.printf(" %35s %7d %8s %15s",DoctorsList.get(i).getName(),DoctorsList.get(i).getId(),DoctorsList.get(i).getSpcilization(),DoctorsList.get(i).getAvalability()+"   \n");
+			System.out.printf(" %35s %7d %8s %15s",doctorsList.get(i).getName(),doctorsList.get(i).getId(),doctorsList.get(i).getSpcilization(),doctorsList.get(i).getAvalability()+"   \n");
 
 		}
 		System.out.println("\t\t\t_____________________________________________________");
@@ -361,10 +361,10 @@ public class ClinicManagementApp implements ClinicApp{
 
 	public void saveDoctor() throws FileNotFoundException
 	{
-		ArrayList<Doctor>DoctorsList1=readDoctorFile();
-		DoctorsList.addAll(DoctorsList1);
+		ArrayList<Doctor>doctorsList1=readDoctorFile();
+		doctorsList.addAll(doctorsList1);
 		try {
-			mapper.writeValue(new FileOutputStream(DoctorFile), DoctorsList);
+			mapper.writeValue(new FileOutputStream(DoctorFile), doctorsList);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -395,7 +395,7 @@ public class ClinicManagementApp implements ClinicApp{
 
 			}
 
-			//DoctorsList.addAll(arrayList);
+			//doctorsList.addAll(arrayList);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -476,7 +476,7 @@ public class ClinicManagementApp implements ClinicApp{
 		}
 		if(flag)
 		{
-			System.out.println(" Patient "+name+" is Not registered..so please add patient to the directray");
+			System.out.println(" Patient "+name+" is Not registered..so please add patient to the file..");
 			addPatient();
 		}
 
@@ -580,38 +580,35 @@ public class ClinicManagementApp implements ClinicApp{
 		}
 
 	}*/
-}
+	}
 	public static <T> List<T>  readFile(String filename,Class<T[]> clazz)
 	{   List<T> list = null;
-		BufferedReader  reader = null;
-		 String jsonArray = "";
-			try {
-				reader = new BufferedReader(new FileReader(filename));
-			} catch (FileNotFoundException e) {
-				System.out.println(" not exist");	
-			}
-			
-			 try {
-				 String line = "";
-				 while ((line = reader.readLine()) != null) {
-			           jsonArray += line;
-				 }
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			 //System.out.println(jsonArray);
-	    if(jsonArray != null)
-	    {
-			 ObjectMapper objectMapper = new ObjectMapper();
-	           
-			 try {
-				 list= new LinkedList<T> (Arrays.asList(objectMapper.readValue(jsonArray,clazz)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-		return list;
+	BufferedReader  reader = null;
+	String jsonArray = "";
+	try {
+		reader = new BufferedReader(new FileReader(filename));
+	} catch (FileNotFoundException e) {
+		System.out.println("\t\t\tFile not exsists");	
+	}
+
+	try {
+		String line = "";
+		while ((line = reader.readLine()) != null) {
+			jsonArray += line;
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	if(jsonArray != null)
+	{
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		try {
+			list= new LinkedList<T> (Arrays.asList(objectMapper.readValue(jsonArray,clazz)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	return list;
 	}
 }

@@ -16,6 +16,7 @@ public class Clinic{
 		while(flag)
 		{
 			System.out.print("\t\t\t _______________Menu__________________ \n");
+			System.out.print("\t\t\t|                                     |\n");
 			System.out.print("\t\t\t|       1: Add Detials                |\n");
 			System.out.print("\t\t\t|       2: Search Detils              |\n");
 			System.out.print("\t\t\t|       3: Display detils             |\n");
