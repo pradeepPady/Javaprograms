@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import org.codehaus.jackson.JsonGenerationException;
@@ -63,7 +62,7 @@ public class ClinicManagementApp{
 		Patient patient=new Patient();
 		System.out.print("Enter Patient Name\n");
 		patient.setName(scanner.next());
-		patient.setId((readPationtFile().size())+1);
+		patient.setId(((ArrayList<Patient>) readFile(patientFile,Patient[].class)).size()+1);
 		System.out.print("Enter Patient Mobile number\n");
 		patient.setMobileNumber(scanner.nextInt());
 		System.out.print("Enter Patient Age\n");
@@ -78,7 +77,7 @@ public class ClinicManagementApp{
 		Doctor Doctor=new Doctor();
 		System.out.print("Enter Doctor Name\n");
 		Doctor.setName(scanner.next());					
-		Doctor.setId(readDoctorFile().size()+1);
+		Doctor.setId(((ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class)).size()+1);
 		System.out.print("Enter Doctor Specilization\n");
 		Doctor.setSpcilization(scanner.next());
 		System.out.print("Enter Doctor avalability\n");
@@ -116,7 +115,8 @@ public class ClinicManagementApp{
 
 	private ArrayList<Doctor> doctorSearchMenu() throws FileNotFoundException {
 		boolean flag=true;
-		ArrayList<Doctor>doctorsList=readDoctorFile();
+		//ArrayList<Doctor>doctorsList=readDoctorFile();
+		ArrayList<Doctor> doctorsList=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
 		ArrayList<Doctor>arrayList=null;
 		while(flag)
 		{
@@ -222,7 +222,8 @@ public class ClinicManagementApp{
 	private void patientSearchMenu() throws FileNotFoundException {
 
 		boolean flag=true;
-		ArrayList<Patient>pationtList=readPationtFile();
+		//ArrayList<Patient>pationtList=readPationtFile();
+		ArrayList<Patient> pationtList=(ArrayList<Patient>) readFile(patientFile,Patient[].class);
 
 		while(flag)
 		{
@@ -242,6 +243,7 @@ public class ClinicManagementApp{
 			break;
 			case 3:searchPatientByMobileNum(pationtList);      
 			break;
+			case 4:flag=false;
 			}
 		}
 
@@ -334,7 +336,8 @@ public class ClinicManagementApp{
 	}
 	private void patientDisply() throws FileNotFoundException {
 		System.out.println("\t\t\t|________________Patient-List_________________________|");
-		ArrayList<Patient>pationtList=readPationtFile();
+		//ArrayList<Patient>pationtList=readPationtFile();
+		ArrayList<Patient> pationtList=(ArrayList<Patient>) readFile(patientFile,Patient[].class);
 		System.out.println("\t\t\t   Patient Name _ Id _ Mobile Number _ Age   ");
 		for(int i=0;i<pationtList.size();i++)
 		{
@@ -347,7 +350,8 @@ public class ClinicManagementApp{
 	}
 	private void doctersDisply() throws FileNotFoundException {
 		System.out.println("\t\t\t________________Doctors-List_________________________");
-		ArrayList<Doctor>doctorsList=readDoctorFile();
+		ArrayList<Doctor> doctorsList=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
+		//ArrayList<Doctor>doctorsList=readDoctorFile();
 		System.out.println("\t\t\t   Doctor Name _ Id _ Specilization _ Avalibility   ");
 		for(int i=0;i<doctorsList.size();i++)
 		{
@@ -361,7 +365,9 @@ public class ClinicManagementApp{
 
 	public void saveDoctor() throws FileNotFoundException
 	{
-		ArrayList<Doctor>doctorsList1=readDoctorFile();
+		//ArrayList<Doctor>doctorsList1=readDoctorFile();
+		ArrayList<Doctor> doctorsList1=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
+
 		doctorsList.addAll(doctorsList1);
 		try {
 			mapper.writeValue(new FileOutputStream(DoctorFile), doctorsList);
@@ -372,7 +378,9 @@ public class ClinicManagementApp{
 
 	public void savePatient() throws FileNotFoundException {
 
-		ArrayList<Patient>pationtList1=readPationtFile();
+		//ArrayList<Patient>pationtList1=readPationtFile();
+		ArrayList<Patient> pationtList1=(ArrayList<Patient>) readFile(patientFile,Patient[].class);
+
 		if(pationtList1.size()>0)
 			pationtList.addAll(pationtList1);
 		try {
@@ -381,27 +389,8 @@ public class ClinicManagementApp{
 			e.printStackTrace();
 		}
 	}
-	private ArrayList<Doctor> readDoctorFile() throws FileNotFoundException {
-		bufferedReader=new BufferedReader(new FileReader(DoctorFile));
-		String jsonArray;
-		ArrayList<Doctor>arrayList=new ArrayList<Doctor>();
-
-		try {
-			if((jsonArray=bufferedReader.readLine())!=null)
-			{
-				//	System.out.print(jsonArray+"\n");
-				TypeReference<ArrayList<Doctor>> typeReference = new TypeReference<ArrayList<Doctor>>() {};
-				arrayList = mapper.readValue(jsonArray, typeReference);
-
-			}
-
-			//doctorsList.addAll(arrayList);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		return arrayList;
-	}
-	private ArrayList<Patient> readPationtFile() throws FileNotFoundException {
+	
+	/*private ArrayList<Patient> readPationtFile() throws FileNotFoundException {
 		bufferedReader=new BufferedReader(new FileReader(patientFile));
 		String jsonArray;
 		ArrayList<Patient>arrayList=new ArrayList<Patient>();
@@ -420,8 +409,8 @@ public class ClinicManagementApp{
 			e1.printStackTrace();
 		}
 		return arrayList;
-	}
-	private ArrayList<Appointment> readAppointFile() throws FileNotFoundException {
+	}*/
+	/*private ArrayList<Appointment> readAppointFile() throws FileNotFoundException {
 		bufferedReader=new BufferedReader(new FileReader(appointFile));
 		String jsonArray;
 		ArrayList<Appointment>arrayList=new ArrayList<Appointment>();
@@ -440,10 +429,12 @@ public class ClinicManagementApp{
 			e1.printStackTrace();
 		}
 		return arrayList;
-	}
+	}*/
 	public void saveAppoint() throws FileNotFoundException {
 
-		ArrayList<Appointment>list1=readAppointFile();
+		//ArrayList<Appointment>list1=readAppointFile();
+		ArrayList<Appointment> list1=(ArrayList<Appointment>) readFile(appointFile,Appointment[].class);
+
 		if(list1.size()>0)
 			//appointList.addAll(list1);
 			try {
@@ -459,7 +450,9 @@ public class ClinicManagementApp{
 		System.out.println("Enter the patient name and Id");
 		String name=scanner.next();
 		int id=scanner.nextInt();
-		ArrayList<Patient>array= readPationtFile();
+	
+		//ArrayList<Patient>array= readPationtFile();
+		ArrayList<Patient> array=(ArrayList<Patient>) readFile(patientFile,Patient[].class);
 
 		boolean flag=true;
 		for(int i=0;i<array.size();i++)
@@ -485,8 +478,10 @@ public class ClinicManagementApp{
 	public void searchAppointment(String name, int id) throws ParseException, JsonGenerationException, JsonMappingException, IOException
 	{
 		Appointment appointment=new Appointment();
-		ArrayList<Doctor> array1=readDoctorFile();
-		ArrayList<Appointment> array2=readAppointFile(); 
+		//ArrayList<Doctor> array1=readDoctorFile();
+		ArrayList<Doctor> array1=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
+		//ArrayList<Appointment> array2=readAppointFile(); 
+		ArrayList<Appointment> array2=(ArrayList<Appointment>) readFile(appointFile,Appointment[].class);
 		doctersDisply();
 		System.out.println("Enter the docter name and id to take appointment");
 		String docterName=scanner.next();
@@ -539,7 +534,8 @@ public class ClinicManagementApp{
 
 	public void getFamousDocter() throws FileNotFoundException {
 		//HashMap<String,Integer>hashMap=new HashMap<String,Integer>();
-		ArrayList<Doctor>arrayList=readDoctorFile();
+		//ArrayList<Doctor>arrayList=readDoctorFile();
+		ArrayList<Doctor> arrayList=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
 		System.out.println("Enter the specilization of Doctor");
 		String splzn=scanner.next();
 		Doctor doctor = null;
@@ -581,12 +577,12 @@ public class ClinicManagementApp{
 
 	}*/
 	}
-	public static <T> List<T>  readFile(String filename,Class<T[]> clazz)
+	public static <T> List<T>  readFile(File File,Class<T[]> class1)
 	{   List<T> list = null;
 	BufferedReader  reader = null;
 	String jsonArray = "";
 	try {
-		reader = new BufferedReader(new FileReader(filename));
+		reader = new BufferedReader(new FileReader(File));
 	} catch (FileNotFoundException e) {
 		System.out.println("\t\t\tFile not exsists");	
 	}
@@ -604,7 +600,7 @@ public class ClinicManagementApp{
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		try {
-			list= new LinkedList<T> (Arrays.asList(objectMapper.readValue(jsonArray,clazz)));
+			list= new ArrayList<T> (Arrays.asList(objectMapper.readValue(jsonArray,class1)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

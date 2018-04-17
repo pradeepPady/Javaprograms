@@ -1,23 +1,25 @@
-<div class='dashboard' id='dashboard'>
+
+ <div class='dashboard' id='dashboard'>
   <md-content layout-padding layout-xs="column" layout="row" layout-wrap layout-align='space-around center'>
-    <md-card class='card' flex-xs='100' ng-repeat='item in data2 | commonString:arrData'>
+    <md-card class='card' flex-xs='100' ng-repeat='element in data | uniqueData:allData'>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline">{{item.name}}</span>
+          <span class="md-headline">{{element.name}}</span>
         </md-card-title-text>
       </md-card-title>
-      <img ng-src="{{item.image.small}}" class="md-media-sm" alt="img">
+      <img ng-src="{{element.image.small}}" class="md-media-sm" alt="img">
 
       <md-divider></md-divider>
       <md-card-content>
-        <p><b>Manufacturer:</b>{{item.specs.manufacturer}}</p>
-        <p><b>Storage:</b>{{item.specs.storage}} <b>OS:</b>{{item.specs.os}}
-          <p><b>Camera:</b>{{item.specs.camera}}</p>
+        <p><b>Manufacturer:</b>{{element.specs.manufacturer}}</p>
+        <p><b>Storage:</b>{{element.specs.storage}}
+          <p><b>OS:</b>{{element.specs.os}}<p>
+          <p><b>Camera:</b>{{element.specs.camera}}</p>
       </md-card-content>
       <md-divider></md-divider>
       <md-card-actions layout="row" layout-align="space-between center">
-        <md-button class="md-raised md-primary" ng-click='showDialog($event,item)'>BuyNow</md-button>
-        <p><b>$ {{item.price}}</b></p>
+        <md-button class="md-raised md-primary" ng-click='showDialog($event,element)'>BuyNow</md-button>
+        <p><b>$ {{element.price}}</b></p>
       </md-card-actions>
     </md-card>
   </md-content>

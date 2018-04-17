@@ -8,33 +8,39 @@ public class AdressBook {
 	Scanner scanner=new Scanner(System.in);
 	AdressBookManager adressBookManager=new AdressBookManager();
 	ArrayList<Person>arraylist;
-	public void adressBookOperation(ArrayList<Person> arrayList2) throws IOException {
-		
+	public ArrayList<Person> adressBookOperation(ArrayList<Person> arrayList2) throws IOException {
+		boolean falg=true;
+		while(falg)
+		{
 		System.out.print("\t\t\t============Menu==============\n\n");
 		System.out.print("\t\t\tEdit                  Enter 1:\n");
 		System.out.print("\t\t\tAdd an entry to book  Enter 2:\n");
 		System.out.print("\t\t\tSort all entries      Enter 3:\n");
 		System.out.print("\t\t\tDisply file Data      Enter 4:\n");
 		System.out.print("\t\t\tDelete Person         Enter 5:\n");
+		System.out.print("\t\t\tExit                  Enter 6:\n");
 		System.out.print("\t\t\t===============================\n\n");
 		int choice=scanner.nextInt();
 		switch (choice) 
 		{
-		case 1:arraylist=editMenu(arrayList2);
+		case 1:arrayList2=editMenu(arrayList2);
 
 		break;
 		case 2:System.out.print("Data "+arrayList2+"\n");
-		       arraylist=adressBookManager.addPerson(arrayList2);
+		       arrayList2=addPerson(arrayList2);
 
 		break;
-		case 3:arraylist=sortMenu(arrayList2);
+		case 3:arrayList2=sortMenu(arrayList2);
 
 		break;
 		case 4:diplyData(arrayList2);
 		default:
 		case 5:deleteData(arrayList2);
 			break;
+		case 6:falg=false;
 		}
+		}
+		return arrayList2;
 	}
 
 	private void deleteData(ArrayList<Person> arrayList2) 
@@ -73,7 +79,25 @@ public class AdressBook {
 		System.out.println("\t\t\t=======================");
 
 	}
-
+	public  ArrayList<Person> addPerson(ArrayList<Person> arrayList) throws IOException{
+		Person person=new Person();
+		System.out.print("\t\t\tEnter First Name\n");
+		person.setFirstName(scanner.next());
+		System.out.print("\t\t\tEnter Last Name\n");
+		person.setLastName(scanner.next());
+		System.out.print("\t\t\tEnter Adress\n");
+		person.setAddress(scanner.next());
+		System.out.print("\t\t\tEnter city\n");
+		person.setCity(scanner.next());
+		System.out.print("\t\t\tEnter the state\n");
+		person.setState(scanner.next());
+		System.out.print("\t\t\tEnter the Zip-code\n");
+		person.setZip(scanner.nextInt());
+		System.out.print("\t\t\tEnter phone number\n");
+		person.setPhoneNumber(scanner.nextInt());
+		arrayList.add(person);
+		return arrayList;
+	}
 	private ArrayList<Person> sortMenu(ArrayList<Person> arrayList2) {
 		System.out.print("\t\t\tSort by name Enter 1:\n");
 		System.out.print("\t\t\tSort by Zip  Enter 2:\n");
@@ -88,6 +112,7 @@ public class AdressBook {
 			     }
 		   });
 		System.out.print("\t\t\tData sorted by Name sucsessfully...\n");
+		diplyData(arrayList2);
 		return arrayList2;
 		case 2:Collections.sort(arrayList2, new Comparator<Person>() 
 	    {
@@ -97,7 +122,7 @@ public class AdressBook {
 		     }
 	   }); 
 		System.out.print("\t\t\tData sorted by Zip-Code sucsessfully...\n");
-
+		diplyData(arrayList2);
 	return arrayList2;
 
 		default:

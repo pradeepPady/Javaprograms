@@ -1,23 +1,23 @@
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="10" style="position:fixed;">
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="8">
   <md-content layout-margin>
     <md-subheader class="md-primary"><strong>Manufacturer</strong></md-subheader>
-    <md-list-item ng-repeat='item in data | unique:"manufacturer"'>
-      <li> {{ item.specs.manufacturer }} </li>
+    <md-list-item ng-repeat='item in data | uniqueString:"manufacturer"'>
+      <p> {{ item.specs.manufacturer }} </p>
       <md-checkbox class="md-secondary" ng-click='toggle(item.specs.manufacturer)' aria-label="Manufacturer"></md-checkbox>
     </md-list-item>
     <md-subheader class="md-primary"><strong>Storage</strong></md-subheader>
-    <md-list-item ng-repeat='item in data | unique:"storage"'>
-      <li> {{ item.specs.storage }} </li>
+    <md-list-item ng-repeat="item in data | uniqueString:'storage'">
+      <p> {{ item.specs.storage }} </p>
       <md-checkbox class="md-primary" ng-click='toggle(item.specs.storage)' aria-label="Storage"></md-checkbox>
     </md-list-item>
     <md-subheader class="md-primary"><strong>OS</strong></md-subheader>
-    <md-list-item ng-repeat="item in data | unique:'os'">
-      <li> {{ item.specs.os }} </li>
+    <md-list-item ng-repeat="item in data | uniqueString:'os'">
+      <p> {{ item.specs.os }} </p>
       <md-checkbox class="md-secondary" ng-click='toggle(item.specs.os)' aria-label="OS"></md-checkbox>
     </md-list-item>
     <md-subheader class="md-primary"><strong>Camera</strong></md-subheader>
-    <md-list-item ng-repeat="item in data | unique:'camera'">
-      <li> {{ item.specs.camera }} </li>
+    <md-list-item ng-repeat="item in data | uniqueString:'camera'">
+      <p> {{ item.specs.camera }} </p>
       <md-checkbox class="md-primary" ng-click='toggle(item.specs.camera)' aria-label="Camera"></md-checkbox>
     </md-list-item>
   </md-content>

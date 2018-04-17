@@ -1,0 +1,22 @@
+<div class='loginPage' layout='row' layout-align='center center'>
+  <md-whiteframe class='md-whiteframe-5dp' flex-gt-md='50' flex-md='70' flex-sm='100'>
+    <div layout='column' layout-align='center center'>
+      <h1 style="color:blue">LOGIN</h1>
+      <form name='loginForm' class='form'>
+        <md-input-container class='md-block'>
+          <label>Username</label>
+          <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_account_circle_24px.svg" class="name"></md-icon>
+          <input type="text" ng-model='user.name' ng-required="true">
+        </md-input-container>
+        <md-input-container class='md-block'>
+          <label>Password</label>
+          <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_lock_24px.svg" class="name"></md-icon>
+          <input type="password" ng-model='user.pass' ng-required="true">
+        </md-input-container>
+        <a ui-sref='home'>
+          <md-button class="md-raised md-primary" style='width:100%'>LOGIN</md-button>
+        </a>
+      </form>
+    </div>
+  </md-whiteframe>
+</div>

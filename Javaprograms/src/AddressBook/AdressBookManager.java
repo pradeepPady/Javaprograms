@@ -33,26 +33,6 @@ public class AdressBookManager
 		file.createNewFile();
 		System.out.print("\t\t\tFile created in the Directry...\n");
 	}
-	
-	public  ArrayList<Person> addPerson(ArrayList<Person> arrayList) throws IOException{
-		Person person=new Person();
-		System.out.print("\t\t\tEnter First Name\n");
-		person.setFirstName(scanner.next());
-		System.out.print("\t\t\tEnter Last Name\n");
-		person.setLastName(scanner.next());
-		System.out.print("\t\t\tEnter Adress\n");
-		person.setAddress(scanner.next());
-		System.out.print("\t\t\tEnter city\n");
-		person.setCity(scanner.next());
-		System.out.print("\t\t\tEnter the state\n");
-		person.setState(scanner.next());
-		System.out.print("\t\t\tEnter the Zip-code\n");
-		person.setZip(scanner.nextInt());
-		System.out.print("\t\t\tEnter phone number\n");
-		person.setPhoneNumber(scanner.nextInt());
-		arrayList.add(person);
-		return arrayList;
-	}
 
 	public  ArrayList<Person> open(ArrayList<Person> arrayList) throws IOException, ParseException{
 			File filePath=new File("/home/bridgeit/AdressBookData");
