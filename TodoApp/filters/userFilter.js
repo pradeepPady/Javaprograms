@@ -3,7 +3,7 @@ app.filter('unique',function(){
     var filtered = [];
 if(datas!==undefined)
 {
-      for(var i=0;i < datas.length;i++)
+      for(var i=0;i<datas.length;i++)
        {
               var item = datas[i];
               var flag = false;
@@ -28,26 +28,4 @@ if(datas!==undefined)
     }
     return filtered;
   };
-});
-app.filter('uniqueData', function() {
-  return function(datas, selected) {
-    var filtered = [];
-
-    if (selected.length > 0) {
-      for (var i = 0; i < datas.length; i++) {
-        var item = datas[i];
-
-        if (selected.indexOf(item.specs.manufacturer) >= 0 || selected.indexOf(item.specs.storage) >= 0
-            || selected.indexOf(item.specs.os) >= 0 || selected.indexOf(item.specs.camera) >= 0) {
-          filtered.push(item);
-        }
-      }
-    } else {
-      return datas;
-    }
-    return filtered;
-  };
-});
-app.factory('JsonService',function($http){
-  return $http.get('products.json');
 });

@@ -1,0 +1,74 @@
+app.filter('uniqueData', function() {
+  return function(datas, manufactureData,storageData,cameraData,osData) {
+    var filtered = [];
+    var tempArray=[];
+  if(manufactureData.length>0||storageData.length>0||cameraData.length>0||osData.length>0){
+    for(var j=0;j<datas.length;j++)
+    {
+      var item=items[j];
+      for(var i=0;j<manufactureData.length;i++)
+      {
+        var tempData=manufactureData[i];
+        if(item.specs.manufacturer==tempData)
+        {
+          filtered.push(item);
+        }
+      }
+    }
+    if(filtered.length>0)
+    {
+    tempArray=filtered;
+    filtered=[];
+  }
+  else {
+    tempArray=datas;
+  }
+  if(storageData.length>0){
+    for(var i=0;i<tempArray.length;i++){
+      var item=tempArray[i];
+      for(var j=0;j<storageData.length;j++)
+      {
+        if(item.specs.manufacturer==storageData[i])
+        {
+          filtered.push(item);
+        }
+      }
+    }
+    tempArray=filtered;
+    filtered=[];
+  }
+  if(cameraData.length>0){
+    for(var i=0;i<tempArray.length;i++){
+      var item=tempArray[i];
+      for(var j=0;j<cameraData.length;j++)
+      {
+        if(item.specs.manufacturer==cameraData[i])
+        {
+          filtered.push(item);
+        }
+      }
+    }
+    tempArray=filtered;
+    filtered=[];
+  }
+  if(osData.length>0){
+    for(var i=0;i<tempArray.length;i++){
+      var item=tempArray[i];
+      for(var j=0;j<osData.length;j++)
+      {
+        if(item.specs.manufacturer==osData[i])
+        {
+          filtered.push(item);
+        }
+      }
+    }
+    tempArray=filtered;
+    filtered=[];
+  }
+  }
+  else {
+    tempArray=datas;
+  }
+return tempArray;
+  };
+});
