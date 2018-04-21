@@ -1,4 +1,4 @@
-package Bridgelabz.ClinicManagement;
+package bridgelabz.clinicmanagement;
 
 public class Patient {
 private String name;

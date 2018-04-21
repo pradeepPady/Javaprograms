@@ -1,4 +1,4 @@
-package Bridgelabz.ClinicManagement;
+package bridgelabz.clinicmanagement;
 public class Appointment {
 private String doctorName;
 private String patientName;

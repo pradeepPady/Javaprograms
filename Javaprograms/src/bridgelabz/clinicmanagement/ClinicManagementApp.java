@@ -1,4 +1,4 @@
-package Bridgelabz.ClinicManagement;
+package bridgelabz.clinicmanagement;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -479,39 +479,39 @@ public class ClinicManagementApp{
 	{
 		Appointment appointment=new Appointment();
 		//ArrayList<Doctor> array1=readDoctorFile();
-		ArrayList<Doctor> array1=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
+		ArrayList<Doctor> doctors=(ArrayList<Doctor>) readFile(DoctorFile,Doctor[].class);
 		//ArrayList<Appointment> array2=readAppointFile(); 
-		ArrayList<Appointment> array2=(ArrayList<Appointment>) readFile(appointFile,Appointment[].class);
+		ArrayList<Appointment> appointments=(ArrayList<Appointment>) readFile(appointFile,Appointment[].class);
 		doctersDisply();
 		System.out.println("Enter the docter name and id to take appointment");
 		String docterName=scanner.next();
 		int docterId=scanner.nextInt();
 		boolean flag1=true;
-		for(int j=0;j<array1.size();j++)
+		for(int j=0;j<doctors.size();j++)
 		{
-			if(array1.get(j).getName().equals(docterName)&&array1.get(j).getId()==docterId)
+			if(doctors.get(j).getName().equals(docterName)&&doctors.get(j).getId()==docterId)
 			{
-				if(array1.get(j).getCount()<5)
+				if(doctors.get(j).getCount()<5)
 				{
 					appointment.setPatientName(name);
 					appointment.setPatientId(id);
 					appointment.setDoctorId(docterId);
 					appointment.setDoctorName(docterName);
-					appointment.setDocterAvalability(array1.get(j).getAvalability());
+					appointment.setDocterAvalability(doctors.get(j).getAvalability());
 					System.out.println("Enter Date of Appoientmentd (XX/YY/ZZZZ):");
 					Date date=stringToDate(scanner.next());
 					String date1=date.toString();
 					appointment.setDate(date1);
-					array1.get(j).setCount((array1.get(j).getCount())+1);
-					array1.get(j).setNumberOfPatients((array1.get(j).getNumberOfPatients()+1));
+					doctors.get(j).setCount((doctors.get(j).getCount())+1);
+					doctors.get(j).setNumberOfPatients((doctors.get(j).getNumberOfPatients()+1));
 					flag1=false;
 					appointList.add(appointment);
 					System.out.println("\t\t\tAppointment sucsessful...");
 					break;
 				}
-				else if(array1.get(j).getCount()>=5)
+				else if(doctors.get(j).getCount()>=5)
 				{
-					array1.get(j).setCount(0);
+					doctors.get(j).setCount(0);
 				}
 			}
 		}
@@ -520,12 +520,12 @@ public class ClinicManagementApp{
 		}
 		else
 		{
-			if(array2.size()>0)
-				appointList.addAll(array2);
+			if(appointments.size()>0)
+				appointList.addAll(appointments);
 			mapper.writeValue(new FileOutputStream(appointFile),appointList );
 
 		}
-		mapper.writeValue(new FileOutputStream(DoctorFile), array1);
+		mapper.writeValue(new FileOutputStream(DoctorFile), doctors);
 	}
 	private Date stringToDate(String stringInput) throws ParseException {
 		Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(stringInput);  

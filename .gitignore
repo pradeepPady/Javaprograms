@@ -1,2 +1,7 @@
 /.metadata/
 /.recommenders/
+bower_components
+node_modules
+*.class
+*.*~
+bin/**

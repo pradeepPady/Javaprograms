@@ -1,4 +1,4 @@
-package Bridgelabz.ClinicManagement;
+package bridgelabz.clinicmanagement;
 
 import java.io.IOException;
 import java.text.ParseException;
