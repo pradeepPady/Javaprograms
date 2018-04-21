@@ -1,11 +1,16 @@
 <div >
-<md-toolbar class="md-hue-2" style="position:fixed;">
+<md-toolbar class="md-hue-2" class="jumbotron text-center" style="position:fixed;">
   <div class="md-toolbar-tools">
     <md-button class="md-primary md-raised md-icon-button" aria-label="sidenav" ng-click="toggleLeft()">
       <span><md-icon><i class="material-icons">menu</i></md-icon></span>
     </md-button>
 
-    <h2 flex md-truncate>Mobile App</h2>
-  </div>
+    <h2 flex md-truncate >Mobile App</h2>
+    <a ui-sref='login'>
+      <md-button  class="md-primary md-raised md-icon-button" aria-label="logout">
+               <span><md-icon><i class="material-icons">exit_to_app</i></md-icon></span>
+      </md-button>
+    </a>
+      </div>
 </md-toolbar>
 </div>

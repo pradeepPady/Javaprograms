@@ -1,24 +1,40 @@
-<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="10" style="position:fixed;">
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="24" style="position:fixed;">
   <md-content layout-margin>
-    <md-subheader class="md-primary"><strong>Manufacturer</strong></md-subheader>
+    <md-subheader class="md-primary"><strong>Manufacturer</strong>
+    </md-subheader>
+
     <md-list-item ng-repeat='item in data | unique:"manufacturer"'>
       <li> {{ item.specs.manufacturer }} </li>
-      <md-checkbox class="md-secondary" ng-click='toggle("manufacturer",item.specs.manufacturer)' aria-label="Manufacturer"></md-checkbox>
+      <md-checkbox class="md-secondary" ng-click='dataStoreInArray("manufacturer",item.specs.manufacturer)' aria-label="Manufacturer">
+      </md-checkbox>
     </md-list-item>
-    <md-subheader class="md-primary"><strong>Storage</strong></md-subheader>
+
+    <md-subheader class="md-primary"><strong>Storage</strong>
+    </md-subheader>
+
     <md-list-item ng-repeat='item in data | unique:"storage"'>
       <li> {{ item.specs.storage }} </li>
-      <md-checkbox class="md-primary" ng-click='toggle("storage",item.specs.storage)' aria-label="Storage"></md-checkbox>
+      <md-checkbox class="md-secondary" ng-click='dataStoreInArray("storage",item.specs.storage)' aria-label="Storage">
+      </md-checkbox>
     </md-list-item>
-    <md-subheader class="md-primary"><strong>OS</strong></md-subheader>
+
+    <md-subheader class="md-primary"><strong>OS</strong>
+    </md-subheader>
+
     <md-list-item ng-repeat="item in data | unique:'os'">
       <li> {{ item.specs.os }} </li>
-      <md-checkbox class="md-secondary" ng-click='toggle("os",item.specs.os)' aria-label="OS"></md-checkbox>
+      <md-checkbox class="md-secondary" ng-click='dataStoreInArray("os",item.specs.os)' aria-label="OS">
+      </md-checkbox>
     </md-list-item>
-    <md-subheader class="md-primary"><strong>Camera</strong></md-subheader>
+
+    <md-subheader class="md-primary"><strong>Camera</strong>
+    </md-subheader>
+
     <md-list-item ng-repeat="item in data | unique:'camera'">
       <li> {{ item.specs.camera }} </li>
-      <md-checkbox class="md-primary" ng-click='toggle("camera",item.specs.camera)' aria-label="Camera"></md-checkbox>
+      <md-checkbox class="md-secondary" ng-click='dataStoreInArray("camera",item.specs.camera)' aria-label="Camera">
+      </md-checkbox>
     </md-list-item>
+    
   </md-content>
 </md-sidenav>

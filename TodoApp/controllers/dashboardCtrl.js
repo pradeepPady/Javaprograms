@@ -1,18 +1,18 @@
 app.controller('dashboardCtrl',function($scope,$mdDialog){
-  $scope.showDialog = function(clickEvent,x) {
+  //$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+  $scope.dailogView= function($event,x) {
       $mdDialog.show({
-        locals : {dataList : x},
+        locals : {d : x},
         controller: DialogController,
         templateUrl: 'templates/dialog.html',
         parent: angular.element(document.body),
-        targetEvent: clickEvent,
+        targetEvent: $event,
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       });
     };
-
-  function DialogController($scope, $mdDialog,dataList) {
-    $scope.dataList = dataList;
+  function DialogController($scope, $mdDialog,d) {
+    $scope.elements = d;
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
