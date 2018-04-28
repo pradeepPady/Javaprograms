@@ -14,13 +14,7 @@
     position: fixed;
   }
 }
-/* .pageContainer{
-  height: 100vh !important;
-  max-height: 100vh !important;
-} */
-/* .card{
-  height : 400px;
-} */
+
 #toolbar{
   position: fixed !important;
 }
@@ -31,4 +25,56 @@
   height : 300px;
   width : 350px;
   align-self: center;
+}
+body {
+  font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
+}
+button {
+  border: 0;
+  background: #0087cc;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 #006599;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 12px 20px;
+  transition: all .1s linear;
+}
+button:active {
+  box-shadow: 0 2px 0 #006599;
+  transform: translateY(3px);
+}
+.button {
+  background: #1DB9EC;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+.button:hover {
+  background: #FFB6C1;
+}
+
+.button1 {
+  background: #1DB9EC;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+.button1:hover1 {
+  background: #FFB6C1;
+}
+
+.square {
+  background: darkturquoise;
+  border-radius: 5px;
+  height: 100px;
+  margin: 100px;
+  transition: transform 1s;
+  width: 100px;
+
+  &:hover {
+    transform: scale(2);
+  }
 }

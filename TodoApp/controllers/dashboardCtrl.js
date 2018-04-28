@@ -1,12 +1,12 @@
 app.controller('dashboardCtrl',function($scope,$mdDialog){
   //$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-  $scope.dailogView= function($event,x) {
+  $scope.dailogView= function(clickEvent,x) {
       $mdDialog.show({
         locals : {d : x},
         controller: DialogController,
         templateUrl: 'templates/dialog.html',
         parent: angular.element(document.body),
-        targetEvent: $event,
+        targetEvent: clickEvent,
         clickOutsideToClose:true,
         fullscreen: $scope.customFullscreen
       });

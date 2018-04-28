@@ -31,89 +31,48 @@ app.filter('unique',function()
     return filter;
   };
 });
-
 app.filter('uniqueData', function() {
   return function(elements, manufacturerData, storageData, osData, cameraData) {
     var filteredValues = [];
     var temp = [];
-      if (manufacturerData.length > 0 || storageData.length > 0 || osData.length > 0 || cameraData.length > 0)
-       {
-          var j=0;
-          while (j<elements.length)
-           {
-                for (var i = 0; i < manufacturerData.length; i++)
-                {
-                    if (elements[j].specs.manufacturer == manufacturerData[i])
-                    {
-                      filteredValues.push(elements[j]);
-                    }
+    loopingFun=function(arrayData,entries){
+      var j=0;
+      while (j<entries.length){
+            for (var i = 0; i < arrayData.length; i++){
+                if (entries[j].specs.manufacturer == arrayData[i]|| entries[j].specs.storage==arrayData[i]||entries[j].specs.os==arrayData[i]||entries[j].specs.camera==arrayData[i]){
+                  filteredValues.push(entries[j]);
                 }
-                j++;
             }
-            if (filteredValues.length > 0)
-            {
-              temp = filteredValues;
-              filteredValues = [];
+            j++;
+        }
+        ifFun=function(myData)
+        {
+          if(myData.length>0){
+            temp = filteredValues;
+            filteredValues = [];
+          }
+          else {
+            temp = elements;
+          }
+        }
+    }
+if (manufacturerData.length > 0 || storageData.length > 0 || osData.length > 0 || cameraData.length > 0){
+    loopingFun(manufacturerData,elements);
+    ifFun(filteredValues);
+            if (storageData.length > 0) {
+    loopingFun(storageData,temp);
+    ifFun(filteredValues);
             }
-            else
-            {
-              temp = elements;
+            if (osData.length > 0){
+    loopingFun(osData,temp);
+    ifFun(filteredValues);
             }
-            if (storageData.length > 0)
-             {
-                var j=0;
-                while(j<temp.length)
-                {
-                    for (var i = 0; i < storageData.length; i++)
-                    {
-                        if ( temp[j].specs.storage == storageData[i])
-                         {
-                            filteredValues.push(temp[j]);
-                         }
-                    }
-                    j++;
-               }
-              temp = filteredValues;
-              filteredValues = [];
-            }
-            if (osData.length > 0)
-            {
-                var j=0;
-                while(j < temp.length)
-                {
-
-                  for (var i = 0; i < osData.length; i++)
-                   {
-                      if (temp[j].specs.os == osData[i])
-                      {
-                        filteredValues.push(temp[j]);
-                      }
-                  }
-                  j++;
-              }
-              temp = filteredValues;
-              filteredValues = [];
-            }
-            if (cameraData.length > 0)
-            {
-                var j=0;
-                while(j < temp.length)
-                {
-                for (var i = 0; i < cameraData.length; i++)
-                 {
-                  if (temp[j].specs.camera == cameraData[i])
-                  {
-                    filteredValues.push(temp[j]);
-                  }
-                }
-                j++;
-              }
-              temp = filteredValues;
-              filteredValues = [];
+            if (cameraData.length > 0){
+    loopingFun(cameraData,temp);
+    ifFun(filteredValues);
            }
       }
-       else
-        {
+       else{
          temp = elements;
         }
     return temp;
