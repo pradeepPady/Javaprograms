@@ -45,32 +45,25 @@ app.filter('uniqueData', function() {
             }
             j++;
         }
-        ifFun=function(myData)
-        {
-          if(myData.length>0){
-            temp = filteredValues;
-            filteredValues = [];
-          }
-          else {
-            temp = elements;
-          }
-        }
     }
 if (manufacturerData.length > 0 || storageData.length > 0 || osData.length > 0 || cameraData.length > 0){
     loopingFun(manufacturerData,elements);
-    ifFun(filteredValues);
-            if (storageData.length > 0) {
+    if (filteredValues.length > 0)
+    {temp = filteredValues;
+      filteredValues = [];}
+    else{temp = elements;}
+    if (storageData.length > 0) {
     loopingFun(storageData,temp);
-    ifFun(filteredValues);
-            }
-            if (osData.length > 0){
+    temp = filteredValues;
+    filteredValues = [];}
+    if (osData.length > 0){
     loopingFun(osData,temp);
-    ifFun(filteredValues);
-            }
-            if (cameraData.length > 0){
+    temp = filteredValues;
+    filteredValues = [];}
+    if (cameraData.length > 0){
     loopingFun(cameraData,temp);
-    ifFun(filteredValues);
-           }
+    temp = filteredValues;
+    filteredValues = [];}
       }
        else{
          temp = elements;

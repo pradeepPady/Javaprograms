@@ -29,10 +29,10 @@
 body {
   font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
 }
-button {
+/* button {
   border: 0;
-  background: #0087cc;
-  border-radius: 4px;
+  /* background: #0087cc; */
+  /* border-radius: 4px;
   box-shadow: 0 5px 0 #006599;
   color: #fff;
   cursor: pointer;
@@ -47,26 +47,26 @@ button:active {
   transform: translateY(3px);
 }
 .button {
-  background: #1DB9EC;
-  transition-property: background;
+  /* background: #1DB9EC; */
+  /* transition-property: background;
   transition-duration: 1s;
   transition-timing-function: linear;
 }
 .button:hover {
   background: #FFB6C1;
-}
+} */ 
 
-.button1 {
-  background: #1DB9EC;
-  transition-property: background;
+/* .button1 {
+  /* background: #1DB9EC; */
+  /* transition-property: background;
   transition-duration: 1s;
   transition-timing-function: linear;
-}
-.button1:hover1 {
-  background: #FFB6C1;
-}
+} */
+/* .button1:hover1 {
+  /* background: #FFB6C1; */
+/* } */
 
-.square {
+/* .square {
   background: darkturquoise;
   border-radius: 5px;
   height: 100px;
@@ -76,5 +76,5 @@ button:active {
 
   &:hover {
     transform: scale(2);
-  }
+  } */
 }

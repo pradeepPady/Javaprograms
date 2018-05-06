@@ -1,0 +1,40 @@
+<div class='dashboard' id='dashboard'>
+ <md-content layout-padding layout-xs="column" layout="row" layout-wrap layout-align='space-around center'>
+   <md-card class="card" ng-repeat='element in filteredData=(data | uniqueData:manufacturerData
+   :storageData:osData:cameraData)'>
+     <md-card-title>
+       <md-card-title-text>
+         <span class="md-headline" style="color:tan">{{element.name}}</span>
+       </md-card-title-text>
+     </md-card-title>
+   <img ng-src="{{element.image.small}}" class="md-media-sm" alt="img">
+
+     <md-divider></md-divider>
+     <md-card-content>
+       <p><b>Manufacturer:{{element.specs.manufacturer}}</p>
+       <p><b>Storage:{{element.specs.storage}}
+         <p><b>OS:{{element.specs.os}}<p>
+         <p><b>Camera:{{element.specs.camera}}</p>
+     </md-card-content>
+     <md-divider></md-divider>
+     <md-card-actions  layout="row" layout-align="space-between center">
+       <md-button class="md-raised md-primary " ng-click='dailogView($event,element)'>BuyNow</md-button>
+       <p><b><strong>$</strong> {{element.price}}</b></p>
+     </md-card-actions>
+   </md-card>
+   <md-card ng-show='filteredData.length==0'>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline md-raised md-primary"><strong style="color:blue">Sorry.....!</strong></span>
+          <span class="md-subhead"><strong style="color:red">No data to Disply.....</strong></span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-lg card-media"></div>
+        </md-card-title-media>
+      </md-card-title>
+      <img ng-src="assets/images/norecorddata.png" class="md-media-sm" alt="img">
+      <md-card-actions layout="column" layout-align="center end">
+      </md-card-actions>
+    </md-card>
+ </md-content>
+</div>
