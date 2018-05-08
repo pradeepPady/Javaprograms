@@ -1,0 +1,31 @@
+<table class="table" >
+  <caption class="lead">Notes</caption>
+  <thead>
+    <input type="text" my-on-key-down-call="callRestService()">
+
+    <tr>
+      <th>Title</th><br>
+      <th>Text</th><br>
+      <th>isArchived</th><br>
+    <th> Operations </th><br>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="a in datas">
+      <td>{{a.title}}</td><br>
+      <td>{{a.text}}</td><br>
+      <td>{{a.isArchived}}</td></br>
+    <td><a href="#/edit/{{a.$id}}" class="btn btn-small btn-primary">Edit</a>
+       <a class="btn btn-small btn-danger" ng-click="removeData(a.$id)">Delete</a>
+       <!-- <a  href="#/archive/{{a.$id}}" class="btn btn-small btn-primary" >Archive</a></td> -->
+       <button  class="btn btn-small btn-primary" ng-click = "a.isArchived = !a.isArchived, isArchived(a.$id, a)"
+    </tr>
+  </tbody>
+
+</table>
+<p>
+    <a href="#/add" class="btn btn-success" role="button">Add New Notes</a>
+</p>
+<p>
+  <a class="btn btn-small btn-danger" ng-click="removeData(data.$id)">Delete</a>
+</p>

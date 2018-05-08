@@ -1,0 +1,28 @@
+<h1>Edit Product</h1>
+
+<form name="edit_form" class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="title" class="col-sm-2 control-label">Title:</label>
+    <div class="col-sm-4">
+      <input class="form-control" id="title"
+             ng-model="data.title" placeholder="title"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="text" class="col-sm-2 control-label">text:</label>
+    <div class="col-sm-4">
+      <input class="form-control" id="text"
+             ng-model="data.text" placeholder="text"/>
+    </div>
+  </div>
+  <div class="form-group">
+
+    <div class="col-sm-offset-2 col-sm-10">
+
+    <input type="submit" id="submit" class="btn btn-small btn-primary" ng-click="editNotes()" class="btn btn-small btn-primary">
+  </button> <a href="#/datas" class="btn btn-small btn-danger">Cancel</a>
+    </div>
+
+  </div>
+</form>

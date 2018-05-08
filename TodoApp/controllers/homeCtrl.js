@@ -16,6 +16,11 @@ app.controller('homeCtrl', function($scope,$mdDialog, JsonService, $timeout, $md
       }
     };
   }
+ //  $scope.getData = readJson.getJson();
+ // $scope.getData.then(function(response) {
+ //   $scope.jsonRecord = response;
+ // })
+
   JsonService.then(function(response){
     $scope.data = response.data;
   });

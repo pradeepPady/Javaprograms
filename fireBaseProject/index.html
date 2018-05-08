@@ -1,13 +1,8 @@
 <html>
-   <head>
-
-
-   </head>
-
+   <head></head>
    <body ng-app="mobileApp">
-
 <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-<!-- <script>
+  <script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyB9EiNLusE87QlcFj2s7y22R8JGOCDvKDU",
@@ -19,19 +14,20 @@
   };
   firebase.initializeApp(config);
   var ref = firebase.database().ref();
-
+   var database;
 ref.on("value", function(snapshot) {
    console.log(snapshot.val());
+   database=snapshot.val();
 }, function (error) {
    console.log("Error: " + error.code);
 });
-</script> -->
+</script>
    </body>
    <script src="bower_components/angular/angular.js"></script>
    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
    <script src="bower_components/angular-aria/angular-aria.js"></script>
- <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" charset="utf-8"></script>
-     <script src="bower_components/angular-material/angular-material.min.js"></script>
+   <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js" charset="utf-8"></script>
+   <script src="bower_components/angular-material/angular-material.min.js"></script>
    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
    <script src="app.js" charset="utf-8"></script>
    <script src="controller/homeCtrl.js" charset="utf-8"></script>

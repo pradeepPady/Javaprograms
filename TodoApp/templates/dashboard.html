@@ -5,7 +5,7 @@
     :storageData:osData:cameraData)'>
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline" style="color:tan">{{element.name}}</span>
+          <span class="md-headline" style="color:tan;">{{element.name}}</span>
         </md-card-title-text>
       </md-card-title>
     <img ng-src="{{element.image.small}}" class="md-media-sm" alt="img">
@@ -19,14 +19,14 @@
       </md-card-content>
       <md-divider></md-divider>
       <md-card-actions  layout="row" layout-align="space-between center">
-        <md-button class="md-raised md-primary " ng-click='dailogView($event,element)'>BuyNow</md-button>
+        <md-button class="md-raised md-primary" ng-click='dailogView($event,element)'>BuyNow</md-button>
         <p><b><strong>$</strong> {{element.price}}</b></p>
       </md-card-actions>
     </md-card>
     <md-card ng-show='filteredData.length==0'>
        <md-card-title>
          <md-card-title-text>
-           <span class="md-headline md-raised md-primary"><strong style="color:blue">Sorry.....!</strong></span>
+           <span class="md-headline md-raised md-primary"><strong style="color:blue;">Sorry.....!</strong></span>
            <span class="md-subhead"><strong style="color:red">No data to Disply.....</strong></span>
          </md-card-title-text>
          <md-card-title-media>
