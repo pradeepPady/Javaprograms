@@ -6,10 +6,9 @@ app.controller('AddController', ['$scope', '$firebaseArray', '$location', 'FBURL
     data.$add({
       title: $scope.data.title,
       text:  $scope.data.text,
-      isArchived:$scope.data.isArchived=false,
-        // id:  $scope.data.id,
+      isArchived:$scope.data.isArchived=false,      
     });
-    // console.log("datas",data);
+
 
     $location.path('/');
   };

@@ -1,4 +1,4 @@
-var app =angular.module('mobileApp',['ui.router','ngMaterial','ngAnimate']);
+var app =angular.module('mobileApp',['ui.router','ngMaterial','firebase']);
 
 app.config(function($stateProvider,$urlRouterProvider){
 
@@ -20,3 +20,7 @@ $stateProvider
    //   controller : 'dashboardCtrl'
    // });
 });
+app.constant('FBURL',
+  'https://todoapp-32c3a.firebaseio.com/mobileData'
+
+);

@@ -18,11 +18,11 @@ app.config(function($routeProvider){
     templateUrl: 'templates/edit.html'
 
   })
-  .when('/archive/:id', {
-    controller: 'ArchiveController',
-    templateUrl: 'templates/archive.html'
-
-  })
+  // .when('/archive/:id', {
+  //   controller: 'ArchiveController',
+  //   templateUrl: 'templates/archive.html'
+  //
+  // })
   .otherwise({
     redirectTo: '/'
   });

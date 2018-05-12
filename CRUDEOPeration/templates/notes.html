@@ -11,14 +11,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="a in datas">
+    <tr ng-repeat="a in datas |filter: searchKeyword">
       <td>{{a.title}}</td><br>
       <td>{{a.text}}</td><br>
       <td>{{a.isArchived}}</td></br>
     <td><a href="#/edit/{{a.$id}}" class="btn btn-small btn-primary">Edit</a>
        <a class="btn btn-small btn-danger" ng-click="removeData(a.$id)">Delete</a>
        <!-- <a  href="#/archive/{{a.$id}}" class="btn btn-small btn-primary" >Archive</a></td> -->
-       <button  class="btn btn-small btn-primary" ng-click = "a.isArchived = !a.isArchived, isArchived(a.$id, a)"
+       <div class="col-xs-12"><div class="col-xs-6"></div><div class="col-xs-6">Search
+         <input class="form-control ng-pristine ng-valid" ng-model="searchKeyword" type="text" placeholder="enter the text to search"> </div></div>
+         <!-- <button onclick = "googleSignin()">Google Signin</button>
+         <button onclick = "googleSignout()">Google Signout</button> -->
+       <button class="btn btn-small btn-primary" ng-model="isArchive" ng-click = "isArchived(a.$id)">Archive</button>
     </tr>
   </tbody>
 
