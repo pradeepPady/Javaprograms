@@ -1,0 +1,14 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "angularMarerial/bower_components/angular-animate/package.json",
+        "angularMarerial/bower_components/angular-aria/package.json",
+        "angularMarerial/bower_components/angular-material/package.json",
+        "angularMarerial/bower_components/angular-messages/package.json",
+        "angularMarerial/bower_components/angular/package.json",
+        "angularprograms/bower_components/angular/package.json"
+      ]
+    }
+  }
+}
