@@ -7,7 +7,7 @@
   "peerDependencies": {
     "angular": ">=1.7.6",
     "angular-animate": ">=1.7.6",
-    "angular-aria": ">=1.4 <1.7",
+    "angular-aria": ">=1.7.6",
     "angular-messages": ">=1.4 <1.7"
   },
   "jspm": {
